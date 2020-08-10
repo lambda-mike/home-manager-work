@@ -15,8 +15,8 @@
   #
   # You need to change these to match your username and home directory
   # path:
-  home.username = "$USER";
-  home.homeDirectory = "$HOME";
+  home.username = "mike";
+  home.homeDirectory = "/home/mike";
 
   # If you use non-standard XDG locations, set these options to the
   # appropriate paths:
@@ -38,13 +38,24 @@
   # Since we do not install home-manager, you need to let home-manager
   # manage your shell, otherwise it will not be able to add its hooks
   # to your profile.
-  programs.bash = {
+  programs.fish = {
     enable = true;
+    promptInit = ''echo "Hello from Fish!"'';
   };
 
-  home.packages = [
-    pkgs.htop
-    pkgs.fortune
+  home.packages = with pkgs; [
+    fortune
+    htop
   ];
+
+  xsession.enable = true;
+
+  xsession.windowManager.i3 = {
+    enable = true;
+    config = {
+      modifier = "Mod4";
+      workspaceAutoBackAndForth = true;
+    };
+  };
 
 }
