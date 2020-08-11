@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
 
@@ -35,14 +35,6 @@
   # changes in each release.
   home.stateVersion = "20.09";
 
-  # Since we do not install home-manager, you need to let home-manager
-  # manage your shell, otherwise it will not be able to add its hooks
-  # to your profile.
-  programs.fish = {
-    enable = true;
-    promptInit = ''echo "Hello from Fish!"'';
-  };
-
   home.packages = with pkgs; [
     fortune
     htop
@@ -50,11 +42,48 @@
 
   xsession.enable = true;
 
-  xsession.windowManager.i3 = {
+  # xsession.windowManager.i3 = {
+  #   enable = false;
+  #   config =
+  #     let mod = "Mod4";
+  #     in {
+  #       modifier = mod;
+  #       workspaceAutoBackAndForth = true;
+  #       keybindings =
+  #           lib.mkOptionDefault {
+  #             "${mod}+Return" = "exec alacritty";
+  #           };
+  #     };
+  # };
+
+  xsession.windowManager.xmonad = {
     enable = true;
-    config = {
-      modifier = "Mod4";
-      workspaceAutoBackAndForth = true;
+    enableContribAndExtras = true;
+    config = pkgs.writeText "xmonad.hs" ''
+  import XMonad
+  main = xmonad def
+      { terminal    = "alacritty"
+      , modMask     = mod4Mask
+      , borderWidth = 2
+      }
+'' ;
+    extraPackages = haskellPackages : [
+      haskellPackages.xmonad-contrib
+      haskellPackages.xmonad-extras
+      haskellPackages.xmonad
+    ];
+  };
+
+  # Since we do not install home-manager, you need to let home-manager
+  # manage your shell, otherwise it will not be able to add its hooks
+  # to your profile.
+  programs = {
+    fish = {
+      enable = true;
+      promptInit = ''echo "Hello from Fish!"'';
+    };
+    alacritty = {
+      enable = true;
     };
   };
 
