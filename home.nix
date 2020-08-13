@@ -93,6 +93,7 @@
     broot = {
       enable = true;
     };
+    chromium.enable = true;
     feh.enable = true;
     firefox = {
       enable = true;
