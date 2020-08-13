@@ -84,6 +84,9 @@
     bat = {
       enable = true;
     };
+    broot = {
+      enable = true;
+    };
     firefox = {
       enable = true;
     };
