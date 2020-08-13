@@ -45,6 +45,7 @@
     ripgrep
     screen
     tree
+    unzip
   ];
 
   xsession.enable = true;
