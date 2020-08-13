@@ -103,6 +103,10 @@
         lg = "log";
       };
     };
+    rofi = {
+      enable = true;
+    };
+    skim.enable = true;
   };
 
 }
