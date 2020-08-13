@@ -41,6 +41,7 @@
     gimp
     htop
     i3lock
+    neofetch
   ];
 
   xsession.enable = true;
