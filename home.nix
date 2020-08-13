@@ -80,6 +80,9 @@
     alacritty = {
       enable = true;
     };
+    firefox = {
+      enable = true;
+    };
     fish = {
       enable = true;
       interactiveShellInit = ''echo "Interactive..."'';
