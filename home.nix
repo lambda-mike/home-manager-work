@@ -38,6 +38,7 @@
   home.packages = with pkgs; [
     brave
     htop
+    i3lock
   ];
 
   xsession.enable = true;
