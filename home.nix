@@ -127,6 +127,9 @@
       enable = true;
     };
     skim.enable = true;
+    tmux = {
+      enable = true;
+    };
   };
 
 }
