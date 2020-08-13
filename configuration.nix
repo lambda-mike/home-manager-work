@@ -9,6 +9,9 @@
       ./hardware-configuration.nix
     ];
 
+    # Requiers for Intel wifi to work on laptop
+    boot.kernelPackages = pkgs.linuxPackages_5_7;
+
     # Boot loader (UEFI)
     boot.loader.systemd-boot.configurationLimit = 30;
     boot.loader.systemd-boot.enable = true;
