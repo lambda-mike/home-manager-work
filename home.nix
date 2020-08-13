@@ -38,6 +38,7 @@
   home.packages = with pkgs; [
     brave
     du-dust
+    gimp
     htop
     i3lock
   ];
