@@ -37,6 +37,7 @@
 
   home.packages = with pkgs; [
     brave
+    du-dust
     htop
     i3lock
   ];
