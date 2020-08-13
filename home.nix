@@ -138,6 +138,9 @@
     tmux = {
       enable = true;
     };
+    zathura = {
+      enable = true;
+    };
   };
 
 }
