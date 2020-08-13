@@ -44,6 +44,7 @@
     neofetch
     ripgrep
     screen
+    tree
   ];
 
   xsession.enable = true;
