@@ -114,6 +114,9 @@
         lg = "log";
       };
     };
+    jq = {
+      enable = true;
+    };
     kakoune = {
       enable = true;
     };
