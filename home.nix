@@ -120,6 +120,9 @@
     kakoune = {
       enable = true;
     };
+    neovim = {
+      enable = true;
+    };
     rofi = {
       enable = true;
     };
