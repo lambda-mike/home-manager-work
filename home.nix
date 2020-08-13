@@ -82,7 +82,10 @@
     };
     fish = {
       enable = true;
+      interactiveShellInit = ''echo "Interactive..."'';
+      loginShellInit = ''echo "Login..."'';
       promptInit = ''echo "Hello from Fish!"'';
+      shellInit = ''echo "Init"'';
     };
     git = {
       enable = true;
