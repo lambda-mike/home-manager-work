@@ -98,6 +98,9 @@
       promptInit = ''echo "Hello from Fish!"'';
       shellInit = ''echo "Init"'';
     };
+    gpg = {
+      enable = true;
+    };
     git = {
       enable = true;
       aliases = {
