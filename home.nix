@@ -42,6 +42,7 @@
     htop
     i3lock
     neofetch
+    ripgrep
     screen
   ];
 
