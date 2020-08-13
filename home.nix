@@ -81,6 +81,9 @@
     alacritty = {
       enable = true;
     };
+    bat = {
+      enable = true;
+    };
     firefox = {
       enable = true;
     };
