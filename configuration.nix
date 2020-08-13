@@ -19,8 +19,8 @@
     boot.loader.timeout = 2;
     boot.initrd.luks.devices = {
       root = {
-          device = "/dev/sda2";
-          preLVM = true;
+        device = "/dev/sda2";
+        preLVM = true;
       };
     };
 
