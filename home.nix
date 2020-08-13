@@ -42,6 +42,7 @@
     htop
     i3lock
     neofetch
+    screen
   ];
 
   xsession.enable = true;
