@@ -36,7 +36,6 @@
   home.stateVersion = "20.09";
 
   home.packages = with pkgs; [
-    fortune
     htop
   ];
 
@@ -78,11 +77,14 @@
   # manage your shell, otherwise it will not be able to add its hooks
   # to your profile.
   programs = {
+    alacritty = {
+      enable = true;
+    };
     fish = {
       enable = true;
       promptInit = ''echo "Hello from Fish!"'';
     };
-    alacritty = {
+    git = {
       enable = true;
     };
   };
