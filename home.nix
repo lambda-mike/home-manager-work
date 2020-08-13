@@ -104,6 +104,9 @@
         lg = "log";
       };
     };
+    kakoune = {
+      enable = true;
+    };
     rofi = {
       enable = true;
     };
