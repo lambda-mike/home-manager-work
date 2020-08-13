@@ -86,6 +86,16 @@
     };
     git = {
       enable = true;
+      aliases = {
+        st = "status";
+        s = "status -s";
+        ci = "commit";
+        co = "checkout";
+        dc = "diff --cached";
+        d = "diff";
+        so = "show";
+        lg = "log";
+      };
     };
   };
 
