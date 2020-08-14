@@ -46,6 +46,7 @@
     screen
     tree
     unzip
+    xsel
   ];
 
   xsession.enable = true;
