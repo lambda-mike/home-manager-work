@@ -96,6 +96,7 @@
       enable = true;
     };
     chromium.enable = true;
+    emacs.enable = true;
     feh.enable = true;
     firefox = {
       enable = true;
