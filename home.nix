@@ -114,12 +114,8 @@
     };
     skim.enable = true;
     tmux = import ./tmux.nix { inherit pkgs; };
-    vscode = {
-      enable = true;
-    };
-    zathura = {
-      enable = true;
-    };
+    vscode = { enable = true; };
+    zathura = { enable = true; };
   };
 
   services = {
