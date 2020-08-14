@@ -5,6 +5,16 @@
   config = {
     colorScheme = "base16";
     indentWidth = 2;
+    hooks = [
+      {
+        commands = ''
+set-option global fzf_file_command 'rg'
+set-option global fzf_implementation 'sk'
+'';
+        name = "ModuleLoaded";
+        option = "fzf";
+      }
+    ];
     keyMappings = [
       {
         docstring = "move down";
@@ -72,6 +82,12 @@
         key = "<a-#>";
         mode = "normal";
       }
+      {
+        docstring = "fzf mode";
+        effect = ": fzf-mode<ret>";
+        key = "<space>";
+        mode = "normal";
+      }
     ];
     numberLines = {
       enable = true;
@@ -85,10 +101,6 @@
       marker =  "⏎";
     };
   };
-  extraConfig = ''
-    set-option global fzf_file_command 'rg'
-    set-option global fzf_implementation 'sk'
-'';
   plugins = [
     pkgs.kakounePlugins.kak-fzf
   ];
