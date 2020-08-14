@@ -112,8 +112,8 @@
     jq = {
       enable = true;
     };
-    neovim = (import ./neovim.nix) { inherit pkgs; };
-    kakoune = (import ./kakoune.nix) { inherit pkgs; };
+    kakoune = import ./kakoune.nix { inherit pkgs; };
+    neovim = import ./neovim.nix { inherit pkgs; };
     rofi = {
       enable = true;
     };
