@@ -128,4 +128,8 @@
     };
   };
 
+  services = {
+    redshift = import ./redshift.nix;
+  };
+
 }
