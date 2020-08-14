@@ -86,9 +86,7 @@
   # manage your shell, otherwise it will not be able to add its hooks
   # to your profile.
   programs = {
-    alacritty = {
-      enable = true;
-    };
+    alacritty = import ./alacritty.nix;
     bat = {
       enable = true;
     };
