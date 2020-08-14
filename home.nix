@@ -115,9 +115,7 @@
     kakoune = {
       enable = true;
     };
-    neovim = {
-      enable = true;
-    };
+    neovim = (import ./neovim.nix) { inherit pkgs; };
     rofi = {
       enable = true;
     };
