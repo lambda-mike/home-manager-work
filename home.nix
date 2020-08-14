@@ -90,6 +90,7 @@
     alacritty = import ./alacritty.nix;
     bat = {
       enable = true;
+      config = { pager = "less -FR"; theme = "1337"; };
     };
     broot = {
       enable = true;
