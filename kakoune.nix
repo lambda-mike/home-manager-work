@@ -63,7 +63,7 @@
       {
         docstring = "comment line";
         effect = ":comment-line<ret>";
-        key = "#";
+        key = "'#'";
         mode = "normal";
       }
       {
