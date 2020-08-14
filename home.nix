@@ -99,13 +99,7 @@
     firefox = {
       enable = true;
     };
-    fish = {
-      enable = true;
-      interactiveShellInit = ''echo "Interactive..."'';
-      loginShellInit = ''echo "Login..."'';
-      promptInit = ''echo "Hello from Fish!"'';
-      shellInit = ''echo "Init"'';
-    };
+    fish = import ./fish.nix;
     gpg = {
       enable = true;
     };
