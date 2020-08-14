@@ -118,9 +118,7 @@
       enable = true;
     };
     skim.enable = true;
-    tmux = {
-      enable = true;
-    };
+    tmux = import ./tmux.nix { inherit pkgs; };
     vscode = {
       enable = true;
     };
