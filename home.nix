@@ -38,38 +38,8 @@
   };
 
   xsession.enable = true;
+  xsession.windowManager.xmonad = import ./xmonad.nix { inherit pkgs; };
 
-  # xsession.windowManager.i3 = {
-  #   enable = false;
-  #   config =
-  #     let mod = "Mod4";
-  #     in {
-  #       modifier = mod;
-  #       workspaceAutoBackAndForth = true;
-  #       keybindings =
-  #           lib.mkOptionDefault {
-  #             "${mod}+Return" = "exec alacritty";
-  #           };
-  #     };
-  # };
-
-  xsession.windowManager.xmonad = {
-    enable = true;
-    enableContribAndExtras = true;
-    config = pkgs.writeText "xmonad.hs" ''
-  import XMonad
-  main = xmonad def
-      { terminal    = "alacritty"
-      , modMask     = mod4Mask
-      , borderWidth = 2
-      }
-'' ;
-    extraPackages = haskellPackages : [
-      haskellPackages.xmonad-contrib
-      haskellPackages.xmonad-extras
-      haskellPackages.xmonad
-    ];
-  };
   programs = {
     autorandr = import ./autorandr.nix;
     alacritty = import ./alacritty.nix;
