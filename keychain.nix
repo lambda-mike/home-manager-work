@@ -3,7 +3,7 @@
   agents = [ "ssh" ];
   enable = true;
   enableZshIntegration = false;
-  extraFlags = [ "--quick" ];
+  extraFlags = [ "--quick" "--quiet" ];
   # keys should contain an array of strings: [ "id_rsa" ]
   keys = import ./keys.nix;
 }
