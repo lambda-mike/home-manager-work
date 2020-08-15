@@ -10,46 +10,26 @@
   #
   #   https://rycee.gitlab.io/home-manager/options.html
 
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
-  #
-  # You need to change these to match your username and home directory
-  # path:
-  home.username = "mike";
-  home.homeDirectory = "/home/mike";
-
-  # If you use non-standard XDG locations, set these options to the
-  # appropriate paths:
-  #
-  # xdg.cacheHome
-  # xdg.configHome
-  # xdg.dataHome
-
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = "20.09";
-
-  home.packages = with pkgs; [
-    brave
-    du-dust
-    fd
-    gimp
-    htop
-    i3lock
-    neofetch
-    ripgrep
-    rustup
-    screen
-    tree
-    unzip
-    xsel
-  ];
+  home = {
+    username = "mike";
+    homeDirectory = "/home/mike";
+    packages = with pkgs; [
+      brave
+      du-dust
+      fd
+      gimp
+      htop
+      i3lock
+      neofetch
+      ripgrep
+      rustup
+      screen
+      tree
+      unzip
+      xsel
+    ];
+    stateVersion = "20.09";
+  };
 
   services.screen-locker = {
     enable = true;
@@ -90,10 +70,6 @@
       haskellPackages.xmonad
     ];
   };
-
-  # Since we do not install home-manager, you need to let home-manager
-  # manage your shell, otherwise it will not be able to add its hooks
-  # to your profile.
   programs = {
     autorandr = import ./autorandr.nix;
     alacritty = import ./alacritty.nix;
