@@ -29,6 +29,9 @@
       unzip
       xsel
     ];
+    sessionVariables = {
+      SHELL = "/home/mike/.nix-profile/bin/fish";
+    };
     stateVersion = "20.09";
   };
 
