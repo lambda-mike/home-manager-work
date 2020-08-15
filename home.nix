@@ -50,6 +50,12 @@
     xsel
   ];
 
+  services.screen-locker = {
+    enable = true;
+    inactiveInterval = 10;
+    lockCmd = "${pkgs.i3lock}/bin/i3lock -c 00558c";
+  };
+
   xsession.enable = true;
 
   # xsession.windowManager.i3 = {
