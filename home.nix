@@ -43,6 +43,7 @@
     i3lock
     neofetch
     ripgrep
+    rustup
     screen
     tree
     unzip
