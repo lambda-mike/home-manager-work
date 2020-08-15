@@ -23,6 +23,7 @@
       neofetch
       ripgrep
       rustup
+      scrot
       screen
       tree
       unzip
