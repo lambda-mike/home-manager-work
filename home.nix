@@ -119,6 +119,7 @@
       enable = true;
     };
     kakoune = import ./kakoune.nix { inherit pkgs; };
+    keychain = import ./keychain.nix;
     neovim = import ./neovim.nix { inherit pkgs; };
     rofi = {
       enable = true;
