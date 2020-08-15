@@ -74,6 +74,7 @@
       '';
       plugins = with pkgs.vimPlugins; [
         lightline-vim
+        rust-vim
         skim
         skim-vim
         typescript-vim
