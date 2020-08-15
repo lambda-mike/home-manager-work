@@ -58,29 +58,30 @@
       layout = "us";
       xkbVariant = "colemak";
 
+      # Touchpad support
       libinput.enable = true;
 
       displayManager = {
-        defaultSession = "none+i3";
-        #defaultSession = "none+xmonad";
+        #defaultSession = "none+i3";
+        defaultSession = "none+xmonad";
         lightdm = {
           enable = true;
           autoLogin = {
-          enable = true;
-          user = "mike";
+            enable = true;
+            user = "mike";
           };
         };
       };
 
-      windowManager.i3.enable = true;
-      #windowManager.xmonad.enable = true;
+      #windowManager.i3.enable = true;
+      windowManager.xmonad.enable = true;
 
     };
 
     # users
     users.users.mike = {
       createHome = true;
-      extraGroups = [ "wheel" "disk" "video" "networkmanager" "vboxsf" ];
+      extraGroups = [ "wheel" "disk" "audio" "video" "networkmanager" "vboxsf" ];
       group = "users";
       home = "/home/mike";
       isNormalUser = true;
