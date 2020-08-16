@@ -1,7 +1,7 @@
 let
   createDockProfile = id:
     {
-      dock = {
+      "dock${id}" = {
         config = {
           "eDP-1" = {
             crtc = 0;
@@ -45,5 +45,8 @@ in
 {
   enable = true;
   profiles =
-    createDockProfile "1" // soloProfile;
+    builtins.foldl'
+      (ps: n: createDockProfile (builtins.toString n) // ps)
+      soloProfile
+      [1 2 3 4];
 }
