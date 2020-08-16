@@ -20,6 +20,8 @@
       gimp
       htop
       i3lock
+      linuxPackages_5_7.virtualbox
+      linuxPackages_5_7.virtualboxGuestAdditions
       neofetch
       ripgrep
       rustup
@@ -27,6 +29,7 @@
       screen
       tree
       unzip
+      virtualbox
       xsel
     ];
     stateVersion = "20.09";
