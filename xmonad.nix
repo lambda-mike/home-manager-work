@@ -22,18 +22,17 @@
       myTerminal =
         "alacritty"
       myKeysList =
-        [ ("M-<Return>", spawn myTerminal               )
-        , ("M-S-q"     , kill                           )
-        , ("M-S-r"     , spawn restartXMonad            )
-        , ("M-r"       , refresh                        )
-        , ("M-S-x"     , io (E.exitWith E.ExitSuccess)  )
-        , ("M-p"       , spawn "rofi -show run"         )
-        , ("M-S-p"     , spawn "rofi -show window"      )
-        , ("M-S-m"     , windows W.swapMaster           )
-        -- TODO
-        -- , ((0, xK_Print), spawn "scrot")
-        -- , ((shift, xK_Print), spawn "sleep 0.2; scrot -u") -- window
-        -- , ((shift control, xK_Print), spawn "sleep 0.2; scrot -s") -- rect
+        [ ("M-<Return>"  , spawn myTerminal               )
+        , ("M-S-q"       , kill                           )
+        , ("M-S-r"       , spawn restartXMonad            )
+        , ("M-r"         , refresh                        )
+        , ("M-S-x"       , io (E.exitWith E.ExitSuccess)  )
+        , ("M-p"         , spawn "rofi -show run"         )
+        , ("M-S-p"       , spawn "rofi -show window"      )
+        , ("M-S-m"       , windows W.swapMaster           )
+        , ("<Print>"     , screenshot SMWhole             )
+        , ("M-<Print>"   , screenshot SMWindow            )
+        , ("M-S-<Print>" , screenshot SMRect              )
         ]
         ++ myScreenKeybindings
       -- mod-{n,e,i} %! Switch to physical screens 1, 2, or 3
@@ -49,6 +48,25 @@
         "if type xmonad; then " ++
         "xmonad --recompile && xmonad --restart; " ++
         "else xmessage xmonad not in \\$PATH: \"$PATH\"; fi"
+
+  -- screenshot :: ScreenshotMode -> Int
+  screenshot mode =
+    spawn $ sleepCmd <> scrotCmd <> mvShotCmd
+    where
+      sleepCmd =
+        "sleep 0.5; "
+      scrotCmd =
+        case mode of
+          SMWhole  -> "scrot"
+          SMWindow -> "scrot -u"
+          SMRect   -> "scrot -s"
+      mvShotCmd =
+        " -e 'mv $f ~/Data/Screenshots/'"
+
+  data ScreenshotMode
+    = SMWhole
+    | SMWindow
+    | SMRect
 
 '' ;
   extraPackages = haskellPackages : [
