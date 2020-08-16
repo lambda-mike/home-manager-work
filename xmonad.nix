@@ -16,7 +16,7 @@
           { terminal           = myTerminal
           , modMask            = mod4Mask
           , borderWidth        = 2
-          , normalBorderColor  = "#cccccc"
+          , normalBorderColor  = "#2f3d44"
           , focusedBorderColor = "#00558c"
           }
       myTerminal =
@@ -28,6 +28,7 @@
         , ("M-r"         , refresh                        )
         , ("M-S-x"       , io (E.exitWith E.ExitSuccess)  )
         , ("M-p"         , spawn "rofi -show run"         )
+        -- TODO fix so it shows windows??
         , ("M-S-p"       , spawn "rofi -show window"      )
         , ("M-S-m"       , windows W.swapMaster           )
         , ("<Print>"     , screenshot SMWhole             )
@@ -49,7 +50,6 @@
         "xmonad --recompile && xmonad --restart; " ++
         "else xmessage xmonad not in \\$PATH: \"$PATH\"; fi"
 
-  -- screenshot :: ScreenshotMode -> Int
   screenshot mode =
     spawn $ sleepCmd <> scrotCmd <> mvShotCmd
     where
