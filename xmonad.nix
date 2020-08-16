@@ -17,7 +17,7 @@
           , modMask            = mod4Mask
           , borderWidth        = 2
           , normalBorderColor  = "#2f3d44"
-          , focusedBorderColor = "#00558c"
+          , focusedBorderColor = "#0076cf"
           }
       myTerminal =
         "alacritty"
