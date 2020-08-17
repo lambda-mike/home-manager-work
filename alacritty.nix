@@ -42,7 +42,7 @@
       #normal.family = "DejaVu Sans Mono";
       #normal.family = "JetBrains Mono";
       #normal.family = "Hermit";
-      size = 11;
+      size = 12;
     };
     # shell.program = "${pkgs.fish}/bin/fish";
   };
