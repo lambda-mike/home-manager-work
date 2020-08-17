@@ -3,6 +3,7 @@
 ;; Latest stable emacs.d hashes:
 ;; 126461d
 ;; 03162466c6
+;; 8fa5b940
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
