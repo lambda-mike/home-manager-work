@@ -23,6 +23,7 @@
       linuxPackages_5_7.virtualbox
       linuxPackages_5_7.virtualboxGuestAdditions
       neofetch
+      python38
       ripgrep
       rustup
       scrot
