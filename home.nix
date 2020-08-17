@@ -85,4 +85,6 @@
     redshift = import ./redshift.nix;
   };
 
+  xdg = import ./xdg.nix;
+
 }
