@@ -18,6 +18,7 @@
       du-dust
       fd
       gimp
+      git-crypt
       htop
       i3lock
       linuxPackages_5_7.virtualbox
