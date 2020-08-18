@@ -96,6 +96,7 @@
   };
 
   services = {
+    polybar = import ./polybar.nix;
     redshift = import ./redshift.nix;
   };
 
