@@ -35,6 +35,9 @@
       virtualbox
       xsel
     ];
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
     stateVersion = "20.09";
   };
 
