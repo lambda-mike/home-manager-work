@@ -16,7 +16,7 @@
     boot.loader.systemd-boot.configurationLimit = 30;
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.timeout = 2;
+    boot.loader.timeout = 1;
     boot.initrd.luks.devices = {
       root = {
         device = "/dev/sda2";
