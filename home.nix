@@ -55,11 +55,7 @@
     };
   };
 
-  xsession = {
-    enable = true;
-    initExtra = "autorandr -c";
-    windowManager.xmonad = import ./xmonad.nix { inherit pkgs; };
-  };
+  xsession = import ./xsession.nix { inherit pkgs; };
 
   programs = {
     autorandr = import ./autorandr.nix;
