@@ -85,6 +85,7 @@
       group = "users";
       home = "/home/mike";
       isNormalUser = true;
+      # TODO uncomment once fish is installed using home-manager
       #shell = /home/mike/.nix-profile/bin/fish;
       uid = 1000;
     };
