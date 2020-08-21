@@ -90,6 +90,7 @@
     neovim = import ./neovim.nix { inherit pkgs; };
     rofi = {
       enable = true;
+      theme = "Arc-Dark";
     };
     skim.enable = true;
     tmux = import ./tmux.nix { inherit pkgs; };
