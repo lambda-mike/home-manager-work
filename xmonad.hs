@@ -1,3 +1,5 @@
+import qualified DBus as D
+import qualified DBus.Client as D
 import qualified System.Exit as E
 import           XMonad
 import           XMonad.Config.Desktop (desktopConfig)
@@ -9,8 +11,14 @@ import           XMonad.ManageHook (composeAll)
 import qualified XMonad.StackSet as W
 import           XMonad.Util.EZConfig (additionalKeysP)
 
-main = xmonad $
-  (myConfig `additionalKeysP` myKeysList)
+main = do
+  dbus <- D.connectSession
+  -- Request access to the DBus name
+  D.requestName dbus (D.busName_ "org.xmonad.Log")
+    [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
+
+  xmonad $
+    (myConfig `additionalKeysP` myKeysList)
 
 myConfig =
   desktopConfig
