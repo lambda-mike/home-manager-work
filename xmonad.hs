@@ -22,8 +22,8 @@ myConfig =
     , focusFollowsMouse  = True
     , handleEventHook    = handleEventHook desktopConfig <+> fullscreenEventHook
     , layoutHook         = smartBorders $ layoutHook desktopConfig
-    , startupHook        = myStartupHook
     , manageHook         = myManageHook <+> manageHook desktopConfig
+    , startupHook        = myStartupHook <+> startupHook desktopConfig
     }
 
 myTerminal =
