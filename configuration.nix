@@ -37,6 +37,7 @@
 
     # Pkgs
     environment.systemPackages = with pkgs; [
+      killall
       lynx
       networkmanagerapplet
       wget
