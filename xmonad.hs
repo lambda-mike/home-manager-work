@@ -2,6 +2,7 @@ import           System.Exit as E
 import           XMonad
 import           XMonad.Config.Desktop (desktopConfig)
 import           XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
+import           XMonad.Layout.NoBorders (smartBorders)
 import qualified XMonad.StackSet as W
 import           XMonad.Util.EZConfig (additionalKeysP)
 
@@ -16,6 +17,7 @@ myConfig =
     , normalBorderColor  = "#2f3d44"
     , focusedBorderColor = "#0076cf"
     , handleEventHook    = handleEventHook desktopConfig <+> fullscreenEventHook
+    , layoutHook         = smartBorders $ layoutHook desktopConfig
     }
 
 myTerminal =
