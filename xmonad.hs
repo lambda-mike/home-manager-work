@@ -86,7 +86,9 @@ data ScreenshotMode
   | SMWindow
   | SMRect
 
-myStartupHook = setWMName "LG3D"
+myStartupHook = do
+  setWMName "LG3D"
+  spawn "polybar-msg cmd restart"
 
 myManageHook = composeAll . concat $
   [ [isDialog --> doCenterFloat]
