@@ -2,6 +2,7 @@ import           System.Exit as E
 import           XMonad
 import           XMonad.Config.Desktop (desktopConfig)
 import           XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
+import           XMonad.Hooks.SetWMName (setWMName)
 import           XMonad.Layout.NoBorders (smartBorders)
 import qualified XMonad.StackSet as W
 import           XMonad.Util.EZConfig (additionalKeysP)
@@ -18,6 +19,7 @@ myConfig =
     , focusedBorderColor = "#0076cf"
     , handleEventHook    = handleEventHook desktopConfig <+> fullscreenEventHook
     , layoutHook         = smartBorders $ layoutHook desktopConfig
+    , startupHook        = myStartupHook
     }
 
 myTerminal =
@@ -71,3 +73,5 @@ data ScreenshotMode
   = SMWhole
   | SMWindow
   | SMRect
+
+myStartupHook = setWMName "LG3D"
