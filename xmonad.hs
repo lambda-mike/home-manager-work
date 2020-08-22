@@ -1,4 +1,4 @@
-import           System.Exit as E
+import qualified System.Exit as E
 import           XMonad
 import           XMonad.Config.Desktop (desktopConfig)
 import           XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
