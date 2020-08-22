@@ -17,6 +17,7 @@ myConfig =
     , borderWidth        = 2
     , normalBorderColor  = "#2f3d44"
     , focusedBorderColor = "#0076cf"
+    , focusFollowsMouse  = True
     , handleEventHook    = handleEventHook desktopConfig <+> fullscreenEventHook
     , layoutHook         = smartBorders $ layoutHook desktopConfig
     , startupHook        = myStartupHook
