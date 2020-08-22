@@ -2,8 +2,10 @@ import           System.Exit as E
 import           XMonad
 import           XMonad.Config.Desktop (desktopConfig)
 import           XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
+import           XMonad.Hooks.ManageHelpers (doCenterFloat, isDialog)
 import           XMonad.Hooks.SetWMName (setWMName)
 import           XMonad.Layout.NoBorders (smartBorders)
+import           XMonad.ManageHook (composeAll)
 import qualified XMonad.StackSet as W
 import           XMonad.Util.EZConfig (additionalKeysP)
 
@@ -21,6 +23,7 @@ myConfig =
     , handleEventHook    = handleEventHook desktopConfig <+> fullscreenEventHook
     , layoutHook         = smartBorders $ layoutHook desktopConfig
     , startupHook        = myStartupHook
+    , manageHook         = myManageHook <+> manageHook desktopConfig
     }
 
 myTerminal =
@@ -76,3 +79,12 @@ data ScreenshotMode
   | SMRect
 
 myStartupHook = setWMName "LG3D"
+
+myManageHook = composeAll . concat $
+  [ [isDialog --> doCenterFloat]
+  , [className =? c --> doCenterFloat | c <- myCFloats]
+  , [title =? t --> doFloat | t <- myTFloats]
+  ]
+  where
+    myCFloats = ["VirtualBox Manager", "Gimp"]
+    myTFloats = ["Downloads", "Save As..."]
