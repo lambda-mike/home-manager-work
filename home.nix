@@ -21,6 +21,7 @@
       git-crypt
       htop
       i3lock
+      killall
       libreoffice
       linuxPackages_5_7.virtualbox
       linuxPackages_5_7.virtualboxGuestAdditions
