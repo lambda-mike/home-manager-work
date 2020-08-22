@@ -95,7 +95,7 @@
   };
 
   services = {
-    polybar = import ./polybar.nix;
+    polybar = import ./polybar.nix { inherit pkgs lib; };
     redshift = import ./redshift.nix;
   };
 
