@@ -3,10 +3,10 @@ import qualified DBus.Client as D
 import qualified System.Exit as E
 import           XMonad
 import           XMonad.Config.Desktop (desktopConfig)
-import           XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
 import           XMonad.Hooks.ManageDocks (ToggleStruts(..), avoidStruts)
 import           XMonad.Hooks.ManageHelpers (doCenterFloat, isDialog)
 import           XMonad.Hooks.SetWMName (setWMName)
+import           XMonad.Layout.Fullscreen (fullscreenEventHook, fullscreenManageHook)
 import           XMonad.Layout.MultiToggle (Toggle(..), mkToggle, single)
 import           XMonad.Layout.MultiToggle.Instances (StdTransformers(FULL))
 import           XMonad.Layout.NoBorders (smartBorders)
@@ -35,7 +35,8 @@ myConfig =
     , focusFollowsMouse  = True
     , handleEventHook    = handleEventHook desktopConfig <+> fullscreenEventHook
     , layoutHook         = myLayout
-    , manageHook         = myManageHook <+> manageHook desktopConfig
+    , manageHook         =
+        myManageHook <+> manageHook desktopConfig <+> fullscreenManageHook
     , startupHook        = myStartupHook <+> startupHook desktopConfig
     }
 
