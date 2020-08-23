@@ -4,9 +4,11 @@ import qualified System.Exit as E
 import           XMonad
 import           XMonad.Config.Desktop (desktopConfig)
 import           XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
-import           XMonad.Hooks.ManageDocks (avoidStruts)
+import           XMonad.Hooks.ManageDocks (ToggleStruts(..), avoidStruts)
 import           XMonad.Hooks.ManageHelpers (doCenterFloat, isDialog)
 import           XMonad.Hooks.SetWMName (setWMName)
+import           XMonad.Layout.MultiToggle (Toggle(..), mkToggle, single)
+import           XMonad.Layout.MultiToggle.Instances (StdTransformers(FULL))
 import           XMonad.Layout.NoBorders (smartBorders)
 import qualified XMonad.Layout.Tabbed as T
 import           XMonad.Layout.ThreeColumns (ThreeCol(ThreeCol))
@@ -41,18 +43,19 @@ myTerminal =
   "alacritty"
 
 myKeysList =
-  [ ("M-<Return>"  , spawn myTerminal               )
-  , ("M-S-q"       , kill                           )
-  , ("M-S-r"       , spawn restartXMonad            )
-  , ("M-r"         , refresh                        )
-  , ("M-S-x"       , io (E.exitWith E.ExitSuccess)  )
-  , ("M-p"         , spawn "rofi -show run"         )
+  [ ("M-<Return>"  , spawn myTerminal              )
+  , ("M-S-q"       , kill                          )
+  , ("M-S-r"       , spawn restartXMonad           )
+  , ("M-r"         , refresh                       )
+  , ("M-S-x"       , io (E.exitWith E.ExitSuccess) )
+  , ("M-p"         , spawn "rofi -show run"        )
   -- TODO fix so it shows windows??
-  , ("M-S-p"       , spawn "rofi -show window"      )
-  , ("M-S-m"       , windows W.swapMaster           )
-  , ("<Print>"     , screenshot SMWhole             )
-  , ("M-<Print>"   , screenshot SMWindow            )
-  , ("M-S-<Print>" , screenshot SMRect              )
+  , ("M-S-p"       , spawn "rofi -show window"     )
+  , ("M-f"         , toggleFullscreen              )
+  , ("M-S-m"       , windows W.swapMaster          )
+  , ("<Print>"     , screenshot SMWhole            )
+  , ("M-<Print>"   , screenshot SMWindow           )
+  , ("M-S-<Print>" , screenshot SMRect             )
   ]
   ++ myScreenKeybindings
   -- mod-{n,e,i} %! Switch to physical screens 1, 2, or 3
@@ -65,6 +68,10 @@ myScreenKeybindings =
   | (key   , scr ) <- zip "nei" [0..]
   , (action, mask) <- [ (W.view, "") , (W.shift, "S-") ]
   ]
+
+toggleFullscreen = do
+  sendMessage $ Toggle FULL
+  sendMessage ToggleStruts
 
 restartXMonad =
   "if type xmonad; then " ++
@@ -96,6 +103,8 @@ myStartupHook = do
 myLayout = id
   $ avoidStruts
   $ smartBorders
+  $ mkToggle (single FULL)
+  -- TODO use foldr1
   $   tiled
   ||| Mirror tiled
   ||| Full
