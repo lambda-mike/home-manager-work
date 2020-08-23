@@ -50,7 +50,6 @@ myKeysList =
   , ("M-r"         , refresh                       )
   , ("M-S-x"       , io (E.exitWith E.ExitSuccess) )
   , ("M-p"         , spawn "rofi -show run"        )
-  -- TODO fix so it shows windows??
   , ("M-S-p"       , spawn "rofi -show window"     )
   , ("M-f"         , toggleFullscreen              )
   , ("M-S-m"       , windows W.swapMaster          )
@@ -105,31 +104,30 @@ myLayout = id
   $ avoidStruts
   $ smartBorders
   $ mkToggle (single FULL)
-  -- TODO use foldr1
-  $   tiled
+  $ tiled
   ||| Mirror tiled
-  ||| Full
   ||| T.tabbedBottom T.shrinkText myTabConfig
   ||| ThreeCol 1 (3/100) (1/3)
+  ||| Full
   where
-     -- default tiling algorithm partitions the screen into two panes
-     tiled   = Tall nmaster delta ratio
-     -- The default number of windows in the master pane
-     nmaster = 1
-     -- Default proportion of screen occupied by master pane
-     ratio   = 1/2
-     -- Percent of screen to increment by when resizing panes
-     delta   = 3/100
-     -- Tabs theme
-     myTabConfig =
-       T.def
-        { T.activeColor         = colourLightBlue
-        , T.inactiveColor       = colourNordBlue
-        , T.activeBorderColor   = colourDarkBlue
-        , T.inactiveBorderColor = colourDarkBlue
-        , T.activeTextColor     = colourWhite
-        , T.inactiveTextColor   = colourGrey
-        }
+    -- default tiling algorithm partitions the screen into two panes
+    tiled = Tall nmaster delta ratio
+    -- The default number of windows in the master pane
+    nmaster = 1
+    -- Default proportion of screen occupied by master pane
+    ratio = 1/2
+    -- Percent of screen to increment by when resizing panes
+    delta = 3/100
+    -- Tabs theme
+    myTabConfig =
+      T.def
+       { T.activeColor         = colourLightBlue
+       , T.inactiveColor       = colourNordBlue
+       , T.activeBorderColor   = colourDarkBlue
+       , T.inactiveBorderColor = colourDarkBlue
+       , T.activeTextColor     = colourWhite
+       , T.inactiveTextColor   = colourGrey
+       }
 
 myManageHook = composeAll . concat $
   [ [isDialog --> doCenterFloat]
