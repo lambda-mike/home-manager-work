@@ -7,7 +7,7 @@ import           XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
 import           XMonad.Hooks.ManageDocks (avoidStruts)
 import           XMonad.Hooks.ManageHelpers (doCenterFloat, isDialog)
 import           XMonad.Hooks.SetWMName (setWMName)
-import           XMonad.Layout.Accordion (Accordion(Accordion))
+import           XMonad.Layout.Dishes (Dishes(Dishes))
 import           XMonad.Layout.NoBorders (smartBorders)
 import           XMonad.ManageHook (composeAll)
 import qualified XMonad.StackSet as W
@@ -95,7 +95,7 @@ myStartupHook = do
 myLayout = id
   $ avoidStruts
   $ smartBorders
-  $ tiled ||| Mirror tiled ||| Full ||| Accordion
+  $ tiled ||| Mirror tiled ||| Full ||| Dishes 2 (1/6)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
