@@ -4,6 +4,7 @@ import qualified System.Exit as E
 import           XMonad
 import           XMonad.Config.Desktop (desktopConfig)
 import           XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
+import           XMonad.Hooks.ManageDocks (avoidStruts)
 import           XMonad.Hooks.ManageHelpers (doCenterFloat, isDialog)
 import           XMonad.Hooks.SetWMName (setWMName)
 import           XMonad.Layout.NoBorders (smartBorders)
@@ -29,7 +30,7 @@ myConfig =
     , focusedBorderColor = "#0076cf"
     , focusFollowsMouse  = True
     , handleEventHook    = handleEventHook desktopConfig <+> fullscreenEventHook
-    , layoutHook         = smartBorders $ layoutHook desktopConfig
+    , layoutHook         = myLayout
     , manageHook         = myManageHook <+> manageHook desktopConfig
     , startupHook        = myStartupHook <+> startupHook desktopConfig
     }
@@ -89,6 +90,20 @@ data ScreenshotMode
 myStartupHook = do
   setWMName "LG3D"
   spawn "polybar-msg cmd restart"
+
+myLayout = id
+  $ avoidStruts
+  $ smartBorders
+  $ tiled ||| Mirror tiled ||| Full
+  where
+     -- default tiling algorithm partitions the screen into two panes
+     tiled   = Tall nmaster delta ratio
+     -- The default number of windows in the master pane
+     nmaster = 1
+     -- Default proportion of screen occupied by master pane
+     ratio   = 1/2
+     -- Percent of screen to increment by when resizing panes
+     delta   = 3/100
 
 myManageHook = composeAll . concat $
   [ [isDialog --> doCenterFloat]
