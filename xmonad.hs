@@ -8,7 +8,7 @@ import           XMonad.Hooks.ManageDocks (avoidStruts)
 import           XMonad.Hooks.ManageHelpers (doCenterFloat, isDialog)
 import           XMonad.Hooks.SetWMName (setWMName)
 import           XMonad.Layout.NoBorders (smartBorders)
-import           XMonad.Layout.Tabbed (simpleTabbedBottom)
+import qualified XMonad.Layout.Tabbed as T
 import           XMonad.Layout.ThreeColumns (ThreeCol(ThreeCol))
 import           XMonad.ManageHook (composeAll)
 import qualified XMonad.StackSet as W
@@ -28,8 +28,8 @@ myConfig =
     { terminal           = myTerminal
     , modMask            = mod4Mask
     , borderWidth        = 2
-    , normalBorderColor  = "#2f3d44"
-    , focusedBorderColor = "#0076cf"
+    , normalBorderColor  = colourNordBlue
+    , focusedBorderColor = colourLightBlue
     , focusFollowsMouse  = True
     , handleEventHook    = handleEventHook desktopConfig <+> fullscreenEventHook
     , layoutHook         = myLayout
@@ -99,7 +99,7 @@ myLayout = id
   $   tiled
   ||| Mirror tiled
   ||| Full
-  ||| simpleTabbedBottom
+  ||| T.tabbedBottom T.shrinkText myTabConfig
   ||| ThreeCol 1 (3/100) (1/3)
   where
      -- default tiling algorithm partitions the screen into two panes
@@ -110,6 +110,16 @@ myLayout = id
      ratio   = 1/2
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
+     -- Tabs theme
+     myTabConfig =
+       T.def
+        { T.activeColor         = colourLightBlue
+        , T.inactiveColor       = colourNordBlue
+        , T.activeBorderColor   = colourDarkBlue
+        , T.inactiveBorderColor = colourDarkBlue
+        , T.activeTextColor     = colourWhite
+        , T.inactiveTextColor   = colourGrey
+        }
 
 myManageHook = composeAll . concat $
   [ [isDialog --> doCenterFloat]
@@ -119,3 +129,10 @@ myManageHook = composeAll . concat $
   where
     myCFloats = ["VirtualBox Manager", "Gimp"]
     myTFloats = ["Downloads", "Save As..."]
+
+-- Colours
+colourDarkBlue = "#00558c"
+colourLightBlue = "#0076cf"
+colourNordBlue = "#2f343f"
+colourWhite = "#fefefe"
+colourGrey = "#bebebe"
