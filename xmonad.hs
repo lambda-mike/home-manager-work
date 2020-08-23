@@ -7,8 +7,9 @@ import           XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
 import           XMonad.Hooks.ManageDocks (avoidStruts)
 import           XMonad.Hooks.ManageHelpers (doCenterFloat, isDialog)
 import           XMonad.Hooks.SetWMName (setWMName)
-import           XMonad.Layout.ThreeColumns (ThreeCol(ThreeCol))
 import           XMonad.Layout.NoBorders (smartBorders)
+import           XMonad.Layout.Tabbed (simpleTabbedBottom)
+import           XMonad.Layout.ThreeColumns (ThreeCol(ThreeCol))
 import           XMonad.ManageHook (composeAll)
 import qualified XMonad.StackSet as W
 import           XMonad.Util.EZConfig (additionalKeysP)
@@ -95,7 +96,11 @@ myStartupHook = do
 myLayout = id
   $ avoidStruts
   $ smartBorders
-  $ tiled ||| Mirror tiled ||| Full ||| ThreeCol 1 (3/100) (1/2)
+  $   tiled
+  ||| Mirror tiled
+  ||| Full
+  ||| simpleTabbedBottom
+  ||| ThreeCol 1 (3/100) (1/3)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
