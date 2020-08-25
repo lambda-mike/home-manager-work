@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 
 {
 
@@ -55,7 +55,7 @@
     };
   };
 
-  xsession = import ./xsession.nix { inherit pkgs; };
+  xsession = import ./xsession.nix { inherit pkgs config; };
 
   programs = {
     autorandr = import ./autorandr.nix;
@@ -99,6 +99,6 @@
     redshift = import ./redshift.nix;
   };
 
-  xdg = import ./xdg.nix;
+  xdg = import ./xdg.nix { inherit pkgs config; };
 
 }

@@ -1,8 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   enable = true;
-  initExtra = "autorandr -c";
+  initExtra = ''
+    autorandr -c
+    ${config.home.homeDirectory}/.fehbg &
+  '';
   pointerCursor = {
     package = pkgs.vanilla-dmz;
     name = "Vanilla-DMZ";
