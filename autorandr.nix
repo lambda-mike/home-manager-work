@@ -1,3 +1,4 @@
+# FIXME Phase2 Get values using `autorandr --fingerprint` and xrandr
 let
   createDockProfile = id:
     {

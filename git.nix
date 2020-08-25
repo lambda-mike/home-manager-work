@@ -11,5 +11,6 @@
     st = "status";
     s = "status -s";
   };
-  userName = "Michał Grygierzec";
+  # FIXME Phase2 Set proper userName
+  # FIXME Phase2 Set proper userEmail
 }

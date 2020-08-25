@@ -9,6 +9,7 @@
       ./hardware-configuration.nix
     ];
 
+    # FIXME Phase1
     # Requiers for Intel wifi to work on laptop
     boot.kernelPackages = pkgs.linuxPackages_5_7;
 
@@ -19,6 +20,7 @@
     boot.loader.timeout = 1;
     boot.initrd.luks.devices = {
       root = {
+        # FIXME Phase1 Set proper value
         device = "/dev/sda2";
         preLVM = true;
       };
@@ -28,6 +30,7 @@
     networking.useDHCP = false;
     networking.interfaces.yours.useDHCP = true;
     networking.networkmanager.enable = true;
+    # FIXME Phase1 Set proper name
     networking.hostName = "nixos";
 
     # Localization
@@ -86,7 +89,7 @@
       group = "users";
       home = "/home/mike";
       isNormalUser = true;
-      # TODO uncomment once fish is installed using home-manager
+      # FIXME Phase2 Uncomment once fish is installed using home-manager
       #shell = /home/mike/.nix-profile/bin/fish;
       uid = 1000;
     };
