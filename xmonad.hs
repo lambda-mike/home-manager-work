@@ -2,6 +2,7 @@ import qualified DBus as D
 import qualified DBus.Client as D
 import qualified System.Exit as E
 import           XMonad
+import qualified XMonad.Actions.CycleWS as CWS
 import           XMonad.Config.Desktop (desktopConfig)
 import           XMonad.Hooks.ManageDocks (ToggleStruts(..), avoidStruts)
 import           XMonad.Hooks.ManageHelpers (doCenterFloat, isDialog)
@@ -56,6 +57,7 @@ myKeysList =
   , ("<Print>"     , screenshot SMWhole            )
   , ("M-<Print>"   , screenshot SMWindow           )
   , ("M-S-<Print>" , screenshot SMRect             )
+  , ("M-w"         , CWS.toggleWS                  )
   ]
   ++ myScreenKeybindings
   -- mod-{n,e,i} %! Switch to physical screens 1, 2, or 3
