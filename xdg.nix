@@ -14,4 +14,11 @@
       ${pkgs.feh} --no-fehbg --bg-fill "${config.home.homeDirectory}/wallpaper"
     '';
   };
+  configFile."lock-screen" = {
+    executable = true;
+    text = ''
+      #!/bin/sh
+      ${pkgs.i3lock}/bin/i3lock -n -c 00558c
+    '';
+  };
 }

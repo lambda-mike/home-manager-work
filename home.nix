@@ -51,7 +51,7 @@
     screen-locker = {
       enable = true;
       inactiveInterval = 10;
-      lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 00558c";
+      lockCmd = "${config.xdg.configHome}/lock-screen";
     };
   };
 
