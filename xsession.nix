@@ -4,7 +4,7 @@
   enable = true;
   initExtra = ''
     autorandr -c
-    ${config.home.homeDirectory}/.fehbg &
+    ${config.xdg.configHome}/fehbg &
   '';
   pointerCursor = {
     package = pkgs.vanilla-dmz;

@@ -6,7 +6,7 @@
     source = ./.doom.d;
     recursive = true;
   };
-  configFile.".fehbg" = {
+  configFile."fehbg" = {
     executable = true;
     # FIXME Phase1 Download wallpaper, create symlink in ~
     text = ''
