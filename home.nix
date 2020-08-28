@@ -34,6 +34,7 @@
       tree
       unzip
       virtualbox
+      xorg.xdpyinfo
       xsel
     ];
     sessionVariables = {
