@@ -11,7 +11,7 @@
     # FIXME Phase1 Download wallpaper, create symlink in ~
     text = ''
       #!/bin/sh
-      ${pkgs.feh} --no-fehbg --bg-fill "${config.home.homeDirectory}/wallpaper"
+      ${pkgs.feh}/bin/feh --no-fehbg --bg-fill ${config.home.homeDirectory}/wallpaper
     '';
   };
   configFile."lock-screen" = {
