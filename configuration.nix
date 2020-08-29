@@ -52,6 +52,7 @@
     hardware.pulseaudio.enable = true;
 
     # Services
+    services.locate.enable = true;
     services.nixosManual.showManual = true;
     services.openssh.enable = true;
     services.thermald.enable = true;
