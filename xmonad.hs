@@ -1,8 +1,10 @@
+import qualified Data.Map.Strict as M
 import qualified DBus as D
 import qualified DBus.Client as D
 import qualified System.Exit as E
 import           XMonad
 import qualified XMonad.Actions.CycleWS as CWS
+import           XMonad.Actions.Submap (submap)
 import           XMonad.Config.Desktop (desktopConfig)
 import           XMonad.Hooks.ManageDocks (ToggleStruts(..), avoidStruts)
 import           XMonad.Hooks.ManageHelpers (doCenterFloat, isDialog)
@@ -60,15 +62,27 @@ myKeysList =
   , ("M-w"         , CWS.toggleWS                  )
   ]
   ++ myScreenKeybindings
+  ++ mySysCtrlSubmapKeybindings
+
   -- mod-{n,e,i} %! Switch to physical screens 1, 2, or 3
   -- mod-shift-{n,e,i} %! Move client to screen 1, 2, or 3
-
 myScreenKeybindings =
   [ ( mask ++ "M-" ++ [key]
       , screenWorkspace scr >>= flip whenJust (windows . action)
     )
   | (key   , scr ) <- zip "nei" [0..]
   , (action, mask) <- [ (W.view, "") , (W.shift, "S-") ]
+  ]
+
+mySysCtrlSubmapKeybindings =
+  [ ("M-0", submap . M.fromList $
+      [ ((0        , xK_h), spawn "systemctl hibernate"   )
+      , ((0        , xK_s), spawn "systemctl suspend"     )
+      , ((shiftMask, xK_s), spawn "systemctl poweroff"    )
+      , ((0        , xK_r), spawn "systemctl reboot"      )
+      , ((0        , xK_l), spawn "~/.config/lock-screen" )
+      ]
+    )
   ]
 
 toggleFullscreen = do
