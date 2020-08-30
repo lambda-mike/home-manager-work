@@ -66,6 +66,7 @@ myKeysList =
   , ("M-S-l"       , resetLayout                   )
   , ("M-f"         , toggleFullscreen              )
   , ("M-t"         , setTabbedLayout               )
+  , ("M-c"         , setColumnLayout               )
   , ("M-S-t"       , pushWinBackToTiling           )
   , ("M-S-m"       , windows W.swapMaster          )
   , ("<Print>"     , screenshot SMWhole            )
@@ -137,6 +138,11 @@ setTabbedLayout =
   sendMessage
   $ JumpToLayout
   $ description myTabLayout
+
+setColumnLayout =
+  sendMessage
+  $ JumpToLayout
+  $ description myColLayout
 
 toggleFullscreen = do
   sendMessage $ Toggle FULL
