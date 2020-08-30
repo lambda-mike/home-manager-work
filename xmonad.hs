@@ -13,6 +13,7 @@ import           XMonad.Layout.Fullscreen (fullscreenEventHook, fullscreenManage
 import           XMonad.Layout.MultiToggle (Toggle(..), mkToggle, single)
 import           XMonad.Layout.MultiToggle.Instances (StdTransformers(FULL))
 import           XMonad.Layout.NoBorders (smartBorders)
+import           XMonad.Layout.Renamed (Rename(Replace), renamed)
 import qualified XMonad.Layout.Tabbed as T
 import           XMonad.Layout.ThreeColumns (ThreeCol(ThreeCol))
 import           XMonad.ManageHook (composeAll)
@@ -55,6 +56,8 @@ myKeysList =
   , ("M-p"         , spawn "rofi -show run"        )
   , ("M-S-p"       , spawn "rofi -show window"     )
   , ("M-f"         , toggleFullscreen              )
+  --, ("M-t"         , setTabbedLayout               )
+  , ("M-S-t"       , pushWinBackToTiling           )
   , ("M-S-m"       , windows W.swapMaster          )
   , ("<Print>"     , screenshot SMWhole            )
   , ("M-<Print>"   , screenshot SMWindow           )
@@ -85,9 +88,8 @@ mySysCtrlSubmapKeybindings =
     )
   ]
 
-toggleFullscreen = do
-  sendMessage $ Toggle FULL
-  sendMessage ToggleStruts
+pushWinBackToTiling =
+  withFocused $ windows . W.sink
 
 restartXMonad =
   "if type xmonad; then " ++
@@ -114,36 +116,48 @@ data ScreenshotMode
 
 myStartupHook = do
   setWMName "LG3D"
+  -- Make sure polybar reads data from XMonad correctly
   spawn "polybar-msg cmd restart"
+
+toggleFullscreen = do
+  sendMessage $ Toggle FULL
+  sendMessage ToggleStruts
 
 myLayout = id
   $ avoidStruts
   $ smartBorders
   $ mkToggle (single FULL)
-  $ tiled
-  ||| Mirror tiled
-  ||| T.tabbedBottom T.shrinkText myTabConfig
-  ||| ThreeCol 1 (3/100) (1/3)
+  $ myTiledLayout
+  ||| Mirror myTiledLayout
+  ||| myTabLayout
+  ||| myColLayout
   ||| Full
+
+-- default tiling algorithm partitions the screen into two panes
+myTiledLayout = Tall nmaster delta ratio
   where
-    -- default tiling algorithm partitions the screen into two panes
-    tiled = Tall nmaster delta ratio
     -- The default number of windows in the master pane
     nmaster = 1
     -- Default proportion of screen occupied by master pane
     ratio = 1/2
     -- Percent of screen to increment by when resizing panes
     delta = 3/100
-    -- Tabs theme
-    myTabConfig =
-      T.def
-       { T.activeColor         = colourLightBlue
-       , T.inactiveColor       = colourNordBlue
-       , T.activeBorderColor   = colourDarkBlue
-       , T.inactiveBorderColor = colourDarkBlue
-       , T.activeTextColor     = colourWhite
-       , T.inactiveTextColor   = colourGrey
-       }
+
+myTabLayout =
+  renamed [Replace "MyTabbed"]
+  $ T.tabbedBottom T.shrinkText
+  $ T.def -- Tabs theme modified below
+    { T.activeColor         = colourLightBlue
+    , T.inactiveColor       = colourNordBlue
+    , T.activeBorderColor   = colourDarkBlue
+    , T.inactiveBorderColor = colourDarkBlue
+    , T.activeTextColor     = colourWhite
+    , T.inactiveTextColor   = colourGrey
+    }
+
+myColLayout =
+  renamed [Replace "MyColumn"]
+  $ ThreeCol 1 (3/100) (1/3)
 
 myManageHook = composeAll . concat $
   [ [isDialog --> doCenterFloat]
