@@ -74,6 +74,7 @@ myKeysList =
   , ("M-S-r"       , spawn restartXMonad           )
   , ("M-r"         , refresh                       )
   , ("M-S-x"       , io (E.exitWith E.ExitSuccess) )
+  , ("M-S-l"       , lockScreen                    )
   , ("M-p"         , spawn "rofi -show run"        )
   , ("M-S-p"       , spawn "rofi -show window"     )
   , ("M-u"         , sendMessage NextLayout        )
@@ -104,13 +105,15 @@ myKeysList =
       | (key   , scr ) <- zip "nei" [0..]
       , (action, mask) <- [ (W.view, "") , (W.shift, "S-") ]
       ]
+    lockScreen =
+      spawn "~/.config/lock-screen"
     mySysCtrlSubmapKeybindings =
       [ ("M-0", submap . M.fromList $
-          [ ((0        , xK_h), spawn "systemctl hibernate"   )
-          , ((0        , xK_s), spawn "systemctl suspend"     )
-          , ((shiftMask, xK_s), spawn "systemctl poweroff"    )
-          , ((0        , xK_r), spawn "systemctl reboot"      )
-          , ((0        , xK_l), spawn "~/.config/lock-screen" )
+          [ ((0        , xK_h), spawn "systemctl hibernate" )
+          , ((0        , xK_s), spawn "systemctl suspend"   )
+          , ((shiftMask, xK_s), spawn "systemctl poweroff"  )
+          , ((0        , xK_r), spawn "systemctl reboot"    )
+          , ((0        , xK_l), lockScreen                  )
           ]
         )
       ]
