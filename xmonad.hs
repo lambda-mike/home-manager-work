@@ -54,6 +54,20 @@ myConfig =
 myTerminal =
   "alacritty"
 
+myManageHook = composeAll . concat $
+  [ [isDialog --> doCenterFloat]
+  , [className =? c --> doCenterFloat | c <- myCFloats]
+  , [title =? t --> doFloat | t <- myTFloats]
+  ]
+  where
+    myCFloats = ["VirtualBox Manager", "Gimp"]
+    myTFloats = ["Downloads", "Save As..."]
+
+myStartupHook = do
+  setWMName "LG3D"
+  -- Make sure polybar reads data from XMonad correctly
+  spawn "polybar-msg cmd restart"
+
 myKeysList =
   [ ("M-<Return>"  , spawn myTerminal              )
   , ("M-S-q"       , kill                          )
@@ -76,27 +90,42 @@ myKeysList =
   ]
   ++ myScreenKeybindings
   ++ mySysCtrlSubmapKeybindings
-
-  -- mod-{n,e,i} %! Switch to physical screens 1, 2, or 3
-  -- mod-shift-{n,e,i} %! Move client to screen 1, 2, or 3
-myScreenKeybindings =
-  [ ( mask ++ "M-" ++ [key]
-      , screenWorkspace scr >>= flip whenJust (windows . action)
-    )
-  | (key   , scr ) <- zip "nei" [0..]
-  , (action, mask) <- [ (W.view, "") , (W.shift, "S-") ]
-  ]
-
-mySysCtrlSubmapKeybindings =
-  [ ("M-0", submap . M.fromList $
-      [ ((0        , xK_h), spawn "systemctl hibernate"   )
-      , ((0        , xK_s), spawn "systemctl suspend"     )
-      , ((shiftMask, xK_s), spawn "systemctl poweroff"    )
-      , ((0        , xK_r), spawn "systemctl reboot"      )
-      , ((0        , xK_l), spawn "~/.config/lock-screen" )
+  where
+    restartXMonad =
+      "if type xmonad; then " ++
+      "xmonad --recompile && xmonad --restart; " ++
+      "else xmessage xmonad not in \\$PATH: \"$PATH\"; fi"
+    -- mod-{n,e,i} %! Switch to physical screens 1, 2, or 3
+    -- mod-shift-{n,e,i} %! Move client to screen 1, 2, or 3
+    myScreenKeybindings =
+      [ ( mask ++ "M-" ++ [key]
+          , screenWorkspace scr >>= flip whenJust (windows . action)
+        )
+      | (key   , scr ) <- zip "nei" [0..]
+      , (action, mask) <- [ (W.view, "") , (W.shift, "S-") ]
       ]
-    )
-  ]
+    mySysCtrlSubmapKeybindings =
+      [ ("M-0", submap . M.fromList $
+          [ ((0        , xK_h), spawn "systemctl hibernate"   )
+          , ((0        , xK_s), spawn "systemctl suspend"     )
+          , ((shiftMask, xK_s), spawn "systemctl poweroff"    )
+          , ((0        , xK_r), spawn "systemctl reboot"      )
+          , ((0        , xK_l), spawn "~/.config/lock-screen" )
+          ]
+        )
+      ]
+    screenshot mode =
+      spawn $ sleepCmd <> scrotCmd <> mvShotCmd
+      where
+        sleepCmd =
+          "sleep 0.5; "
+        scrotCmd =
+          case mode of
+            SMWhole  -> "scrot"
+            SMWindow -> "scrot -u"
+            SMRect   -> "scrot -s"
+        mvShotCmd =
+          " -e 'mv $f ~/Data/Screenshots/'"
 
 resetLayout =
   setLayout
@@ -105,34 +134,6 @@ resetLayout =
 
 pushWinBackToTiling =
   withFocused $ windows . W.sink
-
-restartXMonad =
-  "if type xmonad; then " ++
-  "xmonad --recompile && xmonad --restart; " ++
-  "else xmessage xmonad not in \\$PATH: \"$PATH\"; fi"
-
-screenshot mode =
-  spawn $ sleepCmd <> scrotCmd <> mvShotCmd
-  where
-    sleepCmd =
-      "sleep 0.5; "
-    scrotCmd =
-      case mode of
-        SMWhole  -> "scrot"
-        SMWindow -> "scrot -u"
-        SMRect   -> "scrot -s"
-    mvShotCmd =
-      " -e 'mv $f ~/Data/Screenshots/'"
-
-data ScreenshotMode
-  = SMWhole
-  | SMWindow
-  | SMRect
-
-myStartupHook = do
-  setWMName "LG3D"
-  -- Make sure polybar reads data from XMonad correctly
-  spawn "polybar-msg cmd restart"
 
 setTabbedLayout =
   sendMessage
@@ -184,18 +185,14 @@ myColLayout =
   renamed [Replace "MyColumn"]
   $ ThreeCol 1 (3/100) (1/3)
 
-myManageHook = composeAll . concat $
-  [ [isDialog --> doCenterFloat]
-  , [className =? c --> doCenterFloat | c <- myCFloats]
-  , [title =? t --> doFloat | t <- myTFloats]
-  ]
-  where
-    myCFloats = ["VirtualBox Manager", "Gimp"]
-    myTFloats = ["Downloads", "Save As..."]
-
 -- Colours
 colourDarkBlue = "#00558c"
 colourLightBlue = "#0076cf"
 colourNordBlue = "#2f343f"
 colourWhite = "#fefefe"
 colourGrey = "#bebebe"
+
+data ScreenshotMode
+  = SMWhole
+  | SMWindow
+  | SMRect
