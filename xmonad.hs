@@ -2,14 +2,21 @@ import qualified Data.Map.Strict as M
 import qualified DBus as D
 import qualified DBus.Client as D
 import qualified System.Exit as E
-import           XMonad
+import           XMonad hiding ( (|||) )
 import qualified XMonad.Actions.CycleWS as CWS
 import           XMonad.Actions.Submap (submap)
 import           XMonad.Config.Desktop (desktopConfig)
 import           XMonad.Hooks.ManageDocks (ToggleStruts(..), avoidStruts)
 import           XMonad.Hooks.ManageHelpers (doCenterFloat, isDialog)
 import           XMonad.Hooks.SetWMName (setWMName)
-import           XMonad.Layout.Fullscreen (fullscreenEventHook, fullscreenManageHook)
+import           XMonad.Layout.Fullscreen
+  ( fullscreenEventHook
+  , fullscreenManageHook
+  )
+import           XMonad.Layout.LayoutCombinators
+  ( (|||)
+  , JumpToLayout(JumpToLayout)
+  )
 import           XMonad.Layout.MultiToggle (Toggle(..), mkToggle, single)
 import           XMonad.Layout.MultiToggle.Instances (StdTransformers(FULL))
 import           XMonad.Layout.NoBorders (smartBorders)
@@ -55,8 +62,10 @@ myKeysList =
   , ("M-S-x"       , io (E.exitWith E.ExitSuccess) )
   , ("M-p"         , spawn "rofi -show run"        )
   , ("M-S-p"       , spawn "rofi -show window"     )
+  , ("M-l"         , sendMessage NextLayout        )
+  , ("M-S-l"       , resetLayout                   )
   , ("M-f"         , toggleFullscreen              )
-  --, ("M-t"         , setTabbedLayout               )
+  , ("M-t"         , setTabbedLayout               )
   , ("M-S-t"       , pushWinBackToTiling           )
   , ("M-S-m"       , windows W.swapMaster          )
   , ("<Print>"     , screenshot SMWhole            )
@@ -88,6 +97,11 @@ mySysCtrlSubmapKeybindings =
     )
   ]
 
+resetLayout =
+  setLayout
+  $ Layout
+  $ XMonad.layoutHook myConfig
+
 pushWinBackToTiling =
   withFocused $ windows . W.sink
 
@@ -118,6 +132,11 @@ myStartupHook = do
   setWMName "LG3D"
   -- Make sure polybar reads data from XMonad correctly
   spawn "polybar-msg cmd restart"
+
+setTabbedLayout =
+  sendMessage
+  $ JumpToLayout
+  $ description myTabLayout
 
 toggleFullscreen = do
   sendMessage $ Toggle FULL
