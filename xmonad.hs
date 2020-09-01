@@ -80,6 +80,7 @@ myKeysList =
   , ("M-u"         , sendMessage NextLayout        )
   , ("M-S-u"       , resetLayout                   )
   , ("M-f"         , toggleFullscreen              )
+  , ("M-S-f"       , setFullLayout                 )
   , ("M-t"         , setTabbedLayout               )
   , ("M-c"         , setColumnLayout               )
   , ("M-S-t"       , pushWinBackToTiling           )
@@ -137,6 +138,11 @@ resetLayout =
 
 pushWinBackToTiling =
   withFocused $ windows . W.sink
+
+setFullLayout =
+  sendMessage
+  $ JumpToLayout
+  $ description Full
 
 setTabbedLayout =
   sendMessage
