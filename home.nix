@@ -20,6 +20,7 @@
       file
       gimp
       git-crypt
+      haskellPackages.greenclip
       htop
       i3lock
       libreoffice
