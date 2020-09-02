@@ -21,4 +21,17 @@
       ${pkgs.i3lock}/bin/i3lock -n -c 00558c
     '';
   };
+  configFile."greenclip.cfg" = {
+    text = ''
+Config {
+ maxHistoryLength = 500,
+ historyPath = "~/.cache/greenclip.history",
+ staticHistoryPath = "~/.cache/greenclip.staticHistory",
+ imageCachePath = "/tmp/greenclip/",
+ usePrimarySelectionAsInput = False,
+ blacklistedApps = [],
+ trimSpaceFromSelection = True
+}
+    '';
+  };
 }

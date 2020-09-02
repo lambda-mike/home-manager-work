@@ -77,6 +77,7 @@ myKeysList =
   , ("M-S-l"       , lockScreen                    )
   , ("M-p"         , spawn "rofi -show run"        )
   , ("M-S-p"       , spawn "rofi -show window"     )
+  , ("M-y"         , callGreenclip                 )
   , ("M-u"         , sendMessage NextLayout        )
   , ("M-S-u"       , resetLayout                   )
   , ("M-S-f"       , toggleFullscreen              )
@@ -130,6 +131,10 @@ myKeysList =
             SMRect   -> "scrot -s"
         mvShotCmd =
           " -e 'mv $f ~/Data/Screenshots/'"
+    callGreenclip =
+      spawn $
+        "rofi -modi \"clipboard:greenclip print\" -show clipboard " <>
+        " -run-command '{cmd}'"
 
 resetLayout =
   setLayout
