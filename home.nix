@@ -25,6 +25,7 @@
       linuxPackages_5_7.virtualbox
       linuxPackages_5_7.virtualboxGuestAdditions
       neofetch
+      ncompress
       pinentry
       python38
       ripgrep
