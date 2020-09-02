@@ -17,6 +17,7 @@
       brave
       du-dust
       fd
+      file
       gimp
       git-crypt
       htop
