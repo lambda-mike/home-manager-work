@@ -28,6 +28,7 @@
       linuxPackages_5_7.virtualboxGuestAdditions
       neofetch
       ncompress
+      nodePackages.typescript-language-server
       pinentry
       python38
       ripgrep
