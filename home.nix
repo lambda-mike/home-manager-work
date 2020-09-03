@@ -72,6 +72,10 @@
       enable = true;
     };
     chromium.enable = true;
+    direnv = {
+      enable = true;
+      enableNixDirenvIntegration = true;
+    };
     emacs.enable = true;
     feh.enable = true;
     firefox = {
