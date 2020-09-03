@@ -38,15 +38,6 @@
     console.useXkbConfig = true;
     time.timeZone = "Europe/London";
 
-    # Pkgs
-    environment.systemPackages = with pkgs; [
-      killall
-      lynx
-      networkmanagerapplet
-      wget
-      vim
-    ];
-
     # Sound
     sound.enable = true;
     hardware.pulseaudio.enable = true;
@@ -94,5 +85,14 @@
       #shell = /home/mike/.nix-profile/bin/fish;
       uid = 1000;
     };
+
+    # Pkgs
+    environment.systemPackages = with pkgs; [
+      killall
+      lynx
+      networkmanagerapplet
+      wget
+      vim
+    ];
 
 }
