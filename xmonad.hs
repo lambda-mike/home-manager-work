@@ -193,6 +193,7 @@ myTabLayout =
     , T.inactiveBorderColor = colourDarkBlue
     , T.activeTextColor     = colourWhite
     , T.inactiveTextColor   = colourGrey
+    , T.fontName            = "xft:Liberation Mono:size=10:antialias=true:hinting=true"
     }
 
 myColLayout =
