@@ -15,6 +15,7 @@
     homeDirectory = "/home/mike";
     packages = with pkgs; [
       brave
+      docker
       du-dust
       fd
       file
