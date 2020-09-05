@@ -38,7 +38,8 @@ main = do
 
 myConfig =
   desktopConfig
-    { terminal           = myTerminal
+    { workspaces         = myWorkspaces
+    , terminal           = myTerminal
     , modMask            = mod4Mask
     , borderWidth        = 2
     , normalBorderColor  = colourNordBlue
@@ -50,6 +51,10 @@ myConfig =
         myManageHook <+> manageHook desktopConfig <+> fullscreenManageHook
     , startupHook        = myStartupHook <+> startupHook desktopConfig
     }
+
+myWorkspaces :: [WorkspaceId]
+myWorkspaces =
+  map show [1 .. 9 :: Int]
 
 myTerminal =
   "alacritty"
@@ -93,11 +98,8 @@ myKeysList =
   ]
   ++ myScreenKeybindings
   ++ mySysCtrlSubmapKeybindings
+  ++ myWorkspacesKeybindings
   where
-    restartXMonad =
-      "if type xmonad; then " ++
-      "xmonad --recompile && xmonad --restart; " ++
-      "else xmessage xmonad not in \\$PATH: \"$PATH\"; fi"
     -- mod-{n,e,i} %! Switch to physical screens 1, 2, or 3
     -- mod-shift-{n,e,i} %! Move client to screen 1, 2, or 3
     myScreenKeybindings =
@@ -107,8 +109,6 @@ myKeysList =
       | (key   , scr ) <- zip "nei" [0..]
       , (action, mask) <- [ (W.view, "") , (W.shift, "S-") ]
       ]
-    lockScreen =
-      spawn "~/.config/lock-screen"
     mySysCtrlSubmapKeybindings =
       [ ("M-0", submap . M.fromList $
           [ ((0        , xK_h), spawn "systemctl hibernate" )
@@ -119,6 +119,19 @@ myKeysList =
           ]
         )
       ]
+    -- mod-[1..9] %! Switch to workspace N
+    -- mod-shift-[1..9] %! Move client to workspace N
+    myWorkspacesKeybindings =
+      [ (m <> wsKey, windows $ f ws)
+      | (ws, wsKey ) <- zip myWorkspaces $ map show [1..9 :: Int]
+      , (f , m     ) <- [(W.greedyView, "M"), (W.shift, "M-S-")]
+      ]
+    restartXMonad =
+      "if type xmonad; then " ++
+      "xmonad --recompile && xmonad --restart; " ++
+      "else xmessage xmonad not in \\$PATH: \"$PATH\"; fi"
+    lockScreen =
+      spawn "~/.config/lock-screen"
     screenshot mode =
       spawn $ sleepCmd <> scrotCmd <> mvShotCmd
       where
