@@ -19,6 +19,7 @@
       du-dust
       fd
       file
+      font-awesome
       gimp
       git-crypt
       haskellPackages.greenclip
