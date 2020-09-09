@@ -80,8 +80,8 @@ myKeysList =
   , ("M-r"         , refresh                       )
   , ("M-S-x"       , io (E.exitWith E.ExitSuccess) )
   , ("M-S-l"       , lockScreen                    )
-  , ("M-p"         , spawn "rofi -show run"        )
-  , ("M-S-p"       , spawn "rofi -show window"     )
+  , ("M-p"         , rofiRun                       )
+  , ("M-S-p"       , rofiWindow                    )
   , ("M-y"         , callGreenclip                 )
   , ("M-u"         , sendMessage NextLayout        )
   , ("M-S-u"       , resetLayout                   )
@@ -144,10 +144,13 @@ myKeysList =
             SMRect   -> "scrot -s"
         mvShotCmd =
           " -e 'mv $f ~/Data/Screenshots/'"
-    callGreenclip =
-      spawn $
-        "rofi -modi \"clipboard:greenclip print\" -show clipboard " <>
-        " -run-command '{cmd}'"
+    callGreenclip = spawn $
+      "rofi -modi \"clipboard:greenclip print\" -show clipboard " <>
+      "-run-command '{cmd}'"
+    rofiRun = spawn $
+      "rofi -width 300 -lines 5 -show run"
+    rofiWindow = spawn $
+      "rofi -width 50 -lines 11 -show window"
 
 resetLayout =
   setLayout
