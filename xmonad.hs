@@ -95,6 +95,8 @@ myKeysList =
   , ("M-<Print>"   , screenshot SMWindow           )
   , ("M-S-<Print>" , screenshot SMRect             )
   , ("M-w"         , CWS.toggleWS                  )
+  , ("M-o"         , CWS.swapNextScreen            )
+  , ("M-S-o"       , CWS.swapPrevScreen            )
   ]
   ++ myScreenKeybindings
   ++ mySysCtrlSubmapKeybindings
