@@ -3,6 +3,9 @@
 {
   config = ./polybar.config;
   enable = true;
+  package = pkgs.polybar.override {
+    pulseSupport = true;
+  };
   script = ''
     #! /usr/bin/env bash
 
