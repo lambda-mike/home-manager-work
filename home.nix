@@ -57,7 +57,7 @@
     };
     screen-locker = {
       enable = true;
-      inactiveInterval = 10;
+      inactiveInterval = 45;
       lockCmd = "${config.xdg.configHome}/lock-screen";
     };
   };
