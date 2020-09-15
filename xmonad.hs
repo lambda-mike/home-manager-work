@@ -98,10 +98,17 @@ myKeysList =
   , ("M-o"         , CWS.swapNextScreen            )
   , ("M-S-o"       , CWS.swapPrevScreen            )
   ]
+  ++ myFnKeybindings
   ++ myScreenKeybindings
   ++ mySysCtrlSubmapKeybindings
   ++ myWorkspacesKeybindings
   where
+    myFnKeybindings =
+      let audio = "Master"
+      in [ ("<XF86AudioLowerVolume>" , spawn $ "amixer -q set " <> audio <> " 5%-"    )
+         , ("<XF86AudioRaiseVolume>" , spawn $ "amixer -q set " <> audio <> " 5%+"    )
+         , ("<XF86AudioMute>"        , spawn $ "amixer -q set " <> audio <> " toggle" )
+         ]
     -- mod-{n,e,i} %! Switch to physical screens 1, 2, or 3
     -- mod-shift-{n,e,i} %! Move client to screen 1, 2, or 3
     myScreenKeybindings =
