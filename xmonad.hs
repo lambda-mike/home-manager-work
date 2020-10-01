@@ -101,6 +101,8 @@ myKeysList =
   , ("M-S-a"       , CWS.shiftNextScreen           )
   , ("M-v"         , CWS.prevScreen                )
   , ("M-S-v"       , CWS.shiftPrevScreen           )
+  , ("M-]"         , CWS.nextWS                    )
+  , ("M-S-]"       , CWS.shiftToNext               )
   ]
   ++ myFnKeybindings
   ++ myScreenKeybindings
