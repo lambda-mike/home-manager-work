@@ -1,3 +1,6 @@
+import           Control.Monad (join)
+import           Data.Function (on)
+import           Data.List (sortBy)
 import qualified Data.Map.Strict as M
 import qualified DBus as D
 import qualified DBus.Client as D
@@ -33,6 +36,8 @@ main = do
   D.requestName dbus (D.busName_ "org.xmonad.Log")
     [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
 
+  spawn $ "mkfifo " ++ myWorkspacesLog
+
   xmonad $
     (myConfig `additionalKeysP` myKeysList)
 
@@ -47,6 +52,7 @@ myConfig =
     , focusFollowsMouse  = True
     , handleEventHook    = handleEventHook desktopConfig <+> fullscreenEventHook
     , layoutHook         = myLayout
+    , logHook            = logHook desktopConfig <+> myWorspacesHook
     , manageHook         =
         myManageHook <+> manageHook desktopConfig <+> fullscreenManageHook
     , startupHook        = myStartupHook <+> startupHook desktopConfig
@@ -58,6 +64,22 @@ myWorkspaces =
 
 myTerminal =
   "alacritty"
+
+myWorspacesHook = do
+  winset <- gets windowset
+  let currWs = W.currentTag winset
+  let wss = map W.tag $ W.workspaces winset
+  let wsStr = join $ map (fmt currWs) $ sort' wss
+
+  io $ appendFile myWorkspacesLog (wsStr ++ "\n")
+
+  where fmt currWs ws
+          | currWs == ws = "[" ++ ws ++ "]"
+          | otherwise    = " " ++ ws ++ " "
+        sort' = sortBy (compare `on` (!! 0))
+
+myWorkspacesLog =
+  "/tmp/.xmonad-workspace-log"
 
 myManageHook = composeAll . concat $
   [ [isDialog --> doCenterFloat]
