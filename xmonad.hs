@@ -241,7 +241,7 @@ myTiledLayout = Tall nmaster delta ratio
     delta = 3/100
 
 myTabLayout =
-  renamed [Replace "MyTabbed"]
+  renamed [Replace "Tab"]
   $ T.tabbedBottom T.shrinkText
   $ T.def -- Tabs theme modified below
     { T.activeColor         = colourLightBlue
