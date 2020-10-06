@@ -68,15 +68,19 @@ myTerminal =
 myWorspacesHook = do
   winset <- gets windowset
   let currWs = W.currentTag winset
-  let wss = map W.tag $ W.workspaces winset
-  let wsStr = join $ map (fmt currWs) $ sort' wss
+  let visibleNotCurrentWs =
+        filter (/= currWs)
+        . map (W.tag . W.workspace)
+        . W.visible
+        $ winset
+  let otherWs =
+        case visibleNotCurrentWs of
+          [] -> ""
+          x:_ -> x <> " "
+  let currWsLayout = W.layout . W.workspace . W.current $ winset
+  let result = otherWs <> description currWsLayout <> "\n"
 
-  io $ appendFile myWorkspacesLog (wsStr ++ "\n")
-
-  where fmt currWs ws
-          | currWs == ws = "[" ++ ws ++ "]"
-          | otherwise    = " " ++ ws ++ " "
-        sort' = sortBy (compare `on` (!! 0))
+  io $ appendFile myWorkspacesLog result
 
 myWorkspacesLog =
   "/tmp/.xmonad-workspace-log"
