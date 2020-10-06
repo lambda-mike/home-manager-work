@@ -254,7 +254,7 @@ myTabLayout =
     }
 
 myColLayout =
-  renamed [Replace "MyColumn"]
+  renamed [Replace "Col"]
   $ ThreeCol 1 (3/100) (1/3)
 
 -- Colours
