@@ -221,10 +221,14 @@ myLayout = id
   $ smartBorders
   $ mkToggle (single FULL)
   $ myTiledLayout
-  ||| Mirror myTiledLayout
+  ||| myMirroredLayout
   ||| myTabLayout
   ||| myColLayout
   ||| Full
+
+myMirroredLayout =
+  renamed [Replace "Mir"]
+  $ Mirror myTiledLayout
 
 -- default tiling algorithm partitions the screen into two panes
 myTiledLayout = Tall nmaster delta ratio
