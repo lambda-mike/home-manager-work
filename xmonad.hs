@@ -1,3 +1,6 @@
+import           Control.Monad (join)
+import           Data.Function (on)
+import           Data.List (sortBy)
 import qualified Data.Map.Strict as M
 import qualified DBus as D
 import qualified DBus.Client as D
@@ -33,6 +36,8 @@ main = do
   D.requestName dbus (D.busName_ "org.xmonad.Log")
     [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
 
+  spawn $ "mkfifo " ++ myWorkspacesLog
+
   xmonad $
     (myConfig `additionalKeysP` myKeysList)
 
@@ -47,6 +52,7 @@ myConfig =
     , focusFollowsMouse  = True
     , handleEventHook    = handleEventHook desktopConfig <+> fullscreenEventHook
     , layoutHook         = myLayout
+    , logHook            = logHook desktopConfig <+> myWorspacesHook
     , manageHook         =
         myManageHook <+> manageHook desktopConfig <+> fullscreenManageHook
     , startupHook        = myStartupHook <+> startupHook desktopConfig
@@ -58,6 +64,26 @@ myWorkspaces =
 
 myTerminal =
   "alacritty"
+
+myWorspacesHook = do
+  winset <- gets windowset
+  let currWs = W.currentTag winset
+  let visibleNotCurrentWs =
+        filter (/= currWs)
+        . map (W.tag . W.workspace)
+        . W.visible
+        $ winset
+  let otherWs =
+        case visibleNotCurrentWs of
+          [] -> ""
+          x:_ -> x <> " "
+  let currWsLayout = W.layout . W.workspace . W.current $ winset
+  let result = otherWs <> description currWsLayout <> "\n"
+
+  io $ appendFile myWorkspacesLog result
+
+myWorkspacesLog =
+  "/tmp/.xmonad-workspace-log"
 
 myManageHook = composeAll . concat $
   [ [isDialog --> doCenterFloat]
@@ -201,10 +227,14 @@ myLayout = id
   $ smartBorders
   $ mkToggle (single FULL)
   $ myTiledLayout
-  ||| Mirror myTiledLayout
+  ||| myMirroredLayout
   ||| myTabLayout
   ||| myColLayout
   ||| Full
+
+myMirroredLayout =
+  renamed [Replace "Mir"]
+  $ Mirror myTiledLayout
 
 -- default tiling algorithm partitions the screen into two panes
 myTiledLayout = Tall nmaster delta ratio
@@ -217,7 +247,7 @@ myTiledLayout = Tall nmaster delta ratio
     delta = 3/100
 
 myTabLayout =
-  renamed [Replace "MyTabbed"]
+  renamed [Replace "Tab"]
   $ T.tabbedBottom T.shrinkText
   $ T.def -- Tabs theme modified below
     { T.activeColor         = colourLightBlue
@@ -230,7 +260,7 @@ myTabLayout =
     }
 
 myColLayout =
-  renamed [Replace "MyColumn"]
+  renamed [Replace "Col"]
   $ ThreeCol 1 (3/100) (1/3)
 
 -- Colours
