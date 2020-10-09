@@ -36,7 +36,7 @@ main = do
   D.requestName dbus (D.busName_ "org.xmonad.Log")
     [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
 
-  spawn $ "mkfifo " ++ myWorkspacesLog
+  spawn $ "touch " ++ myWorkspacesLog
 
   xmonad $
     (myConfig `additionalKeysP` myKeysList)
@@ -74,13 +74,10 @@ myWorspacesHook = do
         . W.visible
         $ winset
   let otherWs =
-        case visibleNotCurrentWs of
-          [] -> ""
-          x:_ -> x <> " "
+        concat . map (<> " ") $ visibleNotCurrentWs
   let currWsLayout = W.layout . W.workspace . W.current $ winset
   let result = otherWs <> description currWsLayout <> "\n"
-
-  io $ appendFile myWorkspacesLog result
+  io $ writeFile myWorkspacesLog result
 
 myWorkspacesLog =
   "/tmp/.xmonad-workspace-log"
