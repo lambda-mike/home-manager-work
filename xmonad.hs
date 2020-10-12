@@ -74,7 +74,10 @@ myWorspacesHook = do
         . W.visible
         $ winset
   let otherWs =
-        concat . map (<> " ") $ visibleNotCurrentWs
+        take 6 -- take max 3 other screens
+        . concat
+        . map (<> " ")
+        $ visibleNotCurrentWs
   let currWsLayout = W.layout . W.workspace . W.current $ winset
   let result = otherWs <> description currWsLayout <> "\n"
   io $ writeFile myWorkspacesLog result
