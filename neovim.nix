@@ -29,7 +29,7 @@
     set undofile        " Saves undo history to a file
 
     let g:seoul256_background = 234 "233-239 Light: 252-256
-    colorscheme gruvbox
+    colorscheme one
 
     " Remove all trailing spaces on file write
     autocmd BufWritePre * %s/\s\+$//e
