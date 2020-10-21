@@ -10,6 +10,10 @@
   #
   #   https://rycee.gitlab.io/home-manager/options.html
 
+  imports = [
+    ./xdg.nix
+  ];
+
   home = {
     username = "mike";
     homeDirectory = "/home/mike";
@@ -109,7 +113,5 @@
     polybar = import ./polybar.nix { inherit pkgs lib; };
     redshift = import ./redshift.nix;
   };
-
-  xdg = import ./xdg.nix { inherit pkgs config; };
 
 }
