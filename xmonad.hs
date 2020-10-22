@@ -27,8 +27,11 @@ import           XMonad.Layout.Renamed (Rename(Replace), renamed)
 import qualified XMonad.Layout.Tabbed as T
 import           XMonad.Layout.ThreeColumns (ThreeCol(ThreeCol))
 import           XMonad.ManageHook (composeAll)
+import           XMonad.Prompt ()
+import qualified XMonad.Prompt as PT
 import qualified XMonad.StackSet as W
 import           XMonad.Util.EZConfig (additionalKeysP)
+
 
 main = do
   dbus <- D.connectSession
@@ -100,37 +103,37 @@ myStartupHook = do
   spawn "polybar-msg cmd restart"
 
 myKeysList =
-  [ ("M-<Return>"  , spawn myTerminal              )
-  , ("M-S-q"       , kill                          )
-  , ("M-S-r"       , spawn restartXMonad           )
-  , ("M-r"         , refresh                       )
-  , ("M-S-x"       , io (E.exitWith E.ExitSuccess) )
-  , ("M-S-l"       , lockScreen                    )
-  , ("M-p"         , rofiRun                       )
-  , ("M-S-p"       , rofiWindow                    )
-  , ("M-y"         , callGreenclip                 )
-  , ("M-u"         , sendMessage NextLayout        )
-  , ("M-S-u"       , resetLayout                   )
-  , ("M-S-f"       , toggleFullscreen              )
-  , ("M-f"         , setFullLayout                 )
-  , ("M-t"         , setTabbedLayout               )
-  , ("M-c"         , setColumnLayout               )
-  , ("M-S-t"       , pushWinBackToTiling           )
-  , ("M-S-m"       , windows W.swapMaster          )
-  , ("<Print>"     , screenshot SMWhole            )
-  , ("M-<Print>"   , screenshot SMWindow           )
-  , ("M-S-<Print>" , screenshot SMRect             )
-  , ("M-w"         , CWS.toggleWS                  )
-  , ("M-o"         , CWS.swapNextScreen            )
-  , ("M-S-o"       , CWS.swapPrevScreen            )
-  , ("M-a"         , CWS.nextScreen                )
-  , ("M-S-a"       , CWS.shiftNextScreen           )
-  , ("M-v"         , CWS.prevScreen                )
-  , ("M-S-v"       , CWS.shiftPrevScreen           )
-  , ("M-]"         , CWS.nextWS                    )
-  , ("M-S-]"       , CWS.shiftToNext               )
-  , ("M-["         , CWS.prevWS                    )
-  , ("M-S-["       , CWS.shiftToPrev               )
+  [ ("M-<Return>"  , spawn myTerminal       )
+  , ("M-S-q"       , kill                   )
+  , ("M-S-r"       , spawn restartXMonad    )
+  , ("M-r"         , refresh                )
+  , ("M-S-x"       , exitXMonad             )
+  , ("M-S-l"       , lockScreen             )
+  , ("M-p"         , rofiRun                )
+  , ("M-S-p"       , rofiWindow             )
+  , ("M-y"         , callGreenclip          )
+  , ("M-u"         , sendMessage NextLayout )
+  , ("M-S-u"       , resetLayout            )
+  , ("M-S-f"       , toggleFullscreen       )
+  , ("M-f"         , setFullLayout          )
+  , ("M-t"         , setTabbedLayout        )
+  , ("M-c"         , setColumnLayout        )
+  , ("M-S-t"       , pushWinBackToTiling    )
+  , ("M-S-m"       , windows W.swapMaster   )
+  , ("<Print>"     , screenshot SMWhole     )
+  , ("M-<Print>"   , screenshot SMWindow    )
+  , ("M-S-<Print>" , screenshot SMRect      )
+  , ("M-w"         , CWS.toggleWS           )
+  , ("M-o"         , CWS.swapNextScreen     )
+  , ("M-S-o"       , CWS.swapPrevScreen     )
+  , ("M-a"         , CWS.nextScreen         )
+  , ("M-S-a"       , CWS.shiftNextScreen    )
+  , ("M-v"         , CWS.prevScreen         )
+  , ("M-S-v"       , CWS.shiftPrevScreen    )
+  , ("M-]"         , CWS.nextWS             )
+  , ("M-S-]"       , CWS.shiftToNext        )
+  , ("M-["         , CWS.prevWS             )
+  , ("M-S-["       , CWS.shiftToPrev        )
   ]
   ++ myFnKeybindings
   ++ myScreenKeybindings
@@ -194,6 +197,14 @@ myKeysList =
       "rofi -width 300 -lines 5 -show run"
     rofiWindow = spawn $
       "rofi -width 50 -lines 11 -show window"
+
+data ScreenshotMode
+  = SMWhole
+  | SMWindow
+  | SMRect
+
+exitXMonad =
+  io (E.exitWith E.ExitSuccess)
 
 resetLayout =
   setLayout
@@ -263,14 +274,55 @@ myColLayout =
   renamed [Replace "Col"]
   $ ThreeCol 1 (3/100) (1/3)
 
+data ExitMenuPrompt
+  = EMPExit
+  | EMPLock
+  | EMPHibernate
+  | EMPSuspend
+  | EMPReboot
+  | EMPShutdown
+
+instance XPrompt ExitMenuPrompt where
+  showXPrompt ExitMenuPrompt = "(e)xit (l)ock (h)ibernate (s)uspend (r)eboot (S)hutdown"
+
+instance Show ExitMenuPrompt where
+  show EMPExit = "e"
+  show EMPLock = "l"
+  show EMPHibernate = "h"
+  show EMPSuspend = "s"
+  show EMPReboot = "r"
+  show EMPShutdown = "S"
+
+exitMenuPrompt =
+  PT.mkXPrompt
+    ExitMenuPrompt
+    exitMenuPromptConfig
+    (PT.mkComplFunFromList exitOptions)
+    exitActionHandler
+  where
+    exitOptions =
+      map show $
+        [ EMPExit
+        , EMPLock
+        , EMPHibernate
+        , EMPSuspend
+        , EMPReboot
+        , EMPShutdown
+        ]
+    exitActionHandler action =
+      case action of
+        EMPExit -> exitXMonad
+        EMPLock -> lockScreen
+        EMPHibernate -> spawn "systemctl hibernate"
+        EMPSuspend -> spawn "systemctl suspend"
+        EMPReboot -> spawn "systemctl reboot"
+        EMPShutdown -> spawn "systemctl poweroff"
+    exitMenuPromptConfig =
+      PT.def
+
 -- Colours
 colourDarkBlue = "#00558c"
 colourLightBlue = "#0076cf"
 colourNordBlue = "#2f343f"
 colourWhite = "#fefefe"
 colourGrey = "#bebebe"
-
-data ScreenshotMode
-  = SMWhole
-  | SMWindow
-  | SMRect
