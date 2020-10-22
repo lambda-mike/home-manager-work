@@ -267,8 +267,11 @@ myTabLayout =
     , T.inactiveBorderColor = colourDarkBlue
     , T.activeTextColor     = colourWhite
     , T.inactiveTextColor   = colourGrey
-    , T.fontName            = "xft:Liberation Mono:size=10:antialias=true:hinting=true"
+    , T.fontName            = myFont
     }
+
+myFont =
+  "xft:Liberation Mono:size=10:antialias=true:hinting=true"
 
 myColLayout =
   renamed [Replace "Col"]
@@ -319,6 +322,20 @@ exitMenuPrompt =
         EMPShutdown -> spawn "systemctl poweroff"
     exitMenuPromptConfig =
       PT.def
+        { font                  = myFont
+        , bgColor               = colourNordBlue
+        , fgColor               = colourWhite
+        , bgHLight              = colourLightBlue
+        , fgHLight              = colourWhite
+        , borderColor           = colourNordBlue
+        , promptBorderWidth     = 1
+        , position              = PT.Top
+        , height                = 18
+        , historySize           = 0
+        -- , defaultText           = []
+        , autoComplete          = Just 0
+        , searchPredicate       = isPrefixOf
+        }
 
 -- Colours
 colourDarkBlue = "#00558c"
