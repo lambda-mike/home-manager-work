@@ -27,7 +27,7 @@ import           XMonad.Layout.Renamed (Rename(Replace), renamed)
 import qualified XMonad.Layout.Tabbed as T
 import           XMonad.Layout.ThreeColumns (ThreeCol(ThreeCol))
 import           XMonad.ManageHook (composeAll)
-import           XMonad.Prompt ()
+import           XMonad.Prompt (XPrompt)
 import qualified XMonad.Prompt as PT
 import qualified XMonad.StackSet as W
 import           XMonad.Util.EZConfig (additionalKeysP)
@@ -107,7 +107,7 @@ myKeysList =
   , ("M-S-q"       , kill                   )
   , ("M-S-r"       , spawn restartXMonad    )
   , ("M-r"         , refresh                )
-  , ("M-S-x"       , exitXMonad             )
+  , ("M-S-x"       , myExitXMonad           )
   , ("M-S-l"       , lockScreen             )
   , ("M-p"         , rofiRun                )
   , ("M-S-p"       , rofiWindow             )
@@ -176,8 +176,6 @@ myKeysList =
       "if type xmonad; then " ++
       "xmonad --recompile && xmonad --restart; " ++
       "else xmessage xmonad not in \\$PATH: \"$PATH\"; fi"
-    lockScreen =
-      spawn "~/.config/lock-screen"
     screenshot mode =
       spawn $ sleepCmd <> scrotCmd <> mvShotCmd
       where
@@ -198,12 +196,15 @@ myKeysList =
     rofiWindow = spawn $
       "rofi -width 50 -lines 11 -show window"
 
+lockScreen =
+  spawn "~/.config/lock-screen"
+
 data ScreenshotMode
   = SMWhole
   | SMWindow
   | SMRect
 
-exitXMonad =
+myExitXMonad = do
   io (E.exitWith E.ExitSuccess)
 
 resetLayout =
@@ -267,34 +268,23 @@ myTabLayout =
     , T.inactiveBorderColor = colourDarkBlue
     , T.activeTextColor     = colourWhite
     , T.inactiveTextColor   = colourGrey
-    , T.fontName            = myFont
+    , T.fontName            = myFont 10
     }
 
-myFont =
-  "xft:Liberation Mono:size=10:antialias=true:hinting=true"
+myFont size =
+  "xft:Liberation Mono:size=" <>
+  show size <>
+  ":antialias=true:hinting=true"
 
 myColLayout =
   renamed [Replace "Col"]
   $ ThreeCol 1 (3/100) (1/3)
 
 data ExitMenuPrompt
-  = EMPExit
-  | EMPLock
-  | EMPHibernate
-  | EMPSuspend
-  | EMPReboot
-  | EMPShutdown
+  = ExitMenuPrompt
 
 instance XPrompt ExitMenuPrompt where
-  showXPrompt ExitMenuPrompt = "(e)xit (l)ock (h)ibernate (s)uspend (r)eboot (S)hutdown"
-
-instance Show ExitMenuPrompt where
-  show EMPExit = "e"
-  show EMPLock = "l"
-  show EMPHibernate = "h"
-  show EMPSuspend = "s"
-  show EMPReboot = "r"
-  show EMPShutdown = "S"
+  showXPrompt _ = "Menu: (e)xit (l)ock (h)ibernate (s)uspend (r)eboot (S)hutdown"
 
 exitMenuPrompt =
   PT.mkXPrompt
@@ -304,37 +294,29 @@ exitMenuPrompt =
     exitActionHandler
   where
     exitOptions =
-      map show $
-        [ EMPExit
-        , EMPLock
-        , EMPHibernate
-        , EMPSuspend
-        , EMPReboot
-        , EMPShutdown
-        ]
+      [ "e", "l", "h", "s", "r", "S" ]
     exitActionHandler action =
       case action of
-        EMPExit -> exitXMonad
-        EMPLock -> lockScreen
-        EMPHibernate -> spawn "systemctl hibernate"
-        EMPSuspend -> spawn "systemctl suspend"
-        EMPReboot -> spawn "systemctl reboot"
-        EMPShutdown -> spawn "systemctl poweroff"
+        "e" -> myExitXMonad
+        "l" -> lockScreen
+        "h" -> spawn "systemctl hibernate"
+        "s" -> spawn "systemctl suspend"
+        "r" -> spawn "systemctl reboot"
+        "S" -> spawn "systemctl poweroff"
+        _   -> pure ()
     exitMenuPromptConfig =
       PT.def
-        { font                  = myFont
-        , bgColor               = colourNordBlue
-        , fgColor               = colourWhite
-        , bgHLight              = colourLightBlue
-        , fgHLight              = colourWhite
-        , borderColor           = colourNordBlue
-        , promptBorderWidth     = 1
-        , position              = PT.Top
-        , height                = 18
-        , historySize           = 0
-        -- , defaultText           = []
-        , autoComplete          = Just 0
-        , searchPredicate       = isPrefixOf
+        { PT.font                  = myFont 12
+        , PT.bgColor               = colourNordBlue
+        , PT.fgColor               = colourWhite
+        , PT.bgHLight              = colourLightBlue
+        , PT.fgHLight              = colourWhite
+        , PT.borderColor           = colourLightBlue
+        , PT.promptBorderWidth     = 1
+        , PT.position              = PT.Top
+        , PT.height                = 30
+        , PT.historySize           = 0
+        , PT.autoComplete          = Just 0
         }
 
 -- Colours
