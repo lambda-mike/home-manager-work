@@ -34,6 +34,7 @@
       linuxPackages_5_7.virtualboxGuestAdditions
       neofetch
       ncompress
+      nixfmt
       nodePackages.typescript-language-server
       pinentry
       python38
