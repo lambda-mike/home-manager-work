@@ -1,4 +1,4 @@
-import           Control.Monad (join)
+import           Control.Monad (join, when)
 import           Data.Function (on)
 import           Data.List (sortBy)
 import qualified Data.Map.Strict as M
@@ -7,6 +7,7 @@ import qualified DBus.Client as D
 import qualified System.Exit as E
 import           XMonad hiding ( (|||) )
 import qualified XMonad.Actions.CycleWS as CWS
+import           XMonad.Actions.SpawnOn (spawnOn)
 import           XMonad.Actions.Submap (submap)
 import           XMonad.Config.Desktop (desktopConfig)
 import           XMonad.Hooks.ManageDocks (ToggleStruts(..), avoidStruts)
@@ -101,6 +102,14 @@ myStartupHook = do
   setWMName "LG3D"
   -- Make sure polybar reads data from XMonad correctly
   spawn "polybar-msg cmd restart"
+  when isFreshStartup freshStartupHook
+  where
+    -- TODO check if all stacks contain no windows
+    isFreshStartup = True
+    freshStartupHook = do
+      spawnOn "1" "brave"
+      -- spawnOn "2" (myTerminal <> " -e tmux resurrect-restore")
+      -- spawnOn "3" "emacs"
 
 myKeysList =
   [ ("M-<Return>"  , spawn myTerminal       )
