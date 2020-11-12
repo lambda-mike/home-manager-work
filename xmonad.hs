@@ -102,14 +102,18 @@ myStartupHook = do
   setWMName "LG3D"
   -- Make sure polybar reads data from XMonad correctly
   spawn "polybar-msg cmd restart"
+  winset <- gets windowset
+  let isFreshStartup =
+        W.allWindows winset == []
   when isFreshStartup freshStartupHook
   where
-    -- TODO check if all stacks contain no windows
-    isFreshStartup = True
+    -- TODO accept winset or use withWindowSet fn
     freshStartupHook = do
-      spawnOn "1" "brave"
-      -- spawnOn "2" (myTerminal <> " -e tmux resurrect-restore")
-      -- spawnOn "3" "emacs"
+      updateLayout (myWorkspaces !! 0) $ Just (Layout myTabLayout)
+      -- TODO if two screens or more, set second screen to workspace 5
+      spawnOn (myWorkspaces !! 0) "brave"
+      spawnOn (myWorkspaces !! 1) (myTerminal <> " -e tmux resurrect-restore")
+      spawnOn (myWorkspaces !! 2) "emacs"
 
 myKeysList =
   [ ("M-<Return>"  , spawn myTerminal       )
