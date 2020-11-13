@@ -109,7 +109,8 @@ myStartupHook = do
   where
     -- TODO accept winset or use withWindowSet fn
     freshStartupHook = do
-      updateLayout (myWorkspaces !! 0) $ Just (Layout myTabLayout)
+      -- updateLayout (myWorkspaces !! 0) $ Just (Layout myTabLayout)
+      setTabbedLayout
       -- TODO if two screens or more, set second screen to workspace 5
       spawnOn (myWorkspaces !! 0) "brave"
       spawnOn (myWorkspaces !! 1) (myTerminal <> " -e tmux resurrect-restore")
