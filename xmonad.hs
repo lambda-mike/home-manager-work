@@ -7,7 +7,7 @@ import qualified DBus.Client as D
 import qualified System.Exit as E
 import           XMonad hiding ( (|||) )
 import qualified XMonad.Actions.CycleWS as CWS
-import           XMonad.Actions.SpawnOn (spawnOn)
+import           XMonad.Actions.SpawnOn (manageSpawn, spawnOn)
 import           XMonad.Actions.Submap (submap)
 import           XMonad.Config.Desktop (desktopConfig)
 import           XMonad.Hooks.ManageDocks (ToggleStruts(..), avoidStruts)
@@ -58,7 +58,10 @@ myConfig =
     , layoutHook         = myLayout
     , logHook            = logHook desktopConfig <+> myWorspacesHook
     , manageHook         =
-        myManageHook <+> manageHook desktopConfig <+> fullscreenManageHook
+        myManageHook <+>
+        manageSpawn <+>
+        manageHook desktopConfig <+>
+        fullscreenManageHook
     , startupHook        = myStartupHook <+> startupHook desktopConfig
     }
 
@@ -109,8 +112,7 @@ myStartupHook = do
   where
     -- TODO accept winset or use withWindowSet fn
     freshStartupHook = do
-      -- updateLayout (myWorkspaces !! 0) $ Just (Layout myTabLayout)
-      setTabbedLayout
+      -- setTabbedLayout
       -- TODO if two screens or more, set second screen to workspace 5
       spawnOn (myWorkspaces !! 0) "brave"
       spawnOn (myWorkspaces !! 1) (myTerminal <> " -e tmux resurrect-restore")
