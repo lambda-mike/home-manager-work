@@ -1,6 +1,6 @@
 import           Control.Monad (join, when)
 import           Data.Function (on)
-import           Data.List (sortBy)
+import           Data.List (partition, sortBy)
 import qualified Data.Map.Strict as M
 import qualified DBus as D
 import qualified DBus.Client as D
@@ -110,13 +110,43 @@ myStartupHook = do
         W.allWindows winset == []
   when isFreshStartup freshStartupHook
   where
-    -- TODO accept winset or use withWindowSet fn
     freshStartupHook = do
-      -- setTabbedLayout
-      -- TODO if two screens or more, set second screen to workspace 5
+      setTabbedLayout
+      withWindowSet $
+        set2ndScreenToTag (myWorkspaces !! 4)
       spawnOn (myWorkspaces !! 0) "brave"
-      spawnOn (myWorkspaces !! 1) (myTerminal <> " -e tmux resurrect-restore")
+      spawnOn (myWorkspaces !! 1) (myTerminal <> " -e tmux")
       spawnOn (myWorkspaces !! 2) "emacs"
+
+    set2ndScreenToTag
+      :: WorkspaceId
+      -> W.StackSet
+          WorkspaceId (Layout Window) Window ScreenId ScreenDetail
+      -> X ()
+    set2ndScreenToTag tag winset = modify $ (\s -> do
+        let visibleScreens = W.visible winset
+        if length visibleScreens > 0 then
+          let visibleScreen = head visibleScreens
+              otherVisibleScreens = tail visibleScreens
+              newHiddenWorkspace = W.workspace visibleScreen
+              (hiddenTargetWorkspace, otherHiddenWorkspaces) =
+                partition (\w -> W.tag w == tag)
+                  $ W.hidden winset
+          in case hiddenTargetWorkspace of
+              -- no hidden tag 5 - do nothing
+                [] ->
+                  s
+                [htw] ->
+                  s { windowset =
+                        winset { W.visible =
+                                  (visibleScreen { W.workspace = htw }) : otherVisibleScreens
+                              , W.hidden = newHiddenWorkspace : otherHiddenWorkspaces
+                              }
+                    }
+        -- no visible screen means only one screen, do nothing
+        else
+          s
+      )
 
 myKeysList =
   [ ("M-<Return>"  , spawn myTerminal       )
