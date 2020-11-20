@@ -44,7 +44,6 @@
 
     # Services
     services.locate.enable = true;
-    services.nixosManual.showManual = true;
     services.openssh.enable = true;
     services.thermald.enable = true;
 
@@ -58,15 +57,13 @@
       libinput.enable = true;
 
       displayManager = {
+        autoLogin = {
+          enable = true;
+          user = "mike";
+        };
         #defaultSession = "none+i3";
         defaultSession = "none+xmonad";
-        lightdm = {
-          enable = true;
-          autoLogin = {
-            enable = true;
-            user = "mike";
-          };
-        };
+        lightdm.enable = true;
       };
 
       #windowManager.i3.enable = true;
