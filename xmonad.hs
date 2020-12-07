@@ -7,6 +7,7 @@ import qualified DBus.Client as D
 import qualified System.Exit as E
 import           XMonad hiding ( (|||) )
 import qualified XMonad.Actions.CycleWS as CWS
+import           XMonad.Actions.OnScreen (greedyViewOnScreen)
 import           XMonad.Actions.SpawnOn (manageSpawn, spawnOn)
 import           XMonad.Actions.Submap (submap)
 import           XMonad.Config.Desktop (desktopConfig)
@@ -106,47 +107,18 @@ myStartupHook = do
   -- Make sure polybar reads data from XMonad correctly
   spawn "polybar-msg cmd restart"
   winset <- gets windowset
-  let isFreshStartup =
-        W.allWindows winset == []
-  when isFreshStartup freshStartupHook
+  let isFreshStartup = W.allWindows winset == []
+  when isFreshStartup $ freshStartupHook winset
   where
-    freshStartupHook = do
+    freshStartupHook winset = do
       setTabbedLayout
-      withWindowSet $
-        set2ndScreenToTag (myWorkspaces !! 4)
+      let visibleScreens = W.visible winset
+      let workspace5Tag = myWorkspaces !! 4
+      when (length visibleScreens > 0) $
+        windows (greedyViewOnScreen (W.screen . head $ visibleScreens) workspace5Tag)
       spawnOn (myWorkspaces !! 0) "brave"
       spawnOn (myWorkspaces !! 1) (myTerminal <> " -e tmux")
       spawnOn (myWorkspaces !! 2) "emacs"
-
-    set2ndScreenToTag
-      :: WorkspaceId
-      -> W.StackSet
-          WorkspaceId (Layout Window) Window ScreenId ScreenDetail
-      -> X ()
-    set2ndScreenToTag tag winset = modify $ (\s -> do
-        let visibleScreens = W.visible winset
-        if length visibleScreens > 0 then
-          let visibleScreen = head visibleScreens
-              otherVisibleScreens = tail visibleScreens
-              newHiddenWorkspace = W.workspace visibleScreen
-              (hiddenTargetWorkspace, otherHiddenWorkspaces) =
-                partition (\w -> W.tag w == tag)
-                  $ W.hidden winset
-          in case hiddenTargetWorkspace of
-              -- no hidden tag 5 - do nothing
-                [] ->
-                  s
-                [htw] ->
-                  s { windowset =
-                        winset { W.visible =
-                                  (visibleScreen { W.workspace = htw }) : otherVisibleScreens
-                              , W.hidden = newHiddenWorkspace : otherHiddenWorkspaces
-                              }
-                    }
-        -- no visible screen means only one screen, do nothing
-        else
-          s
-      )
 
 myKeysList =
   [ ("M-<Return>"  , spawn myTerminal       )
