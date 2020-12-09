@@ -45,6 +45,7 @@
       tree
       unzip
       virtualbox
+      xorg.xbacklight
       xorg.xdpyinfo
       xsel
     ];
