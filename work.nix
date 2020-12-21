@@ -11,6 +11,7 @@
   #   https://rycee.gitlab.io/home-manager/options.html
 
   imports = [
+    ./services/screen-locker.nix
     ./xdg.nix
   ];
 
@@ -60,11 +61,6 @@
     gpg-agent = {
       enable = true;
       pinentryFlavor = "tty";
-    };
-    screen-locker = {
-      enable = true;
-      inactiveInterval = 45;
-      lockCmd = "${config.xdg.configHome}/lock-screen";
     };
   };
 
