@@ -11,6 +11,7 @@
   #   https://rycee.gitlab.io/home-manager/options.html
 
   imports = [
+    ./services/gpg-agent.nix
     ./services/screen-locker.nix
     ./xdg.nix
   ];
@@ -54,14 +55,6 @@
       EDITOR = "nvim";
     };
     stateVersion = "20.09";
-  };
-
-  services = {
-    # gpgconf --reload gpg-agent should make pinentry available
-    gpg-agent = {
-      enable = true;
-      pinentryFlavor = "tty";
-    };
   };
 
   xsession = import ./xsession.nix { inherit pkgs config; };
