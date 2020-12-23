@@ -8,5 +8,4 @@
       pinentryFlavor = "tty";
     };
   };
-
 }

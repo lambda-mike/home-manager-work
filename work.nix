@@ -12,6 +12,7 @@
 
   imports = [
     ./services/gpg-agent.nix
+    ./services/redshift.nix
     ./services/screen-locker.nix
     ./xdg.nix
   ];
@@ -102,7 +103,6 @@
 
   services = {
     polybar = import ./polybar.nix { inherit pkgs lib; };
-    redshift = import ./redshift.nix;
   };
 
 }
