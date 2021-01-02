@@ -1,0 +1,134 @@
+#+title: Install
+
+* NixOS installation
+
+=nixos-help= # or check other terminals
+
+Check type of setup (BIOS or UEIF)
+
+#+begin_src shell
+[ -d /sys/firmware/efi/efivars ] && echo "UEFI" || echo "Legacy"
+#+end_src
+
+*Ensure safe boot is disabled*
+
+** Network
+
+=nmtui= - ncurses tool for setting network
+
+Optionally do it manually:
+
+#+begin_src shell
+wpa_supplicant -B -i interface -c <(wpa_passphrase 'SSID' 'key')
+#+end_src
+
+where =interface= can be found using =ifconfig= or =ip addr show=.
+
+Restarat wpa_supplicant service if needed:
+
+#+begin_src shell
+systemctl restart wpa_supplicant.service
+#+end_src
+
+** Partitioning
+
+Use =cgdisk= or =gdisk= for UEFI, =cfdisk= or =fdisk= for BIOS.
+
+*** Partitions
+
+- 1MB empty space
+- EFI type for boot
+  *512MB* first partition
+  format as *vfat* = fat32 if a new partition
+  hex code: *ef00*
+- LVM for the rest
+  format as LVM
+  hex code: *8e00*
+
+*** Encryption
+
+#+begin shell
+cryptsetup luksFormat $LVM_PARTITION
+cryptsetup luksOpen $LVM_PARTITION nixos-luks
+#+end
+
+*** LVM partitioning
+
+#+begin shell
+pvcreate /dev/mapper/nixos-luks
+
+vgcreate nixos-vg /dev/mapper/nixos-luks
+
+lvcreate -n swap nixos-vg -L 8G
+
+lvcreate -n root nixos-vg -L 125G
+
+lvcreate -n data nixos-vg -l 100%FREE
+#+end
+
+*** Formatting
+#+begin shell
+mkswap -L swap /dev/nixos-vg/swap
+
+swapon /dev/nixos-vg/swap
+
+mkfs.fat -F 32 -n boot /dev/sda2 # boot partition (EFI)
+
+mkfs.ext4 -L nixos /dev/nixos-vg/root
+
+mkfs.ext4 -L data /dev/nixos-vg/data
+#+end
+
+*** Mounting
+
+#+begin shell
+mount /dev/disk/by-label/nixos /mnt
+# or
+mount /dev/nixos-vg/nixos /mnt
+
+mkdir /mnt/boot
+mount /dev/sda2 /mnt/boot
+
+mkdir -p /mnt/mnt/data
+mount /dev/nixos-vg/data /mnt/mnt/data 
+#+end
+
+** Configuration
+
+#+begin shell
+nixos-generate-config --root /mnt
+
+vim /mnt/etc/nixos/configuration.nix `
+#+end
+
+#+begin_src nix
+boot.initrd.luks.devices = {
+  root = {
+    device = "/dev/nvme0n1p2"; # or by uuid better?
+    preLVM = true;
+  };
+};
+services.nixosManual.showManual = true; # VT 8`
+#+end_src
+
+
+=nixos-install=
+
+=reboot=
+
+#+begin shell
+# useradd -c 'Mike' -m mike #only if not configured in configuration.nix
+passwd mike
+#+end
+
+** Troubleshooting
+
+#+begin shell
+cryptsetup luksOpen $LVM_PARTITION nixos-enc
+lvscan vgchange -ay
+mount /dev/nixos-vg/root /mnt
+#+end
+
+https://github.com/ryantm/home-manager-template
+
+When switching from bash to fish, add in configuration.nix  :
