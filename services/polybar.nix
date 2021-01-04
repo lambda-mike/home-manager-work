@@ -1,18 +1,20 @@
 { pkgs, lib, ... }:
 
 {
-  config = ./polybar.config;
-  enable = true;
-  package = pkgs.polybar.override {
-    pulseSupport = true;
-  };
-  script = ''
+  services = {
+    polybar = {
+      config = ./polybar.config;
+      enable = true;
+      package = pkgs.polybar.override {
+        pulseSupport = true;
+      };
+      script = ''
     #! /usr/bin/env bash
 
     PATH=$PATH:${
-      with pkgs;
-      lib.makeBinPath [ coreutils gnugrep killall xorg.xrandr ]
-    }
+                  with pkgs;
+                  lib.makeBinPath [ coreutils gnugrep killall xorg.xrandr ]
+                }
 
     # Terminate already running bar instances
     killall -eqw polybar
@@ -28,4 +30,6 @@
 
     echo "Polybar launched..."
 '';
+    };
+  };
 }

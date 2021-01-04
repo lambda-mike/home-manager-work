@@ -12,6 +12,7 @@
 
   imports = [
     ./services/gpg-agent.nix
+    ./services/polybar.nix
     ./services/redshift.nix
     ./services/screen-locker.nix
     ./xdg.nix
@@ -99,10 +100,6 @@
     tmux = import ./tmux.nix { inherit pkgs; };
     vscode = { enable = true; };
     zathura = { enable = true; };
-  };
-
-  services = {
-    polybar = import ./polybar.nix { inherit pkgs lib; };
   };
 
 }
