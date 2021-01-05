@@ -1,5 +1,11 @@
 { pkgs, lib, config, ... }:
 
+# 1. Move other parts to imports
+# 2. Rename to core.nix
+# 3. Import core.nix in work.nix
+# 4. Extract windowManager to separate import from xsession
+# 5. Overwrite what is necessary in local branch
+
 {
 
   # The home-manager manual is at:
@@ -16,6 +22,7 @@
     ./services/redshift.nix
     ./services/screen-locker.nix
     ./xdg.nix
+    ./xsession.nix
   ];
 
   home = {
@@ -54,12 +61,11 @@
       xsel
     ];
     sessionVariables = {
+      # TODO move fish vars here, extract
       EDITOR = "nvim";
     };
     stateVersion = "20.09";
   };
-
-  xsession = import ./xsession.nix { inherit pkgs config; };
 
   programs = {
     autorandr = import ./autorandr.nix;
