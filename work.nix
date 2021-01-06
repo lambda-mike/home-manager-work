@@ -61,8 +61,9 @@
       xsel
     ];
     sessionVariables = {
-      # TODO move fish vars here, extract
+      BROWSER = "brave";
       EDITOR = "nvim";
+      SHELL = "/home/mike/.nix-profile/bin/fish";
     };
     stateVersion = "20.09";
   };

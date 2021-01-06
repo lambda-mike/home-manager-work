@@ -87,7 +87,5 @@
   shellInit = ''
     set -g -x fish_greeting 'Let the λ force be with you! :-)'
     set -g -x fish_key_bindings fish_vi_key_bindings
-    set -g -x BROWSER /usr/bin/firefox
-    set -g -x SHELL /home/mike/.nix-profile/bin/fish
 '';
 }
