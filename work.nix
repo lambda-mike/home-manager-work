@@ -61,7 +61,7 @@
       xsel
     ];
     sessionVariables = {
-      # TODO move fish vars here, extract
+      # Other env vars here cause issues during fish shell startup
       EDITOR = "nvim";
     };
     stateVersion = "20.09";
