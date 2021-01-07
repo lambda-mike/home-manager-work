@@ -74,9 +74,7 @@
       enable = true;
       config = { pager = "less -FR"; theme = "1337"; };
     };
-    broot = {
-      enable = true;
-    };
+    broot.enable = true;
     chromium.enable = true;
     direnv = {
       enable = true;
@@ -84,28 +82,19 @@
     };
     emacs.enable = true;
     feh.enable = true;
-    firefox = {
-      enable = true;
-    };
+    firefox.enable = true;
     fish = import ./fish.nix;
-    gpg = {
-      enable = true;
-    };
+    gpg.enable = true;
     git = import ./git.nix;
-    jq = {
-      enable = true;
-    };
+    jq.enable = true;
     kakoune = import ./kakoune.nix { inherit pkgs; };
     keychain = import ./keychain.nix;
     neovim = import ./neovim.nix { inherit pkgs; };
-    rofi = {
-      enable = true;
-      theme = "Arc-Dark";
-    };
+    rofi = { enable = true; theme = "Arc-Dark"; };
     skim.enable = true;
     tmux = import ./tmux.nix { inherit pkgs; };
-    vscode = { enable = true; };
-    zathura = { enable = true; };
+    vscode.enable = true;
+    zathura.enable = true;
   };
 
 }
