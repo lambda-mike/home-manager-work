@@ -17,6 +17,7 @@
   #   https://rycee.gitlab.io/home-manager/options.html
 
   imports = [
+    ./programs/alacritty.nix
     ./services/gpg-agent.nix
     ./services/polybar.nix
     ./services/redshift.nix
@@ -69,7 +70,6 @@
 
   programs = {
     autorandr = import ./autorandr.nix;
-    alacritty = import ./alacritty.nix;
     bat = {
       enable = true;
       config = { pager = "less -FR"; theme = "1337"; };
