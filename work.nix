@@ -1,11 +1,5 @@
 { pkgs, lib, config, ... }:
 
-# 1. Move other parts to imports
-# 2. Rename to core.nix
-# 3. Import core.nix in work.nix
-# 4. Extract windowManager to separate import from xsession
-# 5. Overwrite what is necessary in local branch
-
 {
 
   # The home-manager manual is at:
@@ -18,11 +12,13 @@
 
   imports = [
     ./programs/alacritty.nix
+    ./programs/fish.nix
     ./services/gpg-agent.nix
     ./services/polybar.nix
     ./services/redshift.nix
     ./services/screen-locker.nix
     ./xdg.nix
+    # TODO move xmonad ouf from xsession make it fn
     ./xsession.nix
   ];
 
@@ -83,7 +79,6 @@
     emacs.enable = true;
     feh.enable = true;
     firefox.enable = true;
-    fish = import ./fish.nix;
     gpg.enable = true;
     git = import ./git.nix;
     jq.enable = true;

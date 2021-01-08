@@ -1,7 +1,11 @@
+{ config, lib, pkgs, ... }:
+
 {
-  enable = true;
-  functions = {
-    fish_mode_prompt = ''
+  programs = {
+    fish = {
+      enable = true;
+      functions = {
+        fish_mode_prompt = ''
       echo -s '['
       switch $fish_bind_mode
         case default
@@ -23,7 +27,7 @@
       set_color normal
       echo -s ']'
     '';
-    fish_right_prompt = ''
+        fish_right_prompt = ''
       function _colour_normal
           set_color -o normal
       end
@@ -83,11 +87,13 @@
       echo -n -s (__cmd_duration) (__current_time)
       _colour_normal
     '';
-  };
-  shellInit = ''
+      };
+      shellInit = ''
     set -g -x fish_greeting 'Let the λ force be with you! :-)'
     set -g -x fish_key_bindings fish_vi_key_bindings
     set -g -x BROWSER brave
     set -g -x SHELL /home/mike/.nix-profile/bin/fish
 '';
+    };
+  };
 }
