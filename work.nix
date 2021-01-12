@@ -52,7 +52,7 @@
       screen
       tree
       unzip
-      virtualbox
+      # virtualbox
       xorg.xbacklight
       xorg.xdpyinfo
       xsel
