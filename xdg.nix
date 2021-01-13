@@ -24,15 +24,16 @@
     };
     configFile."greenclip.cfg" = {
       text = ''
-  Config {
+Config {
   maxHistoryLength = 500,
   historyPath = "~/.cache/greenclip.history",
   staticHistoryPath = "~/.cache/greenclip.staticHistory",
   imageCachePath = "/tmp/greenclip/",
   usePrimarySelectionAsInput = False,
   blacklistedApps = [],
-  trimSpaceFromSelection = True
-  }
+  trimSpaceFromSelection = True,
+  enableImageSupport = True
+}
       '';
     };
   };
