@@ -13,6 +13,7 @@
   imports = [
     ./programs/alacritty.nix
     ./programs/fish.nix
+    ./programs/git.nix
     ./services/gpg-agent.nix
     ./services/polybar.nix
     ./services/redshift.nix
@@ -80,7 +81,6 @@
     feh.enable = true;
     firefox.enable = true;
     gpg.enable = true;
-    git = import ./git.nix;
     jq.enable = true;
     kakoune = import ./kakoune.nix { inherit pkgs; };
     keychain = import ./keychain.nix;
