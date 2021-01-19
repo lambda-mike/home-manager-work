@@ -22,6 +22,18 @@
         ${pkgs.i3lock}/bin/i3lock -n -c 00558c
       '';
     };
+    configFile."copy-to-clip" = {
+      executable = true;
+      text = ''
+        #! /usr/bin/env sh
+        echo "$(pwd)/$1" | xsel -bi
+      '';
+      onChange = ''
+        #! /usr/bin/env sh
+        mkdir -p ${config.home.homeDirectory}/.local/bin
+      '';
+      target = ''../.local/bin/copy-to-clip'';
+    };
     configFile."greenclip.cfg" = {
       text = ''
 Config {

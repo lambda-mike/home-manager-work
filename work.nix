@@ -44,6 +44,7 @@
       neofetch
       ncompress
       nixfmt
+      nnn
       nodePackages.typescript-language-server
       pinentry
       python38
@@ -57,6 +58,9 @@
       xorg.xbacklight
       xorg.xdpyinfo
       xsel
+    ];
+    sessionPath = [
+      "${config.home.homeDirectory}/.local/bin"
     ];
     sessionVariables = {
       # Other env vars here cause issues during fish shell startup

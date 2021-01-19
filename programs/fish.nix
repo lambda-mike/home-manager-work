@@ -93,6 +93,10 @@
     set -g -x fish_key_bindings fish_vi_key_bindings
     set -g -x BROWSER brave
     set -g -x SHELL /home/mike/.nix-profile/bin/fish
+    set -g -x NNN_BMS 'c:~/Documents/Documents/coding;l:~/linux-config/'
+    set -g -x NNN_COLORS '#283fe21b;2341'
+    set -g -x NNN_OPTS 'd'
+    set -g -x NNN_PLUG 'b:-_bat $nnn;c:-_copy-to-clip $nnn*;e:_emacs $nnn*;f:-_feh $nnn*;g:_|gimp $nnn;i:-_viu $nnn;k:_kak $nnn*;v:_|vlc $nnn;z:_|zathura $nnn'
 '';
     };
   };

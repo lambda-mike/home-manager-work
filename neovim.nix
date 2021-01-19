@@ -69,6 +69,10 @@
     let g:netrw_banner = 0
     let g:netrw_liststyle = 1
 
+    " nnn
+    let g:nnn#command = 'nnn -d'
+    let g:nnn#layout = { 'window': { 'width': 0.5, 'height': 0.7, 'highlight': 'Debug' } }
+
     " ELM
     " let g:elm_setup_keybindings = 0
   '';
