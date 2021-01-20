@@ -14,6 +14,7 @@
     ./programs/alacritty.nix
     ./programs/fish.nix
     ./programs/git.nix
+    ./programs/kakoune.nix
     ./services/gpg-agent.nix
     ./services/polybar.nix
     ./services/redshift.nix
@@ -86,7 +87,6 @@
     firefox.enable = true;
     gpg.enable = true;
     jq.enable = true;
-    kakoune = import ./kakoune.nix { inherit pkgs; };
     keychain = import ./keychain.nix;
     neovim = import ./neovim.nix { inherit pkgs; };
     rofi = { enable = true; theme = "Arc-Dark"; };
