@@ -15,6 +15,7 @@
     ./programs/fish.nix
     ./programs/git.nix
     ./programs/kakoune.nix
+    ./programs/tmux.nix
     ./services/gpg-agent.nix
     ./services/polybar.nix
     ./services/redshift.nix
@@ -91,7 +92,6 @@
     neovim = import ./neovim.nix { inherit pkgs; };
     rofi = { enable = true; theme = "Arc-Dark"; };
     skim.enable = true;
-    tmux = import ./tmux.nix { inherit pkgs; };
     vscode.enable = true;
     zathura.enable = true;
   };
