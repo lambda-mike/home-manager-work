@@ -15,6 +15,7 @@
     ./programs/fish.nix
     ./programs/git.nix
     ./programs/kakoune.nix
+    ./programs/keychain.nix
     ./programs/tmux.nix
     ./services/gpg-agent.nix
     ./services/polybar.nix
@@ -88,7 +89,6 @@
     firefox.enable = true;
     gpg.enable = true;
     jq.enable = true;
-    keychain = import ./keychain.nix;
     neovim = import ./neovim.nix { inherit pkgs; };
     rofi = { enable = true; theme = "Arc-Dark"; };
     skim.enable = true;
