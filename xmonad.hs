@@ -7,7 +7,11 @@ import qualified DBus.Client as D
 import qualified System.Exit as E
 import           XMonad hiding ( (|||) )
 import qualified XMonad.Actions.CycleWS as CWS
-import           XMonad.Actions.OnScreen (greedyViewOnScreen)
+import           XMonad.Actions.OnScreen
+  ( Focus(FocusCurrent)
+  , greedyViewOnScreen
+  , onScreen'
+  )
 import           XMonad.Actions.SpawnOn (manageSpawn, spawnOn)
 import           XMonad.Actions.Submap (submap)
 import           XMonad.Config.Desktop (desktopConfig)
@@ -114,8 +118,10 @@ myStartupHook = do
       setTabbedLayout
       let visibleScreens = W.visible winset
       let workspace5Tag = myWorkspaces !! 4
-      when (length visibleScreens > 0) $
-        windows (greedyViewOnScreen (W.screen . head $ visibleScreens) workspace5Tag)
+      when (length visibleScreens > 0) $ do
+        let otherScreen = W.screen . head $ visibleScreens
+        windows $ greedyViewOnScreen otherScreen workspace5Tag
+        onScreen' toggleFullscreen FocusCurrent otherScreen
       spawnOn (myWorkspaces !! 0) "brave"
       spawnOn (myWorkspaces !! 1) (myTerminal <> " -e tmux")
       spawnOn (myWorkspaces !! 2) "emacs"
