@@ -16,6 +16,7 @@
     ./programs/git.nix
     ./programs/kakoune.nix
     ./programs/keychain.nix
+    ./programs/neovim.nix
     ./programs/tmux.nix
     ./services/gpg-agent.nix
     ./services/polybar.nix
@@ -89,7 +90,6 @@
     firefox.enable = true;
     gpg.enable = true;
     jq.enable = true;
-    neovim = import ./neovim.nix { inherit pkgs; };
     rofi = { enable = true; theme = "Arc-Dark"; };
     skim.enable = true;
     vscode.enable = true;
