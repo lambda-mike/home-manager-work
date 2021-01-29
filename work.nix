@@ -23,7 +23,7 @@
     ./services/redshift.nix
     ./services/screen-locker.nix
     ./xdg.nix
-    # TODO move xmonad ouf from xsession make it fn
+    ./xmonad.nix
     ./xsession.nix
   ];
 

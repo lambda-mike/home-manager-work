@@ -12,6 +12,5 @@
       package = pkgs.vanilla-dmz;
       name = "Vanilla-DMZ";
     };
-    windowManager.xmonad = import ./xmonad.nix { inherit pkgs; };
   };
 }
