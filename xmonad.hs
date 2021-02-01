@@ -56,8 +56,8 @@ myConfig =
     , terminal           = myTerminal
     , modMask            = mod4Mask
     , borderWidth        = 2
-    , normalBorderColor  = colourNordBlue
-    , focusedBorderColor = colourLightBlue
+    , normalBorderColor  = colourDark
+    , focusedBorderColor = colourMainLight
     , focusFollowsMouse  = True
     , handleEventHook    = handleEventHook desktopConfig <+> fullscreenEventHook
     , layoutHook         = myLayout
@@ -286,10 +286,10 @@ myTabLayout =
   renamed [Replace "Tab"]
   $ T.tabbedBottom T.shrinkText
   $ T.def -- Tabs theme modified below
-    { T.activeColor         = colourLightBlue
-    , T.inactiveColor       = colourNordBlue
-    , T.activeBorderColor   = colourDarkBlue
-    , T.inactiveBorderColor = colourDarkBlue
+    { T.activeColor         = colourMainLight
+    , T.inactiveColor       = colourDark
+    , T.activeBorderColor   = colourMainDark
+    , T.inactiveBorderColor = colourMainDark
     , T.activeTextColor     = colourWhite
     , T.inactiveTextColor   = colourGrey
     , T.fontName            = myFont 10
@@ -331,11 +331,11 @@ exitMenuPrompt =
     exitMenuPromptConfig =
       PT.def
         { PT.font                  = myFont 12
-        , PT.bgColor               = colourNordBlue
+        , PT.bgColor               = colourDark
         , PT.fgColor               = colourWhite
-        , PT.bgHLight              = colourLightBlue
+        , PT.bgHLight              = colourMainLight
         , PT.fgHLight              = colourWhite
-        , PT.borderColor           = colourLightBlue
+        , PT.borderColor           = colourMainLight
         , PT.promptBorderWidth     = 1
         , PT.position              = PT.Top
         , PT.height                = 30
@@ -344,8 +344,8 @@ exitMenuPrompt =
         }
 
 -- Colours
-colourDarkBlue = "#00558c"
-colourLightBlue = "#0076cf"
-colourNordBlue = "#2f343f"
+colourMainDark = "#00558c"
+colourMainLight = "#0076cf"
+colourDark = "#2f343f"
 colourWhite = "#fefefe"
 colourGrey = "#bebebe"
