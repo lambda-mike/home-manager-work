@@ -179,16 +179,6 @@ myKeysList =
       | (key   , scr ) <- zip "nei" [0..]
       , (action, mask) <- [ (W.view, "") , (W.shift, "S-") ]
       ]
-    -- mySysCtrlSubmapKeybindings =
-    --   [ ("M-0", submap . M.fromList $
-    --       [ ((0        , xK_h), spawn "systemctl hibernate" )
-    --       , ((0        , xK_s), spawn "systemctl suspend"   )
-    --       , ((shiftMask, xK_s), spawn "systemctl poweroff"  )
-    --       , ((0        , xK_r), spawn "systemctl reboot"    )
-    --       , ((0        , xK_l), lockScreen                  )
-    --       ]
-    --     )
-    --   ]
     -- mod-[1..9] %! Switch to workspace N
     -- mod-shift-[1..9] %! Move client to workspace N
     myWorkspacesKeybindings =
