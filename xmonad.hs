@@ -333,9 +333,4 @@ exitMenuPrompt =
         , PT.autoComplete          = Just 0
         }
 
--- Colours
-colourMainDark = "#00558c"
-colourMainLight = "#0076cf"
-colourDark = "#2f343f"
-colourWhite = "#fefefe"
-colourGrey = "#bebebe"
+-- append xmonad.your_config.hs here

@@ -23,7 +23,6 @@
     ./services/redshift.nix
     ./services/screen-locker.nix
     ./xdg.nix
-    ./xmonad.nix
     ./xsession.nix
   ];
 
@@ -96,4 +95,5 @@
     zathura.enable = true;
   };
 
+  xsession.windowManager = (import ./xmonad.nix) "blue" { inherit pkgs; };
 }

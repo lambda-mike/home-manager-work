@@ -1,11 +1,19 @@
-{ pkgs, config, ... }:
+theme:
+{ pkgs, ... }:
 
-{
-  xsession.windowManager.xmonad = {
+let xmonadTheme =
+      if theme == "blue" then
+        ./xmonad.blue.hs
+      else
+        # TODO add green theme
+        ./xmonad.blue.hs;
+    xmonadConfig =
+      (builtins.readFile ./xmonad.hs) + (builtins.readFile xmonadTheme);
+in {
+  xmonad = {
     enable = true;
     enableContribAndExtras = true;
-    # TODO build xmonad from parts based on arguments
-    config = pkgs.writeText "xmonad.hs" (builtins.readFile ./xmonad.hs);
+    config = pkgs.writeText "xmonad.hs" xmonadConfig;
     extraPackages = haskellPackages : [
       haskellPackages.dbus
       haskellPackages.xmonad-contrib
