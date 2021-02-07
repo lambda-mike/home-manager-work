@@ -4,11 +4,11 @@
 
 =nixos-help= # or check other terminals
 
-Check type of setup (BIOS or UEIF)
+Check type of setup (BIOS or UEFI)
 
-#+begin_src shell
+#+begin_example shell
 [ -d /sys/firmware/efi/efivars ] && echo "UEFI" || echo "Legacy"
-#+end_src
+#+end_example
 
 *Ensure safe boot is disabled*
 
@@ -18,17 +18,17 @@ Check type of setup (BIOS or UEIF)
 
 Optionally do it manually:
 
-#+begin_src shell
+#+begin_example shell
 wpa_supplicant -B -i interface -c <(wpa_passphrase 'SSID' 'key')
-#+end_src
+#+end_example
 
 where =interface= can be found using =ifconfig= or =ip addr show=.
 
 Restarat wpa_supplicant service if needed:
 
-#+begin_src shell
+#+begin_example shell
 systemctl restart wpa_supplicant.service
-#+end_src
+#+end_example
 
 ** Partitioning
 
@@ -47,14 +47,14 @@ Use =cgdisk= or =gdisk= for UEFI, =cfdisk= or =fdisk= for BIOS.
 
 *** Encryption
 
-#+begin shell
+#+begin_example shell
 cryptsetup luksFormat $LVM_PARTITION
 cryptsetup luksOpen $LVM_PARTITION nixos-luks
-#+end
+#+end_example
 
 *** LVM partitioning
 
-#+begin shell
+#+begin_example shell
 pvcreate /dev/mapper/nixos-luks
 
 vgcreate nixos-vg /dev/mapper/nixos-luks
@@ -64,10 +64,11 @@ lvcreate -n swap nixos-vg -L 8G
 lvcreate -n root nixos-vg -L 125G
 
 lvcreate -n data nixos-vg -l 100%FREE
-#+end
+#+end_example
 
 *** Formatting
-#+begin shell
+
+#+begin_example shell
 mkswap -L swap /dev/nixos-vg/swap
 
 swapon /dev/nixos-vg/swap
@@ -77,11 +78,11 @@ mkfs.fat -F 32 -n boot /dev/sda2 # boot partition (EFI)
 mkfs.ext4 -L nixos /dev/nixos-vg/root
 
 mkfs.ext4 -L data /dev/nixos-vg/data
-#+end
+#+end_example
 
 *** Mounting
 
-#+begin shell
+#+begin_example shell
 mount /dev/disk/by-label/nixos /mnt
 # or
 mount /dev/nixos-vg/nixos /mnt
@@ -91,17 +92,16 @@ mount /dev/sda2 /mnt/boot
 
 mkdir -p /mnt/mnt/data
 mount /dev/nixos-vg/data /mnt/mnt/data 
-#+end
+#+end_example
 
 ** Configuration
 
-#+begin shell
+#+begin_example shell
 nixos-generate-config --root /mnt
-
 vim /mnt/etc/nixos/configuration.nix `
-#+end
+#+end_example
 
-#+begin_src nix
+#+begin_example nix
 boot.initrd.luks.devices = {
   root = {
     device = "/dev/nvme0n1p2"; # or by uuid better?
@@ -109,25 +109,25 @@ boot.initrd.luks.devices = {
   };
 };
 services.nixosManual.showManual = true; # VT 8`
-#+end_src
+#+end_example
 
 
 =nixos-install=
 
 =reboot=
 
-#+begin shell
+#+begin_example shell
 # useradd -c 'Mike' -m mike #only if not configured in configuration.nix
 passwd mike
-#+end
+#+end_example
 
 ** Troubleshooting
 
-#+begin shell
+#+begin_example shell
 cryptsetup luksOpen $LVM_PARTITION nixos-enc
 lvscan vgchange -ay
 mount /dev/nixos-vg/root /mnt
-#+end
+#+end_example
 
 https://github.com/ryantm/home-manager-template
 
