@@ -1,6 +1,7 @@
 { pkgs, lib, config, ... }:
 
-{
+let theme = "blue";
+in {
 
   # The home-manager manual is at:
   #
@@ -19,7 +20,6 @@
     ./programs/neovim.nix
     ./programs/tmux.nix
     ./services/gpg-agent.nix
-    ./services/polybar.nix
     ./services/redshift.nix
     ./services/screen-locker.nix
     ./xdg.nix
@@ -95,5 +95,6 @@
     zathura.enable = true;
   };
 
-  xsession.windowManager = (import ./xmonad.nix) "blue" { inherit pkgs; };
+  services.polybar = import ./services/polybar.nix theme { inherit pkgs lib; };
+  xsession.windowManager = import ./xmonad.nix theme { inherit pkgs; };
 }
