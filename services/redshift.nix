@@ -4,7 +4,12 @@
   services = {
     redshift = {
       enable = true;
-      extraOptions = [ "-g 0.8" "-m randr" ];
+      settings = {
+        redshift = {
+          adjustment-method = "randr";
+          gamma = 0.8;
+        };
+      };
       # FIXME Phase2
       latitude = "51.6";
       longitude = "0.0";
