@@ -38,6 +38,7 @@ import qualified XMonad.Prompt as PT
 import qualified XMonad.StackSet as W
 import           XMonad.Util.EZConfig (additionalKeysP)
 
+-- all colours variables are located in xmonad.theme.hs file
 
 main = do
   dbus <- D.connectSession
@@ -282,13 +283,12 @@ myTabLayout =
     , T.inactiveBorderColor = colourMainDark
     , T.activeTextColor     = colourWhite
     , T.inactiveTextColor   = colourGrey
-    , T.fontName            = myFont 10
+    , T.fontName            = mkXftFontString 10
     }
 
-myFont size =
-  "xft:Liberation Mono:size=" <>
-  show size <>
-  ":antialias=true:hinting=true"
+mkXftFontString size =
+  -- myFont is in xmonad.theme.hs file
+  "xft:" <> myFont <> ":size=" <> show size <> ":antialias=true:hinting=true"
 
 myColLayout =
   renamed [Replace "Col"]
@@ -320,7 +320,7 @@ exitMenuPrompt =
         _   -> pure ()
     exitMenuPromptConfig =
       PT.def
-        { PT.font                  = myFont 12
+        { PT.font                  = mkXftFontString 12
         , PT.bgColor               = colourDark
         , PT.fgColor               = colourWhite
         , PT.bgHLight              = colourMainLight

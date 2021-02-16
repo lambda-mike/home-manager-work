@@ -7,3 +7,6 @@ colourMainDark = "#00558c"
 colourDark = "#2f343f"
 colourWhite = "#fefefe"
 colourGrey = "#bebebe"
+
+-- Font
+myFont = "Liberation Mono"
