@@ -16,14 +16,14 @@ in {
     executable = true;
     # FIXME Phase1 Download wallpaper, create symlink in ~
     text = ''
-      #!/bin/sh
+      #! /usr/bin/env sh
       ${pkgs.feh}/bin/feh --no-fehbg --bg-fill ${config.home.homeDirectory}/wallpaper
     '';
   };
   configFile."lock-screen" = {
     executable = true;
     text = ''
-      #!/bin/sh
+      #! /usr/bin/env sh
       ${pkgs.i3lock}/bin/i3lock -n -c ${bgColour}
     '';
   };

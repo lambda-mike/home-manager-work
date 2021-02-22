@@ -97,4 +97,10 @@ in {
   services.polybar = import ./services/polybar.nix theme { inherit pkgs lib; };
   xdg = import ./xdg.nix theme { inherit pkgs config; };
   xsession.windowManager = import ./xmonad.nix theme { inherit pkgs; };
+
+  # FIXME create keys.nix
+  # FIXME programs.git.userName
+  # FIXME programs.git.userEmail
+  # FIXME services/redshift.nix coords
+  # FIXME xdg.nix ~/wallpaper
 }
