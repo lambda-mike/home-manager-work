@@ -72,7 +72,7 @@ in {
   };
 
   programs = {
-    autorandr = import ./autorandr.nix;
+    autorandr.enable = true;
     bat = {
       enable = true;
       config = { pager = "less -FR"; theme = "1337"; };
