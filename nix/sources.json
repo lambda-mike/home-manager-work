@@ -5,10 +5,10 @@
         "homepage": "https://rycee.gitlab.io/home-manager/",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "55030c83024bf2d10ff86f3874b91794b9d32722",
-        "sha256": "1akp4ka25a462pg2n2lzadcznq4njllij3h6yansg8r6jfi3b5cw",
+        "rev": "e7b1491fb8dfb1d2bdb90432312e88d03c8d803d",
+        "sha256": "1y1acyavv7n5pjr3yhpj1glcxs8fk72x38m67c1ppqnr0xq63jjh",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/55030c83024bf2d10ff86f3874b91794b9d32722.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/e7b1491fb8dfb1d2bdb90432312e88d03c8d803d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {
@@ -29,10 +29,10 @@
         "homepage": "",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ad4db3f4d8ae54482c63c31c14921cb73953548d",
-        "sha256": "1fwl898f6wznkjpwq11brgadz6iff5w5f4lwj2l7ax2rz7r03mnn",
+        "rev": "04ac9dcd311956d1756d77f4baf9258392ee7bdd",
+        "sha256": "10r7s2bimvijq1znhiypc99zvzzfqilzyzzg62q5xk2cr4gs03g9",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/ad4db3f4d8ae54482c63c31c14921cb73953548d.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/04ac9dcd311956d1756d77f4baf9258392ee7bdd.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
