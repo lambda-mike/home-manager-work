@@ -54,6 +54,7 @@ in {
       rustup
       scrot
       screen
+      shellcheck
       tree
       unzip
       # virtualbox
