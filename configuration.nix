@@ -44,7 +44,10 @@
 
     # Services
     services.locate.enable = true;
-    services.openssh.enable = true;
+    services.openssh = {
+      enable = true;
+      permitRootLogin = "no";
+    };
     services.thermald.enable = true;
 
     # X
