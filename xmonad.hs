@@ -313,8 +313,8 @@ exitMenuPrompt =
       case action of
         "e" -> myExitXMonad
         "l" -> lockScreen
-        "h" -> spawn "systemctl hibernate"
-        "s" -> spawn "systemctl suspend"
+        "h" -> lockScreen *> spawn "systemctl hibernate"
+        "s" -> lockScreen *> spawn "systemctl suspend"
         "r" -> spawn "systemctl reboot"
         "S" -> spawn "systemctl poweroff"
         _   -> pure ()
