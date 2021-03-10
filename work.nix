@@ -55,6 +55,7 @@ in {
       scrot
       screen
       shellcheck
+      tokei
       tree
       unzip
       # virtualbox
