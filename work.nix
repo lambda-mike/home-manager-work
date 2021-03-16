@@ -50,6 +50,7 @@ in {
       nnn
       nodePackages.typescript-language-server
       pinentry
+      procs
       python38
       ripgrep
       rustup
