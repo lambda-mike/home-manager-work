@@ -28,43 +28,11 @@ in {
   home = {
     username = "mike";
     homeDirectory = "/home/mike";
-    packages = with pkgs; [
-      brave
-      docker
-      du-dust
-      exa
-      fd
-      file
-      font-awesome
-      gimp
-      git-crypt
-      haskellPackages.greenclip
-      htop
-      i3lock
-      libreoffice
+    packages = import ./core/packages.nix { inherit pkgs; } ++ (with pkgs; [
       # linuxPackages_5_9.virtualbox
       # linuxPackages_5_9.virtualboxGuestAdditions
-      neofetch
-      ncompress
-      nixfmt
-      nnn
-      nodePackages.typescript-language-server
-      pinentry
-      procs
-      python38
-      ripgrep
-      rustup
-      scrot
-      screen
-      shellcheck
-      tokei
-      tree
-      unzip
       # virtualbox
-      xorg.xbacklight
-      xorg.xdpyinfo
-      xsel
-    ];
+    ]);
     sessionPath = [
       "${config.home.homeDirectory}/.local/bin"
     ];
