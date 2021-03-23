@@ -36,7 +36,7 @@ import           XMonad.ManageHook (composeAll)
 import           XMonad.Prompt (XPrompt)
 import qualified XMonad.Prompt as PT
 import qualified XMonad.StackSet as W
-import           XMonad.Util.EZConfig (additionalKeysP)
+import           XMonad.Util.EZConfig (additionalKeysP, removeKeysP)
 
 -- all colours variables are located in xmonad.theme.hs file
 
@@ -48,8 +48,10 @@ main = do
 
   spawn $ "touch " ++ myWorkspacesLog
 
-  xmonad $
-    (myConfig `additionalKeysP` myKeysList)
+  xmonad
+    . (flip additionalKeysP myKeysList)
+    . (flip removeKeysP myKeysToDelete)
+    $ myConfig
 
 myConfig =
   desktopConfig
@@ -210,6 +212,13 @@ myKeysList =
       "rofi -width 300 -lines 5 -show run"
     rofiWindow = spawn $
       "rofi -width 50 -lines 11 -show window"
+
+myKeysToDelete =
+  [ "M-q"
+  , "M-<Space>"
+  , "M-S-<Space>"
+  , "M-S-c"
+  ]
 
 lockScreen =
   spawn "~/.config/lock-screen"
