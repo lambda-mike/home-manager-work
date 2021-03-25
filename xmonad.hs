@@ -129,6 +129,19 @@ myStartupHook = do
       spawnOn (myWorkspaces !! 1) (myTerminal <> " -e tmux")
       spawnOn (myWorkspaces !! 2) "emacs"
 
+-- Default keybinings
+{-
+    "mod-Tab        Move focus to the next window",
+    "mod-Shift-Tab  Move focus to the previous window",
+    "mod-m          Move focus to the master window",
+    "-- resizing the master/slave ratio",
+    "mod-h  Shrink the master area",
+    "mod-l  Expand the master area",
+    "-- increase or decrease number of windows in the master area",
+    "mod-comma  (mod-,)   Increment the number of windows in the master area",
+    "mod-period (mod-.)   Deincrement the number of windows in the master area",
+-}
+
 myKeysList =
   [ ("M-<Return>"  , spawn myTerminal       )
   , ("M-S-q"       , kill                   )
@@ -217,6 +230,7 @@ myKeysToDelete =
   [ "M-q"
   , "M-<Space>"
   , "M-S-<Space>"
+  , "M-S-w"
   , "M-S-c"
   ]
 
