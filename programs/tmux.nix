@@ -16,6 +16,8 @@ set -g allow-rename off
 # Toggle status bar
 bind-key a { set status }
 bind-key C-b { last-window }
+# Add truecolor support
+set-option -ga terminal-overrides ",xterm-256color:Tc"
   '';
         historyLimit = 10000;
         keyMode = "vi";

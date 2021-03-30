@@ -52,7 +52,7 @@ let mapleader=" "
 imap <A-Tab> <Esc><C-^>
 nmap <A-Tab> <C-^>
 nmap <Leader>e :Ex<CR>
-nmap <Leader>n :noh<CR>
+nmap <Leader>o :noh<CR>
 nmap <Leader>f :FZGFiles<CR>
 nmap <Leader>F :FZFiles<CR>
 nmap <Leader>b :FZBuffers<CR>
