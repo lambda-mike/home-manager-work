@@ -21,6 +21,7 @@
   pinentry
   procs
   python38
+  qrencode
   ripgrep
   rustup
   scrot
