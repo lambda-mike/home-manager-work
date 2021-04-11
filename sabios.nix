@@ -51,7 +51,7 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 '';
     };
-    fish {
+    fish = {
       enable = true;
       shellInit = ''set -g -x fish_key_bindings fish_vi_key_bindings'';
     };
