@@ -38,7 +38,19 @@
   };
 
   programs = {
-    bash.enable = true;
+    bash = {
+      bashrcExtra = builtins.readFile ./sabios/.bashrc;
+      enable = true;
+      historyControl = [ "ignoredups" ];
+      profileExtra = ''
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+        . "$HOME/.bashrc"
+    fi
+fi
+'';
+    };
     #chromium.enable = true;
   };
 
