@@ -54,6 +54,15 @@ fi
     fish.enable = true;
     #chromium.enable = true;
   };
+  xdg = {
+    enable = true;
+    configFile.".screenrc" = {
+      text = ''
+screen fish -l
+shell fish
+      '';
+    };
+  };
 
   # FIXME create keys.nix
   # FIXME services/redshift.nix coords
