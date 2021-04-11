@@ -22,6 +22,16 @@
     networking.networkmanager.enable = true;
     networking.hostName = "sabios";
 
+    # Nix
+    nix = {
+      autoOptimiseStore = true;
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 10d";
+      };
+    };
+
     # Localization
     i18n.defaultLocale = "pl_PL.UTF-8";
     console.useXkbConfig = true;
