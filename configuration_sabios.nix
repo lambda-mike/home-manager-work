@@ -76,9 +76,9 @@
       };
     };
 
-    virtualisation.docker = {
-      enable = true;
-      autoPrune.enable = true;
+    system.autoUpgrade = {
+      allowReboot = false;
+      enable = true; 
     };
 
     # users
