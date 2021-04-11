@@ -20,7 +20,7 @@
     networking.useDHCP = false;
     networking.interfaces.wlp2s0.useDHCP = true;
     networking.networkmanager.enable = true;
-    networking.hostName = "sabios";
+    networking.hostName = "kitkowo";
 
     # Nix
     nix = {
