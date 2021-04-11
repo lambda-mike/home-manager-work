@@ -20,6 +20,7 @@
     packages = [
       brave
       gimp
+      git
       htop
       libreoffice
       megasync
@@ -37,7 +38,8 @@
   };
 
   programs = {
-    chromium.enable = true;
+    bash.enable = true;
+    #chromium.enable = true;
   };
 
   # FIXME create keys.nix
