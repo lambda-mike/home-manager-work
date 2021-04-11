@@ -18,7 +18,7 @@
 
     # Networking
     networking.useDHCP = false;
-    networking.interfaces.yours.useDHCP = true;
+    networking.interfaces.wlp2s0.useDHCP = true;
     networking.networkmanager.enable = true;
     networking.hostName = "sabios";
 
