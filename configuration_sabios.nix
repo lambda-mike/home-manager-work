@@ -78,6 +78,7 @@
 
     system.autoUpgrade = {
       allowReboot = false;
+      dates = "monthly";
       enable = true; 
     };
 
