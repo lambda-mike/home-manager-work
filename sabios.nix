@@ -51,7 +51,10 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 '';
     };
-    fish.enable = true;
+    fish {
+      enable = true;
+      shellInit = ''set -g -x fish_key_bindings fish_vi_key_bindings'';
+    };
     #chromium.enable = true;
   };
   xdg = {
@@ -64,6 +67,5 @@ shell fish
     };
   };
 
-  # FIXME create keys.nix
   # FIXME services/redshift.nix coords
 }
