@@ -51,6 +51,7 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 '';
     };
+    fish.enable = true;
     #chromium.enable = true;
   };
 
