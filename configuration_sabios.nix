@@ -68,11 +68,6 @@
           enable = true;
           user = "sabi";
         };
-        #defaultSession = "none+xmonad";
-        lightdm = {
-          enable = true;
-          greeters.pantheon.enable = true;
-        };
       };
     };
 
