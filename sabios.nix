@@ -17,7 +17,7 @@
   home = {
     username = "sabi";
     homeDirectory = "/home/sabi";
-    packages = [
+    packages = with pkgs; [
       brave
       gimp
       git
