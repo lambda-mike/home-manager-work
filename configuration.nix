@@ -84,6 +84,12 @@
       windowManager.xmonad.enable = true;
     };
 
+    system.autoUpgrade = {
+      allowReboot = false;
+      dates = "weekly";
+      enable = true;
+    };
+
     virtualisation.docker = {
       enable = true;
       autoPrune.enable = true;
