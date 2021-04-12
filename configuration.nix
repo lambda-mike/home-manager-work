@@ -33,6 +33,16 @@
     # FIXME Phase1 Set proper name
     networking.hostName = "nixos";
 
+    # Nix
+    nix = {
+      autoOptimiseStore = true;
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 10d";
+      };
+    };
+
     # Localization
     i18n.defaultLocale = "en_US.UTF-8";
     console.useXkbConfig = true;
@@ -46,14 +56,17 @@
     services.locate.enable = true;
     services.openssh = {
       enable = true;
+      forwardX11 = true;
+      passwordAuthentication = false;
       permitRootLogin = "no";
+      startWhenNeeded = true;
     };
     services.thermald.enable = true;
 
     # X
     services.xserver = {
       enable = true;
-      layout = "us";
+      layout = "pl";
       xkbVariant = "colemak";
 
       # Touchpad support
@@ -64,14 +77,11 @@
           enable = true;
           user = "mike";
         };
-        #defaultSession = "none+i3";
         defaultSession = "none+xmonad";
         lightdm.enable = true;
       };
 
-      #windowManager.i3.enable = true;
       windowManager.xmonad.enable = true;
-
     };
 
     virtualisation.docker = {
