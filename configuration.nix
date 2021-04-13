@@ -103,6 +103,7 @@
       group = "users";
       home = "/home/mike";
       isNormalUser = true;
+      openssh.authorizedKeys.keys = [];
       # FIXME Phase2 Uncomment once fish is installed using home-manager
       #shell = /home/mike/.nix-profile/bin/fish;
       uid = 1000;
