@@ -17,7 +17,7 @@ set -g allow-rename off
 bind-key a { set status }
 bind-key C-b { last-window }
 # Add truecolor support
-set-option -ga terminal-overrides ",xterm-256color:Tc"
+set-option -ga terminal-overrides ',*256col*:Tc'
   '';
         historyLimit = 10000;
         keyMode = "vi";
@@ -27,7 +27,7 @@ set-option -ga terminal-overrides ",xterm-256color:Tc"
             extraConfig = "set -g @resurrect-strategy-nvim 'session'";
           }
         ];
-        terminal = "screen-256color";
+        terminal = "xterm-256color";
       };
   };
 }

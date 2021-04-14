@@ -4,6 +4,10 @@
       {
         enable = true;
         settings = {
+          env = {
+            # for NeoVim to display colours correctly
+            TERM = "xterm-256color";
+          };
           window = {
             padding = {
               x = 1;
