@@ -3,7 +3,7 @@ theme:
 
 let bgColour =
       if theme == "green" then
-        "73ba25"
+        "00a489"
       else
         "00558c"; # blue
 in {
