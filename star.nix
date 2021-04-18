@@ -44,6 +44,8 @@ in {
     stateVersion = "20.09";
   };
 
+  fonts.fontconfig.enable = true;
+
   programs = {
     autorandr.enable = true;
     bash.enable = true;

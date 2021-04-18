@@ -14,6 +14,10 @@
   i3lock
   libreoffice
   neofetch
+  (nerdfonts.override { fonts = [
+    "Agave" "CascadiaCode" "Cousine" "Hack" "Hermit" "JetBrainsMono"
+    "Mononoki" "SourceCodePro" "Terminus" "UbuntuMono"
+  ]; })
   ncompress
   nixfmt
   nnn
