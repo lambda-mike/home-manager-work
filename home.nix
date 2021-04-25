@@ -1,5 +1,5 @@
 {
-  work = import ./work.nix;
-  #star = import ./star.nix;
   sabios = import ./sabios.nix;
+  star = import ./star.nix;
+  work = import ./work.nix;
 }
