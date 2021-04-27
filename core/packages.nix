@@ -37,4 +37,5 @@
   xorg.xbacklight
   xorg.xdpyinfo
   xsel
+  zip
 ])
