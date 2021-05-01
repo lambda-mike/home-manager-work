@@ -60,7 +60,23 @@
     set __fish_prompt_status_generation $status_generation
     set -l prompt_status (__fish_print_pipestatus "[" "]" "|" (set_color $fish_color_status) (set_color $bold_flag $fish_color_status) $last_pipestatus)
 
-    echo -n -s (set_color $fish_color_user) "$USER" $normal @ (set_color $color_host) (prompt_hostname) $normal ' ' (set_color $color_cwd) (prompt_pwd) $normal (fish_vcs_prompt) $normal " "$prompt_status $suffix " "
+    set -g __fish_git_prompt_show_informative_status
+    set -g __fish_git_prompt_showcolorhints
+    set -g __fish_git_prompt_showdirtystate
+    set -g __fish_git_prompt_showuntrackedfiles
+    set -g __fish_git_prompt_showupstream
+
+    set -l nix_shell_info (
+        if test -n "$IN_NIX_SHELL"
+            set_color yellow
+            echo -n " <nix-shell>"
+            set_color normal
+        end
+    )
+
+    echo -s (set_color $fish_color_user) "$USER" $normal @ (set_color $color_host) (prompt_hostname) $normal ' ' (set_color $color_cwd) (prompt_pwd) $normal (fish_git_prompt) $nix_shell_info $normal " "$prompt_status " "
+    echo -n -s (set_color blue) "(" (set_color brgreen) $suffix (set_color blue) ") "
+set_color normal
 '';
         fish_right_prompt = ''
       function _colour_normal
