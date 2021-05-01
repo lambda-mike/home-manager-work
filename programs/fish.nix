@@ -74,7 +74,7 @@
         end
     )
 
-    echo -s (set_color $fish_color_user) "$USER" $normal @ (set_color $color_host) (prompt_hostname) $normal ' ' (set_color $color_cwd) (prompt_pwd) $normal (fish_git_prompt) $nix_shell_info $normal " "$prompt_status " "
+    echo -s (set_color $fish_color_user) " $USER" $normal @ (set_color $color_host) (prompt_hostname) $normal ' ' (set_color $color_cwd) (prompt_pwd) $normal (fish_git_prompt) $nix_shell_info $normal " "$prompt_status " "
     echo -n -s (set_color blue) "(" (set_color brgreen) $suffix (set_color blue) ") "
 set_color normal
 '';
