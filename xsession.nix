@@ -10,7 +10,7 @@
   '';
     pointerCursor = {
       package = pkgs.vanilla-dmz;
-      name = "Vanilla-DMZ";
+      name = "Vanilla-DMZ-AA";
     };
   };
 }
