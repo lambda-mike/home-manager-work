@@ -34,6 +34,7 @@
   tokei
   tree
   unzip
+  xfce.terminal # xfce4-terminal
   xorg.xbacklight
   xorg.xdpyinfo
   xsel
