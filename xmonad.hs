@@ -4,7 +4,7 @@ import           Data.List (partition, sortBy)
 import qualified Data.Map.Strict as M
 import qualified DBus as D
 import qualified DBus.Client as D
-import qualified System.Exit as E
+import qualified System.Exit as Ex
 import           XMonad hiding ( (|||) )
 import qualified XMonad.Actions.CycleWS as CWS
 import           XMonad.Actions.OnScreen
@@ -34,6 +34,7 @@ import qualified XMonad.Layout.Tabbed as T
 import           XMonad.Layout.ThreeColumns (ThreeCol(ThreeCol))
 import           XMonad.ManageHook (composeAll)
 import           XMonad.Prompt (XPrompt)
+import qualified XMonad.Prompt.ConfirmPrompt as CP
 import qualified XMonad.Prompt as PT
 import qualified XMonad.StackSet as W
 import           XMonad.Util.EZConfig (additionalKeysP, removeKeysP)
@@ -242,8 +243,9 @@ data ScreenshotMode
   | SMWindow
   | SMRect
 
-myExitXMonad = do
-  io (E.exitWith E.ExitSuccess)
+myExitXMonad =
+  CP.confirmPrompt
+    promptConfig "XMonad exit" $ io (Ex.exitWith Ex.ExitSuccess)
 
 resetLayout =
   setLayout
@@ -326,7 +328,7 @@ instance XPrompt ExitMenuPrompt where
 exitMenuPrompt =
   PT.mkXPrompt
     ExitMenuPrompt
-    exitMenuPromptConfig
+    promptConfig
     (PT.mkComplFunFromList exitOptions)
     exitActionHandler
   where
@@ -334,26 +336,27 @@ exitMenuPrompt =
       [ "e", "l", "h", "s", "r", "S" ]
     exitActionHandler action =
       case action of
-        "e" -> myExitXMonad
+        "e" -> io (Ex.exitWith Ex.ExitSuccess)
         "l" -> lockScreen
         "h" -> lockScreen *> spawn "systemctl hibernate"
         "s" -> lockScreen *> spawn "systemctl suspend"
         "r" -> spawn "systemctl reboot"
         "S" -> spawn "systemctl poweroff"
         _   -> pure ()
-    exitMenuPromptConfig =
-      PT.def
-        { PT.font                  = mkXftFontString 12
-        , PT.bgColor               = colourDark
-        , PT.fgColor               = colourWhite
-        , PT.bgHLight              = colourMainLight
-        , PT.fgHLight              = colourWhite
-        , PT.borderColor           = colourMainLight
-        , PT.promptBorderWidth     = 1
-        , PT.position              = PT.Top
-        , PT.height                = 30
-        , PT.historySize           = 0
-        , PT.autoComplete          = Just 0
-        }
+
+promptConfig =
+  PT.def
+    { PT.font                  = mkXftFontString 12
+    , PT.bgColor               = colourDark
+    , PT.fgColor               = colourWhite
+    , PT.bgHLight              = colourMainLight
+    , PT.fgHLight              = colourWhite
+    , PT.borderColor           = colourMainLight
+    , PT.promptBorderWidth     = 1
+    , PT.position              = PT.Top
+    , PT.height                = 30
+    , PT.historySize           = 0
+    , PT.autoComplete          = Just 0
+    }
 
 -- append xmonad.your_config.hs here
