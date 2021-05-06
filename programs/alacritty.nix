@@ -45,10 +45,10 @@
             };
           };
           font = {
-            normal.family = "LiberationMono";
             #normal.family = "DejaVu Sans Mono";
-            #normal.family = "JetBrains Mono";
             #normal.family = "Hermit";
+            normal.family = "JetBrainsMono Nerd Font Mono";
+            #normal.family = "LiberationMono";
             size = 12;
           };
           # shell.program = "${pkgs.fish}/bin/fish";
