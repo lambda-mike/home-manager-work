@@ -6,9 +6,10 @@ let bgColour =
         "00a489"
       else
         "00558c"; # blue
+    emacsProfiles = import ./emacsProfiles.nix;
 in {
   enable = true;
-  configFile."doom" = {
+  configFile."${emacsProfiles.doom}" = {
     source = ./.doom.d;
     recursive = true;
   };

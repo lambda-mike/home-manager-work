@@ -34,6 +34,7 @@ in {
       # linuxPackages_5_9.virtualboxGuestAdditions
       # virtualbox
     ]);
+    file = import ./homeFile.nix { inherit config; };
     sessionPath = [
       "${config.home.homeDirectory}/.local/bin"
     ];
