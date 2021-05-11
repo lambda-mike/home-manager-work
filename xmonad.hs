@@ -218,7 +218,7 @@ myKeysList =
             SMWindow -> "scrot -u"
             SMRect   -> "scrot -s"
         mvShotCmd =
-          " -e 'mv $f ~/Data/Screenshots/'"
+          " -e 'mv $f ~/screenshots/'"
     callGreenclip = spawn $
       "rofi -modi \"clipboard:greenclip print\" -show clipboard " <>
       "-run-command '{cmd}'"
