@@ -26,6 +26,7 @@
   procs
   python38
   qrencode
+  qview
   ripgrep
   rustup
   scrot
