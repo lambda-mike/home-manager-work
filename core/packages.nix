@@ -13,6 +13,7 @@
   htop
   i3lock
   libreoffice
+  lsof
   neofetch
   (nerdfonts.override { fonts = [
     "Agave" "CascadiaCode" "Cousine" "Hack" "Hermit" "JetBrainsMono"
