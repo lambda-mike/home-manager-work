@@ -23,6 +23,7 @@
   nixfmt
   nnn
   nodePackages.typescript-language-server
+  pciutils
   pinentry
   procs
   python38
