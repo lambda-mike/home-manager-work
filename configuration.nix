@@ -90,16 +90,23 @@
       enable = true;
     };
 
-    virtualisation.docker = {
-      enable = true;
-      autoPrune.enable = true;
+    virtualisation = {
+      docker = {
+        enable = true;
+        autoPrune.enable = true;
+      };
+      virtualbox = {
+        guest.enable = true;
+        guest.x11 = true;
+        host.enable = true;
+      };
     };
 
     # users
     users.users.mike = {
       createHome = true;
       extraGroups =
-        [ "audio" "disk" "docker" "networkmanager" "vboxsf" "video" "wheel" ];
+        [ "audio" "disk" "docker" "networkmanager" "vboxsf" "vboxusers" "video" "wheel" ];
       group = "users";
       home = "/home/mike";
       isNormalUser = true;

@@ -29,9 +29,6 @@ in {
     username = "mike";
     homeDirectory = "/home/mike";
     packages = import ./core/packages.nix { inherit pkgs; } ++ (with pkgs; [
-      # linuxPackages_5_9.virtualbox
-      # linuxPackages_5_9.virtualboxGuestAdditions
-      # virtualbox
     ]);
     sessionPath = [
       "${config.home.homeDirectory}/.local/bin"
