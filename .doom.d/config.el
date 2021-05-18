@@ -61,4 +61,11 @@
 ;; they are implemented.
 
 ;; Required for stable Rust toolchain
-(setq rustic-flycheck-clippy-params "--message-format=json")
+;(setq rustic-flycheck-clippy-params "--message-format=json")
+;; Treats underscores as part of a word when using evil
+(add-hook! 'rustic-mode-hook (modify-syntax-entry ?_ "w"))
+;; Standard rust settings mirrored from my VS Code
+(setq lsp-rust-analyzer-proc-macro-enable t)
+(setq lsp-rust-cfg-test t)
+(setq lsp-rust-all-features t)
+(setq lsp-modeline-diagnostics-enable nil)
