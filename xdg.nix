@@ -1,6 +1,5 @@
 theme:
 { pkgs, config, ... }:
-
 let bgColour =
       if theme == "green" then
         "00a489"
@@ -8,40 +7,41 @@ let bgColour =
         "00558c"; # blue
     emacsProfiles = import ./emacsProfiles.nix;
 in {
-  enable = true;
-  configFile."${emacsProfiles.doom}" = {
-    source = ./.doom.d;
-    recursive = true;
-  };
-  configFile."fehbg" = {
-    executable = true;
-    # FIXME Phase1 Download wallpaper, create symlink in ~
-    text = ''
+  xdg = {
+    enable = true;
+    configFile."${emacsProfiles.doom}" = {
+      source = ./.doom.d;
+      recursive = true;
+    };
+    configFile."fehbg" = {
+      executable = true;
+      # FIXME Phase1 Download wallpaper, create symlink in ~
+      text = ''
       #! /usr/bin/env sh
       ${pkgs.feh}/bin/feh --no-fehbg --bg-fill ${config.home.homeDirectory}/wallpaper
     '';
-  };
-  configFile."lock-screen" = {
-    executable = true;
-    text = ''
+    };
+    configFile."lock-screen" = {
+      executable = true;
+      text = ''
       #! /usr/bin/env sh
       ${pkgs.i3lock}/bin/i3lock -n -c ${bgColour}
     '';
-  };
-  configFile."copy-to-clip" = {
-    executable = true;
-    text = ''
+    };
+    configFile."copy-to-clip" = {
+      executable = true;
+      text = ''
       #! /usr/bin/env sh
       echo "$(pwd)/$1" | xsel -bi
     '';
-    onChange = ''
+      onChange = ''
       #! /usr/bin/env sh
       mkdir -p ${config.home.homeDirectory}/.local/bin
     '';
-    target = ''../.local/bin/copy-to-clip'';
-  };
-  configFile."greenclip.cfg" = {
-    text = ''
+      target = ''../.local/bin/copy-to-clip'';
+    };
+    configFile."greenclip.cfg" = {
+      text = ''
 Config {
 maxHistoryLength = 500,
 historyPath = "~/.cache/greenclip.history",
@@ -53,5 +53,6 @@ trimSpaceFromSelection = True,
 enableImageSupport = True
 }
     '';
+    };
   };
 }

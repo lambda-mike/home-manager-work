@@ -22,6 +22,7 @@ in {
     ./services/gpg-agent.nix
     ./services/redshift.nix
     ./services/screen-locker.nix
+    (import ./xdg.nix theme)
     ./xsession.nix
   ];
 
@@ -66,7 +67,6 @@ in {
   };
 
   services.polybar = import ./services/polybar.nix theme { inherit pkgs lib; };
-  xdg = import ./xdg.nix theme { inherit pkgs config; };
   xsession.windowManager = import ./xmonad.nix theme { inherit pkgs; };
 
   # FIXME create keys.nix
