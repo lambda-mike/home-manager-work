@@ -6,23 +6,24 @@ let
     if theme == "blue" then
       ./polybar_head_blue.config
     else
-    # TODO add green theme
+      # TODO add green theme
       ./polybar_head_blue.config;
   polybarConfig =
     (builtins.readFile polybarHead) + (builtins.readFile ./polybar.config);
 in {
-  extraConfig = polybarConfig;
-  enable = true;
-  package = pkgs.polybar.override {
-    pulseSupport = true;
-  };
-  script = ''
+  services.polybar = {
+    extraConfig = polybarConfig;
+    enable = true;
+    package = pkgs.polybar.override {
+      pulseSupport = true;
+    };
+    script = ''
 #! /usr/bin/env bash
 
 PATH=$PATH:${
-              with pkgs;
-              lib.makeBinPath [ coreutils gnugrep killall xorg.xrandr ]
-            }
+                   with pkgs;
+                   lib.makeBinPath [ coreutils gnugrep killall xorg.xrandr ]
+                 }
 
 # Terminate already running bar instances
 killall -eqw polybar
@@ -42,4 +43,5 @@ done
 
 echo "Polybar launched..."
 '';
+  };
 }

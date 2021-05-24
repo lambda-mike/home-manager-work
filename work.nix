@@ -20,6 +20,7 @@ in {
     ./programs/neovim.nix
     ./programs/tmux.nix
     ./services/gpg-agent.nix
+    (import ./services/polybar.nix theme)
     ./services/redshift.nix
     ./services/screen-locker.nix
     (import ./xdg.nix theme)
@@ -66,7 +67,6 @@ in {
     zathura.enable = true;
   };
 
-  services.polybar = import ./services/polybar.nix theme { inherit pkgs lib; };
   xsession.windowManager = import ./xmonad.nix theme { inherit pkgs; };
 
   # FIXME create keys.nix
