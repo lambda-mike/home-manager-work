@@ -14,6 +14,7 @@ import           XMonad.Actions.OnScreen
   )
 import           XMonad.Actions.SpawnOn (manageSpawn, spawnOn)
 import           XMonad.Actions.Submap (submap)
+import           XMonad.Actions.UpdatePointer (updatePointer)
 import           XMonad.Config.Desktop (desktopConfig)
 import           XMonad.Hooks.ManageDocks (ToggleStruts(..), avoidStruts)
 import           XMonad.Hooks.ManageHelpers (doCenterFloat, isDialog)
@@ -65,7 +66,10 @@ myConfig =
     , focusFollowsMouse  = True
     , handleEventHook    = handleEventHook desktopConfig <+> fullscreenEventHook
     , layoutHook         = myLayout
-    , logHook            = logHook desktopConfig <+> myWorspacesHook
+    , logHook            =
+        logHook desktopConfig <+>
+        myWorspacesHook >>
+        centerPointerWhenSwitchingScreensHook
     , manageHook         =
         myManageHook <+>
         manageSpawn <+>
@@ -80,6 +84,8 @@ myWorkspaces =
 
 myTerminal =
   "alacritty"
+
+centerPointerWhenSwitchingScreensHook = updatePointer (0.5, 0.5) (0, 0)
 
 myWorspacesHook = do
   winset <- gets windowset
