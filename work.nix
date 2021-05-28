@@ -1,6 +1,7 @@
 { pkgs, lib, config, ... }:
 
 let theme = "blue";
+    oldpkgs = ((import ./nix/sources.nix)."nixpkgs-old");
 in {
 
   # The home-manager manual is at:
@@ -27,20 +28,11 @@ in {
     ./xsession.nix
   ];
 
-  nixpkgs.overlays = [
-    (self: super:
-      let oldpkgs = ((import ./nix/sources.nix)."nixpkgs-old");
-      in {
-        haskellPackages.greenclip =
-          (import oldpkgs { inherit super; }).haskellPackages.greenclip;
-      }
-    )
-  ];
-
   home = {
     username = "mike";
     homeDirectory = "/home/mike";
     packages = import ./core/packages.nix { inherit pkgs; } ++ (with pkgs; [
+      (import oldpkgs {}).haskellPackages.greenclip
     ]);
     sessionPath = [
       "${config.home.homeDirectory}/.local/bin"
