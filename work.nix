@@ -27,6 +27,16 @@ in {
     ./xsession.nix
   ];
 
+  nixpkgs.overlays = [
+    (self: super:
+      let oldpkgs = ((import ./nix/sources.nix)."nixpkgs-old");
+      in {
+        haskellPackages.greenclip =
+          (import oldpkgs { inherit super; }).haskellPackages.greenclip;
+      }
+    )
+  ];
+
   home = {
     username = "mike";
     homeDirectory = "/home/mike";
