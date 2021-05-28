@@ -9,7 +9,6 @@
   font-awesome
   gimp
   git-crypt
-  haskellPackages.greenclip
   htop
   i3lock
   libreoffice

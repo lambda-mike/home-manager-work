@@ -53,6 +53,7 @@
     hardware.pulseaudio.enable = true;
 
     # Services
+    services.greenclip.enable = true;
     services.locate.enable = true;
     services.openssh = {
       enable = true;
