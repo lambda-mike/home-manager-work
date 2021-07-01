@@ -54,7 +54,7 @@ in {
     chromium.enable = true;
     direnv = {
       enable = true;
-      enableNixDirenvIntegration = true;
+      nix-direnv.enable = true;
     };
     emacs.enable = true;
     feh.enable = true;
