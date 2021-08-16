@@ -124,6 +124,7 @@
 
     # Pkgs
     environment.systemPackages = with pkgs; [
+      appimage-run
       killall
       lynx
       networkmanagerapplet
