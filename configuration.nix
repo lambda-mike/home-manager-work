@@ -52,6 +52,11 @@
     sound.enable = true;
     hardware.pulseaudio.enable = true;
 
+    # Gaming
+    hardware.pulseaudio.support32Bit = true;
+    hardware.opengl.driSupport32Bit = true;
+    nixpkgs.config.allowUnfree = true;
+
     # Services
     services.greenclip.enable = true;
     services.locate.enable = true;
@@ -122,9 +127,13 @@
       killall
       lynx
       networkmanagerapplet
+      steam-run
       wget
       vim
     ];
+
+    # Gaming
+    programs.steam.enable = true;
 
     nix.extraOptions = ''
       keep-outputs = true
