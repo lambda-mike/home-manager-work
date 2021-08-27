@@ -141,4 +141,15 @@
       keep-derivations = true
     '';
 
+    services.openvpn.servers = {
+      hobby = {
+        autoStart = false;
+        # Remove cipher once the server version is upgraded
+        config = ''
+          cipher BF-CBC
+          config /root/config.ovpn
+        '';
+      };
+    };
+
 }
