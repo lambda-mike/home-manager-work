@@ -62,6 +62,9 @@
     services.locate.enable = true;
     services.openssh = {
       enable = true;
+      extraConfig = ''
+ClientAliveInterval 100
+'';
       forwardX11 = true;
       passwordAuthentication = false;
       permitRootLogin = "no";
