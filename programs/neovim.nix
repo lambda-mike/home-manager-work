@@ -81,8 +81,8 @@ let g:nnn#layout = { 'window': { 'width': 0.5, 'height': 0.7, 'highlight': 'Debu
             plugins = with pkgs.vimPlugins; [
                 lightline-vim
                 rust-vim
-                skim
-                skim-vim
+                #skim
+                #skim-vim
                 typescript-vim
                 vim-fugitive
                 vim-nix
