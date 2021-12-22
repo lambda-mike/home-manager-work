@@ -8,8 +8,8 @@
         redshift = {
           adjustment-method = "randr";
           gamma = 0.8;
-          brightness-day=0.7;
-          brightness-night=0.5;
+          brightness-day=0.85;
+          brightness-night=0.7;
         };
       };
       # FIXME Phase2
