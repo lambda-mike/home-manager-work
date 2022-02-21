@@ -40,7 +40,7 @@ in {
     '';
       target = ''../.local/bin/copy-to-clip'';
     };
-    configFile."greenclip.cfg" = {
+    configFile."greenclip.toml" = {
       text = ''
 [greenclip]
   blacklisted_applications = []
