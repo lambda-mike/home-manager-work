@@ -42,17 +42,17 @@ in {
     };
     configFile."greenclip.cfg" = {
       text = ''
-Config {
-  maxHistoryLength = 500,
-  historyPath = "~/.cache/greenclip.history",
-  staticHistoryPath = "~/.cache/greenclip.staticHistory",
-  imageCachePath = "/tmp/greenclip/",
-  usePrimarySelectionAsInput = False,
-  blacklistedApps = [],
-  trimSpaceFromSelection = True
-}
+[greenclip]
+  blacklisted_applications = []
+  enable_image_support = true
+  history_file = "${config.home.homeDirectory}/.cache/greenclip.history"
+  image_cache_directory = "/tmp/greenclip"
+  max_history_length = 500
+  max_selection_size_bytes = 0
+  static_history = []
+  trim_space_from_selection = true
+  use_primary_selection_as_input = false
     '';
-  # only version 4 or later: enableImageSupport = True
     };
   };
 }
