@@ -50,6 +50,9 @@ in {
   programs = {
     autorandr.enable = true;
     bash.enable = true;
+    bash.sessionVariables = {
+      SHELL = "${pkgs.bash}/bin/bash";
+    };
     bat = {
       enable = true;
       config = { pager = "less -FR"; theme = "1337"; };
