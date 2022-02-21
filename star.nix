@@ -49,9 +49,11 @@ in {
 
   programs = {
     autorandr.enable = true;
-    bash.enable = true;
-    bash.sessionVariables = {
-      SHELL = "${pkgs.bash}/bin/bash";
+    bash = {
+      enable = true;
+      bashrcExtra = ''
+        export SHELL="${pkgs.bash}/bin/bash"
+      '';
     };
     bat = {
       enable = true;
