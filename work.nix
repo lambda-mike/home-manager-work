@@ -64,6 +64,7 @@ in {
     feh.enable = true;
     firefox.enable = true;
     gpg.enable = true;
+    htop.enable = true;
     jq.enable = true;
     rofi = { enable = true; theme = "Arc-Dark"; };
     skim.enable = true;

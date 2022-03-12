@@ -8,7 +8,6 @@
   font-awesome
   gimp
   git-crypt
-  htop
   i3lock
   libreoffice
   lsof
