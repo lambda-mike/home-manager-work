@@ -44,39 +44,8 @@ in {
 
   fonts.fontconfig.enable = true;
 
-  programs = {
-    autorandr.enable = true;
-    bat = {
-      enable = true;
-      config = { pager = "less -FR"; theme = "1337"; };
-    };
-    bottom.enable = true;
-    broot.enable = true;
-    chromium.enable = true;
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-    };
-    emacs.enable = true;
-    exa = {
-      enable = true;
-      enableAliases = true;
-    };
-    feh.enable = true;
-    firefox.enable = true;
-    gpg.enable = true;
-    htop.enable = true;
-    jq.enable = true;
-    rofi = { enable = true; theme = "Arc-Dark"; };
-    skim.enable = true;
-    vscode.enable = true;
-    zathura.enable = true;
-    zoxide = {
-      enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableZshIntegration = false;
-    };
+  programs = import ./core/programs.nix { inherit pkgs; } // {
+    # Overwrite programs here
   };
 
   xsession.windowManager = import ./xmonad.nix theme { inherit pkgs; };
