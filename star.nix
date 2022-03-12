@@ -59,6 +59,7 @@ in {
       enable = true;
       config = { pager = "less -FR"; theme = "1337"; };
     };
+    bottom.enable = true;
     broot.enable = true;
     chromium.enable = true;
     direnv = {
