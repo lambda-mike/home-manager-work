@@ -66,6 +66,10 @@ in {
       nix-direnv.enable = true;
     };
     emacs.enable = true;
+    exa = {
+      enable = true;
+      enableAliases = true;
+    };
     feh.enable = true;
     firefox.enable = true;
     gpg.enable = true;

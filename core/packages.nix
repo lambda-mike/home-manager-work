@@ -3,7 +3,6 @@
   brave
   docker
   du-dust
-  exa
   fd
   file
   font-awesome
