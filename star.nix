@@ -74,6 +74,12 @@ in {
     skim.enable = true;
     vscode.enable = true;
     zathura.enable = true;
+    zoxide = {
+      enable = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      enableZshIntegration = false;
+    };
   };
 
   xsession.windowManager = import ./xmonad.nix theme { inherit pkgs; };
