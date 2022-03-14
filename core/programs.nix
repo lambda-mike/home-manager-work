@@ -17,7 +17,8 @@
   chromium.enable = true;
   direnv = {
     enable = true;
-    enableNixDirenvIntegration = true;
+    enableZshIntegration = false;
+    nix-direnv.enable = true;
   };
   emacs.enable = true;
   exa = {
