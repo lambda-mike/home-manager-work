@@ -26,7 +26,7 @@
       megasync
       obs-studio
       screen
-      skype
+      skypeforlinux
       tree
       unzip
       zoom-us
