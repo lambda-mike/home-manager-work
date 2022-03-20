@@ -33,6 +33,7 @@ in {
     username = "mike";
     homeDirectory = "/home/mike";
     packages = import ./core/packages.nix { inherit pkgs; } ++ (with pkgs; [
+      pcloud
     ]);
     file = import ./homeFile.nix { inherit config; };
     sessionPath = [
