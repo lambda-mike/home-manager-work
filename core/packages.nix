@@ -1,5 +1,6 @@
 { pkgs, ... }:
 (with pkgs; [
+  appimage-run
   brave
   docker
   du-dust

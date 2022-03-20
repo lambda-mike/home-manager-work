@@ -57,6 +57,11 @@
     hardware.opengl.driSupport32Bit = true;
     nixpkgs.config.allowUnfree = true;
 
+    # Dygma Raise
+    services.udev.extraRules =''
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2201", GROUP="users", MODE="0666"
+'';
+
     # Services
     services.greenclip.enable = true;
     services.locate.enable = true;
