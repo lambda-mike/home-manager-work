@@ -15,7 +15,7 @@
   neofetch
   (nerdfonts.override { fonts = [
     "Agave" "CascadiaCode" "Cousine" "Hack" "Hermit" "JetBrainsMono"
-    "Mononoki" "SourceCodePro" "Terminus" "UbuntuMono"
+    "Mononoki" "SourceCodePro" "Terminus" "UbuntuMono" "Monofur" "ShareTechMono" "VictorMono" "Iosevka" "DaddyTimeMono"
   ]; })
   ncompress
   nixfmt
