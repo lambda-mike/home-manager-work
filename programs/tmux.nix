@@ -13,6 +13,7 @@ set -g status-keys vi
 set -g status-position top
 # Programs won't rename window name
 set -g allow-rename off
+set -g mouse on
 # Toggle status bar
 bind-key a { set status }
 bind-key C-b { last-window }
