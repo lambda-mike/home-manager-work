@@ -141,6 +141,7 @@ ClientAliveInterval 100
       vim
     ];
 
+    programs.command-not-found.enable = true;
     # Gaming
     programs.steam.enable = true;
 
