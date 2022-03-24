@@ -2,6 +2,8 @@
 (with pkgs; [
   appimage-run
   brave
+  cmus
+  dasel
   docker
   du-dust
   fd
