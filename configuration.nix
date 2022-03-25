@@ -132,6 +132,7 @@ ClientAliveInterval 100
 
     # Pkgs
     environment.systemPackages = with pkgs; [
+      android-studio
       appimage-run
       killall
       lynx
@@ -141,6 +142,8 @@ ClientAliveInterval 100
       vim
     ];
 
+    # Android
+    programs.adb.enable = true;
     programs.command-not-found.enable = true;
     # Gaming
     programs.steam.enable = true;
