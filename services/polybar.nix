@@ -5,8 +5,9 @@ let
   polybarHead =
     if theme == "blue" then
       ./polybar_head_blue.config
+    else if theme == "green" then
+      ./polybar_head_green.config
     else
-      # TODO add green theme
       ./polybar_head_blue.config;
   polybarConfig =
     (builtins.readFile polybarHead) + (builtins.readFile ./polybar.config);
