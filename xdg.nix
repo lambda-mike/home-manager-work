@@ -1,6 +1,6 @@
 theme:
 { pkgs, config, ... }:
-let bgColour = theme.colours.lock;
+let bgColour = builtins.substring 1 6 theme.colours.lock;
     emacsProfiles = import ./emacsProfiles.nix;
 in {
   xdg = {
