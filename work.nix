@@ -1,6 +1,6 @@
 { pkgs, lib, config, ... }:
 
-let theme = "blue";
+let theme = (import ./themes.nix).blue;
 in {
 
   # The home-manager manual is at:

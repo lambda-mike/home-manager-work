@@ -1,7 +1,6 @@
 { pkgs, lib, config, ... }:
 
-# blue or green
-let theme = "green";
+let theme = (import ./themes.nix).green;
 in {
 
   # The home-manager manual is at:
@@ -24,7 +23,6 @@ in {
     (import ./services/polybar.nix theme)
     ./services/redshift.nix
     ./services/screen-locker.nix
-    # TODO investigate if theme is green inside
     (import ./xdg.nix theme)
     ./xsession.nix
   ];

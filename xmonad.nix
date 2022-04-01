@@ -1,16 +1,13 @@
 theme:
 { pkgs, ... }:
 
-# TODO pass font and replace in theme file
 let xmonadTheme =
-      if theme == "blue" then
-        ./xmonad.blue.hs
-      else if theme == "green" then
-        ./xmonad.green.hs
-      else
-        ./xmonad.blue.hs;
+    builtins.replaceStrings
+      [ "##MAIN_LIGHT##" "##MAIN_DARK##" "##FONT##" ]
+      [ theme.colours.mainLight theme.colours.mainDark theme.font ]
+      (builtins.readFile ./xmonad.theme.hs);
     xmonadConfig =
-      (builtins.readFile ./xmonad.hs) + (builtins.readFile xmonadTheme);
+      (builtins.readFile ./xmonad.hs) + xmonadTheme;
 in {
   xmonad = {
     enable = true;

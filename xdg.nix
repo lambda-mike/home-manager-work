@@ -1,10 +1,6 @@
 theme:
 { pkgs, config, ... }:
-let bgColour =
-      if theme == "green" then
-        "00a489"
-      else
-        "00558c"; # blue
+let bgColour = theme.colours.lock;
     emacsProfiles = import ./emacsProfiles.nix;
 in {
   xdg = {

@@ -2,11 +2,11 @@
 -- Leave first line blank
 
 -- Colours
-colourMainLight = "#00a489"
-colourMainDark = "#007e69"
+colourMainLight = "##MAIN_LIGHT##"
+colourMainDark = "##MAIN_DARK##"
 colourDark = "#2f343f"
 colourWhite = "#fefefe"
 colourGrey = "#bebebe"
 
 -- Font
-myFont = "CaskaydiaCove Nerd Font"
+myFont = "##FONT##"

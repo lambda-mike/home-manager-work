@@ -3,14 +3,12 @@ theme:
 
 let
   polybarHead =
-    if theme == "blue" then
-      ./polybar_head_blue.config
-    else if theme == "green" then
-      ./polybar_head_green.config
-    else
-      ./polybar_head_blue.config;
+    builtins.replaceStrings
+      [ "##MAIN_COLOUR##" "##FONT##" ]
+      [ theme.colours.mainLight theme.font ]
+      (builtins.readFile ./polybar_head.config);
   polybarConfig =
-    (builtins.readFile polybarHead) + (builtins.readFile ./polybar.config);
+    polybarHead + (builtins.readFile ./polybar.config);
 in {
   services.polybar = {
     extraConfig = polybarConfig;
