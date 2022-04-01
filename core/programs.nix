@@ -1,3 +1,4 @@
+theme:
 { pkgs, ... }:
 
 {
@@ -30,7 +31,11 @@
   gpg.enable = true;
   htop.enable = true;
   jq.enable = true;
-  rofi = { enable = true; theme = "Arc-Dark"; };
+  rofi = {
+    enable = true;
+    font = "${theme.font} 16";
+    theme = "Arc-Dark";
+  };
   skim.enable = true;
   vscode.enable = true;
   zathura.enable = true;

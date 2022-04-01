@@ -46,7 +46,7 @@ in {
 
   fonts.fontconfig.enable = true;
 
-  programs = import ./core/programs.nix { inherit pkgs; } // {
+  programs = import ./core/programs.nix theme { inherit pkgs; } // {
     # Overwrite programs here
   };
 
