@@ -7,6 +7,7 @@
       lock = mainDark;
     };
     font = "CaskaydiaCove Nerd Font";
+    rofi = "Arc-Dark";
   };
   green = {
     name = "green";
@@ -16,5 +17,6 @@
       lock = mainLight;
     };
     font = "CaskaydiaCove Nerd Font";
+    rofi = "lb";
   };
 }

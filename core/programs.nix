@@ -34,7 +34,7 @@ theme:
   rofi = {
     enable = true;
     font = "${theme.font} 16";
-    theme = "Arc-Dark";
+    theme = theme.rofi;
   };
   skim.enable = true;
   vscode.enable = true;
