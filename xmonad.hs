@@ -225,13 +225,16 @@ myKeysList =
             SMRect   -> "scrot -s"
         mvShotCmd =
           " -e 'mv $f ~/screenshots/'"
+    rofiFontSize = 16
+    rofiFont = "-font \"" <> myFont <> " " <> show rofiFontSize <> "\""
     callGreenclip = spawn $
-      "rofi -modi \"clipboard:greenclip print\" -show clipboard " <>
+      "rofi " <> rofiFont <>
+      " -modi \"clipboard:greenclip print\" -show clipboard " <>
       "-run-command '{cmd}'"
     rofiRun = spawn $
-      "rofi -width 300 -lines 5 -show run"
+      "rofi " <> rofiFont <> " -width 300 -lines 5 -show run"
     rofiWindow = spawn $
-      "rofi -width 50 -lines 11 -show window"
+      "rofi " <> rofiFont <> " -width 50 -lines 11 -show window"
 
 myKeysToDelete =
   [ "M-q"
