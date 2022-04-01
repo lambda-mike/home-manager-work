@@ -6,6 +6,7 @@
   dasel
   docker
   du-dust
+  duf
   fd
   file
   font-awesome
