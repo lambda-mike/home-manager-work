@@ -25,6 +25,7 @@
       libreoffice
       megasync
       obs-studio
+      pcloud
       screen
       skypeforlinux
       tree
