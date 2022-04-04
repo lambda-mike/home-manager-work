@@ -33,7 +33,7 @@ theme:
   jq.enable = true;
   rofi = {
     enable = true;
-    font = "${theme.font} 16";
+    font = "${theme.font} 14";
     theme = theme.rofi;
   };
   skim.enable = true;
