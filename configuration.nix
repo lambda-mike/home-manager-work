@@ -75,6 +75,7 @@ ClientAliveInterval 100
       permitRootLogin = "no";
       startWhenNeeded = true;
     };
+    services.vnstat.enable = true;
     services.thermald.enable = true;
 
     # X
