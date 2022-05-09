@@ -1,4 +1,4 @@
-name: "CI"
+name: "work"
 on:
   pull_request:
   push:
@@ -14,4 +14,3 @@ jobs:
         export NIXPKGS_ALLOW_UNFREE=1
         echo '[]' > keys.nix
         nix-shell --run 'home-manager build -v -A work'
-        nix-shell --run 'home-manager build -v -A sabios'
