@@ -335,7 +335,7 @@ exitMenuPrompt =
   PT.mkXPrompt
     ExitMenuPrompt
     promptConfig
-    (PT.mkComplFunFromList exitOptions)
+    (PT.mkComplFunFromList promptConfig exitOptions)
     exitActionHandler
   where
     exitOptions =
