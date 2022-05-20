@@ -36,6 +36,10 @@
     # Nix
     nix = {
       autoOptimiseStore = true;
+      nix.extraOptions = ''
+        keep-outputs = true
+        keep-derivations = true
+      '';
       gc = {
         automatic = true;
         dates = "weekly";
