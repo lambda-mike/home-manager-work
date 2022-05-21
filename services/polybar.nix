@@ -1,5 +1,5 @@
 theme:
-{ pkgs, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   polybarHead =
@@ -9,6 +9,7 @@ let
       (builtins.readFile ./polybar_head.config);
   polybarConfig =
     polybarHead + (builtins.readFile ./polybar.config);
+  polybarConfigPath = "${config.xdg.configHome}/polybar/config";
 in {
   services.polybar = {
     extraConfig = polybarConfig;
@@ -50,7 +51,7 @@ if isVertical "$mprim"; then
 else
   bar="mainbar-xmonad"
 fi
-MONITOR="$mprim" polybar --reload "$bar" 2>&1 | tee $log0 & disown
+MONITOR="$mprim" polybar --reload --config=${polybarConfigPath} "$bar" 2>&1 | tee $log0 & disown
 
 # Launch polybar on other monitors
 for m in $(xrandr --query | grep " connected" | grep -v "primary" | cut -d" " -f1); do
@@ -61,7 +62,7 @@ for m in $(xrandr --query | grep " connected" | grep -v "primary" | cut -d" " -f
   else
     bar="mainbar-xmonad"
   fi
-  MONITOR="$m" polybar --reload "$bar" 2>&1 | tee $logm & disown
+  MONITOR="$m" polybar --reload --config=${polybarConfigPath} "$bar" 2>&1 | tee $logm & disown
 done
 
 echo "Polybar launched..."
