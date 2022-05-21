@@ -38,6 +38,7 @@ in {
     ./services/screen-locker.nix
     (import ./xdg.nix theme)
     ./xsession.nix
+    ./cursor.nix
   ];
 
   nixpkgs.overlays = [
