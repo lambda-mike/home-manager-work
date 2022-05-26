@@ -116,6 +116,8 @@ ClientAliveInterval 100
       docker = {
         enable = true;
         autoPrune.enable = true;
+        # This is needed because Docker cannot resolve localhost DNS lookup
+        extraOptions = "--dns 9.9.9.9";
       };
       virtualbox = {
         guest.enable = true;
