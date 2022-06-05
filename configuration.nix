@@ -157,6 +157,7 @@ ClientAliveInterval 100
     programs.command-not-found.enable = true;
     # Gaming
     programs.steam.enable = true;
+    programs.mosh.enable = true;
 
     nix.extraOptions = ''
       keep-outputs = true
