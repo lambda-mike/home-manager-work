@@ -23,6 +23,18 @@
         "url": "https://github.com/nmattia/niv/archive/82e5cd1ad3c387863f0545d7591512e76ab0fc41.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "nixpkgs": {
+        "branch": "nixos-22.05",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d9794b04bffb468b886c553557489977ae5f4c65",
+        "sha256": "1l41dhs1cmwx7q7s38d9dr9zyijfm6bhmv41zr7rsg94yplbr0f1",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/d9794b04bffb468b886c553557489977ae5f4c65.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nixpkgs-unstable": {
         "branch": "nixpkgs-unstable",
         "description": "Nix Packages collection",
