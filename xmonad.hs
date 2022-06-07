@@ -119,12 +119,12 @@ myManageHook = composeAll . concat $
 myStartupHook = do
   setWMName "LG3D"
   -- Make sure polybar reads data from XMonad correctly
-  spawn "polybar-msg cmd restart"
   winset <- gets windowset
   let isFreshStartup = W.allWindows winset == []
   when isFreshStartup $ freshStartupHook winset
   where
     freshStartupHook winset = do
+      spawn "polybar-msg cmd restart"
       setTabbedLayout
       let visibleScreens = W.visible winset
       let workspace5Tag = myWorkspaces !! 4
