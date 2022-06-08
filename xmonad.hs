@@ -124,7 +124,7 @@ myStartupHook = do
   when isFreshStartup $ freshStartupHook winset
   where
     freshStartupHook winset = do
-      spawn "polybar-msg cmd restart"
+      spawn "systemctl --user restart polybar"
       setTabbedLayout
       let visibleScreens = W.visible winset
       let workspace5Tag = myWorkspaces !! 4
