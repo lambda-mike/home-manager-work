@@ -51,5 +51,7 @@ in {
     # Overwrite programs here
   };
 
+  services.dropbox.enable = true;
+
   xsession.windowManager = import ./xmonad.nix theme { inherit pkgs; };
 }
