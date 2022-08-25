@@ -29,6 +29,21 @@ theme:
   feh.enable = true;
   firefox.enable = true;
   gpg.enable = true;
+  helix = {
+    enable = true;
+    settings = {
+      editor = {
+        line-number = "relative";
+        rulers = [ 80 ];
+      };
+      lsp.display-messages = true;
+      keys.insert = {
+        j = {
+          j = "normal_mode";
+        };
+      };
+    };
+  };
   htop.enable = true;
   jq.enable = true;
   rofi = {
