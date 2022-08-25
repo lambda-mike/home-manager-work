@@ -59,6 +59,7 @@ in {
   skim.enable = true;
   vscode.enable = true;
   zathura.enable = true;
+  zellij.enable = true;
   zoxide = {
     enable = true;
     enableBashIntegration = true;
