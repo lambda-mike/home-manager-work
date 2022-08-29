@@ -85,6 +85,11 @@ ClientAliveInterval 100
     services.printing.enable = true;
     services.printing.drivers = [ pkgs.brlaser pkgs.brgenml1lpr ];
 
+    # Scanner
+    hardware.sane.enable = true;
+    hardware.sane.brscan4.enable = true;
+    hardware.bluetooth.enable = true;
+
     # X
     services.xserver = {
       enable = true;
