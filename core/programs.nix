@@ -41,11 +41,16 @@ in {
         line-number = "relative";
         lsp.display-messages = true;
         rulers = [ 80 ];
+        scrolloff = 0;
       };
       keys.insert = {
         j = {
           j = "normal_mode";
         };
+        "C-g" = "esc";
+      };
+      keys.normal = {
+        "C-g" = "esc";
       };
     };
   };
