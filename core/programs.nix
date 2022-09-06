@@ -37,10 +37,14 @@ in {
     enable = true;
     package = pkgsUnstable.helix;
     settings = {
+      theme = "catppuccin_mocha";
       editor = {
+        color-modes = true;
+        cursorline = true;
+        indent-guides.render = true;
         line-number = "relative";
         lsp.display-messages = true;
-        rulers = [ 80 ];
+        rulers = "[ 80 ]";
         scrolloff = 0;
       };
       keys.insert = {
