@@ -47,14 +47,13 @@ in {
         rulers = [ 80 ];
         scrolloff = 0;
       };
-      keys.insert = {
-        j = {
-          j = "normal_mode";
+      keys = {
+        insert = {
+          j.j = "normal_mode";
         };
-        "C-g" = "esc";
-      };
-      keys.normal = {
-        "C-g" = "esc";
+        normal = {
+          space.q = ":q";
+        };
       };
     };
   };
