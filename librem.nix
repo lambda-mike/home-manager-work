@@ -1,9 +1,9 @@
 { pkgs, lib, config, ... }:
 
-let
-  sources = import ./nix/sources.nix;
-  nixpkgsUnstable = sources."nixpkgs-unstable";
-  pkgsUnstable = import nixpkgsUnstable {};
+let theme = (import ./themes.nix).blue;
+    sources = import ./nix/sources.nix;
+    nixpkgsUnstable = sources."nixpkgs-unstable";
+    pkgsUnstable = import nixpkgsUnstable {};
 in {
 
   # The home-manager manual is at:
@@ -32,30 +32,6 @@ in {
   };
 
   programs = {
-    helix = {
-      enable = true;
-      package = pkgsUnstable.helix;
-      settings = {
-        theme = "catppuccin_mocha";
-        editor = {
-          color-modes = true;
-          cursorline = true;
-          indent-guides.render = true;
-          line-number = "relative";
-          lsp.display-messages = true;
-          rulers = [ 80 ];
-          scrolloff = 0;
-        };
-        keys.insert = {
-          j = {
-            j = "normal_mode";
-          };
-          "C-g" = "esc";
-        };
-        keys.normal = {
-          "C-g" = "esc";
-        };
-      };
-    };
+    helix = (import ./core/programs.nix theme { inherit pkgs; }).helix;
   };
 }
