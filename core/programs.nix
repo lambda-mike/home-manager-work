@@ -46,6 +46,7 @@ in {
         lsp.display-messages = true;
         rulers = [ 80 ];
         scrolloff = 0;
+        statusline.right = [ "position-percentage" "diagnostics" "selections" "position" "file-encoding" ];
       };
       keys = {
         insert = {
