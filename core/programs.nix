@@ -54,6 +54,9 @@ in {
         };
         normal = {
           space.q = ":q";
+          "H" = "goto_window_top";
+          "M" = "goto_window_center";
+          "L" = "goto_window_bottom";
         };
       };
     };
