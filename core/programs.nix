@@ -41,12 +41,14 @@ in {
       editor = {
         color-modes = true;
         cursorline = true;
+        file-picker.hidden = false;
         indent-guides.render = true;
         line-number = "relative";
         lsp.display-messages = true;
         rulers = [ 80 ];
         scrolloff = 0;
         statusline.right = [ "position-percentage" "diagnostics" "selections" "position" "file-encoding" ];
+        whitespace.render = "all";
       };
       keys = {
         insert = {
