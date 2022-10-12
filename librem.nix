@@ -21,9 +21,7 @@ in {
   home = {
     username = "mike";
     homeDirectory = "/home/mike";
-    packages = [
-      pkgsUnstable.leftwm
-    ];
+    packages = [ ];
     sessionPath = [
       "${config.home.homeDirectory}/.local/bin"
     ];
