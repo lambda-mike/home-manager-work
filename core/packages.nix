@@ -12,6 +12,7 @@
   font-awesome
   gimp
   git-crypt
+  gnome.simple-scan
   i3lock
   libreoffice
   lsof
