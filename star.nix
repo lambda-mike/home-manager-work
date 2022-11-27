@@ -40,7 +40,7 @@ in {
     ];
     sessionVariables = {
       # Other env vars here cause issues during fish shell startup
-      EDITOR = "nvim";
+      EDITOR = "hx";
     };
     stateVersion = "20.09";
   };
