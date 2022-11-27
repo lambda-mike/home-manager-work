@@ -10,8 +10,7 @@ in pkgs.mkShell rec {
 
   name = "home-manager-shell";
 
-  buildInputs = with pkgs; [
-    pkgs.niv
+  buildInputs = [
     (import sources.home-manager { inherit pkgs; }).home-manager
   ];
 
