@@ -32,6 +32,7 @@
   qrencode
   qview
   ripgrep
+  rnix-lsp
   rustup
   scrot
   screen
