@@ -1,9 +1,6 @@
 { pkgs, lib, config, ... }:
 
 let theme = (import ./themes.nix).blue;
-    sources = import ./nix/sources.nix;
-    nixpkgsUnstable = sources."nixpkgs-unstable";
-    pkgsUnstable = import nixpkgsUnstable {};
 in {
 
   # The home-manager manual is at:
