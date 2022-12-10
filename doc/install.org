@@ -34,7 +34,8 @@ systemctl restart wpa_supplicant.service
 
 Use =cgdisk= or =gdisk= for UEFI, =cfdisk= or =fdisk= for BIOS.
 
-*** Partitions
+*** LVM
+**** Partitions
 
 - 1MB empty space
 - EFI type for boot
@@ -45,14 +46,14 @@ Use =cgdisk= or =gdisk= for UEFI, =cfdisk= or =fdisk= for BIOS.
   format as LVM
   hex code: *8e00*
 
-*** Encryption
+**** Encryption
 
 #+begin_example shell
 cryptsetup luksFormat $LVM_PARTITION
 cryptsetup luksOpen $LVM_PARTITION nixos-luks
 #+end_example
 
-*** LVM partitioning
+**** LVM partitioning
 
 #+begin_example shell
 pvcreate /dev/mapper/nixos-luks
@@ -66,7 +67,7 @@ lvcreate -n root nixos-vg -L 125G
 lvcreate -n data nixos-vg -l 100%FREE
 #+end_example
 
-*** Formatting
+**** Formatting
 
 #+begin_example shell
 mkswap -L swap /dev/nixos-vg/swap
@@ -80,7 +81,7 @@ mkfs.ext4 -L nixos /dev/nixos-vg/root
 mkfs.ext4 -L data /dev/nixos-vg/data
 #+end_example
 
-*** Mounting
+**** Mounting
 
 #+begin_example shell
 mount /dev/disk/by-label/nixos /mnt
@@ -94,37 +95,123 @@ mkdir -p /mnt/mnt/data
 mount /dev/nixos-vg/data /mnt/mnt/data 
 #+end_example
 
+*** Btrfs
+Compression
+lzo - the fastest
+zstd - the best rates
+Minis - zstd:1 -m dup -d dup
+StarLite - lzo -m dup -d single
+
+**** Partitions
+
+- 1MB empty space
+- EFI type for boot
+  *512MB* first partition
+  format as *vfat* = fat32 if a new partition
+  hex code: *ef00*
+- Linux for the rest
+  format as Linux
+  hex code: *8300*
+
+**** Encryption
+
+#+begin_example shell
+cryptsetup luksFormat $PARTITION
+cryptsetup luksOpen $PARTITION nixos-luks
+cryptsetup luksHeaderBackup $PARTITION --header-backup-file /path/to/backup-file
+# Restore LUKS header
+cryptsetup luksHeaderRestore $PARTITION --header-backup-file /path/to/backup-file
+#+end_example
+
+**** Formatting
+
+#+begin_example shell
+mkfs.fat -F 32 -n boot /dev/sda2 # boot partition (EFI)
+
+mkfs.btrfs --metadata dup --data dup --label nixos /dev/mapper/nixos-luks
+mkdir -p /mnt
+mount /dev/mapper/nixos-luks /mnt
+btrfs subvolume create /mnt/@
+@ = /
+@nix = /nix
+@home = /home
+@data = /data
+@swap = /swap
+@snapshots = /snapshots
+umount /mnt
+#+end_example
+
+**** Swap
+#+begin_example shell
+#Since version 6.1 it’s possible to create the swapfile in a single command (except the activation):
+btrfs filesystem mkswapfile swapfile
+swapon swapfile
+
+mkdir -p /mnt/swap
+mount -o subvol=@swap /dev/mapper/nixos-luks /mnt/swap
+truncate -s 0 /mnt/swap/swapfile
+chattr +C /mnt/swap/swapfile
+btrfs property set /mnt/swap/swapfile compression none
+dd if=/dev/zero of=/mnt/swap/swapfile bs=1M count=16384 #8192
+chmod 0600 /mnt/swap/swapfile
+mkswap /mnt/swap/swapfile
+#+end_example
+
+Add to *configuration.nix*:
+=swapDevices = [ { device = "/swap/swapfile"; } ];=
+
+**** Mounting
+#+begin_example shell
+mkdir /mnt/boot
+mount /dev/sda2 /mnt/boot
+
+mount -o compress=zstd:1,subvol=@ /dev/mapper/nixos-luks /mnt
+mkdir /mnt/{home,nix,data,swap,snaphsots}
+mount -o compress=zstd:1,noatime,subvol=@nix /dev/sdX2 /mnt/nix
+mount -o compress=zstd:1,noatime,subvol=@home /dev/sdX2 /mnt/home
+mount -o compress=zstd:1,noatime,subvol=@data /dev/sdX2 /mnt/home/data
+mount -o compress=zstd:1,noatime,subvol=@snaphsots /dev/sdX2 /mnt/snapshots
+#+end_example
+
 ** Configuration
 
 #+begin_example shell
-nixos-generate-config --root /mnt
-vim /mnt/etc/nixos/configuration.nix `
+nixos-generate-config --root --show-hardware-config /mnt
+vim /mnt/etc/nixos/configuration.nix
 #+end_example
 
 #+begin_example nix
 boot.initrd.luks.devices = {
   root = {
     device = "/dev/nvme0n1p2"; # or by uuid better?
-    preLVM = true;
   };
 };
 services.nixosManual.showManual = true; # VT 8`
-#+end_example
 
+# btrfs subvolumes
+fileSystems = {
+  "/".options = [ "compress=zstd:1" "noatime" ];
+  "/nix".options = [ "compress=zstd:1" "noatime" ];
+  "/home".options = [ "compress=zstd:1" "noatime" ];
+  "/home/data".options = [ "compress=zstd:1" "noatime" ];
+  "/snapshots".options = [ "compress=zstd:1" "noatime" ];
+  "/swap".options = [ "noatime" ];
+};
+#+end_example
 
 =nixos-install=
 
 =reboot=
 
 #+begin_example shell
-# useradd -c 'Mike' -m mike #only if not configured in configuration.nix
+useradd -c 'Mike' -m mike #only if not configured in configuration.nix
 passwd mike
 #+end_example
 
 ** Troubleshooting
 
 #+begin_example shell
-cryptsetup luksOpen $LVM_PARTITION nixos-enc
+cryptsetup luksOpen $PARTITION nixos-luks
 lvscan vgchange -ay
 mount /dev/nixos-vg/root /mnt
 #+end_example

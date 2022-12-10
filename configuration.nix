@@ -26,6 +26,22 @@
       };
     };
 
+    # FIXME Phase1 Set proper mount point options
+    # Filesystem
+    fileSystems = {
+      "/".options = [ "compress=zstd:1" "noatime" ];
+      "/nix".options = [ "compress=zstd:1" "noatime" ];
+      "/home".options = [ "compress=zstd:1" "noatime" ];
+      "/home/data".options = [ "compress=zstd:1" "noatime" ];
+      "/snapshots".options = [ "compress=zstd:1" "noatime" ];
+      "/swap".options = [ "noatime" ];
+    };
+    swapDevices = [ { device = "/swap/swapfile"; } ];
+    services.btrfs.autoScrub = {
+      enable = true;
+      fileSystems = [ "/" ];
+    };
+
     # Networking
     networking.useDHCP = false;
     networking.interfaces.yours.useDHCP = true;
