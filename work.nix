@@ -1,19 +1,6 @@
 { pkgs, lib, config, ... }:
 
 let theme = (import ./themes.nix).blue;
-    # Use direnv 2.31.0
-    direnvOverlay = final: prev: {
-      direnv = prev.direnv.overrideAttrs (old: rec {
-        version = "2.31.0";
-        src = prev.fetchFromGitHub {
-          owner = "direnv";
-          repo = "direnv";
-          rev = "v${version}";
-          sha256 = "sha256-s3IzckePNjr8Bo4kDXj3/WJgybirvtBd9hW2+eWPorA=";
-        };
-        vendorSha256 = "sha256-YhgQUl9fdictEtz6J88vEzznGd8Ipeb9AYo/p1ZLz5k=";
-      });
-    };
 in {
 
   # The home-manager manual is at:
@@ -41,9 +28,7 @@ in {
     ./cursor.nix
   ];
 
-  nixpkgs.overlays = [
-    direnvOverlay
-  ];
+  nixpkgs.overlays = [ ];
 
   home = {
     username = "mike";
