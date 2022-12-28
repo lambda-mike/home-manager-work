@@ -96,10 +96,15 @@ mount /dev/nixos-vg/data /mnt/mnt/data
 #+end_example
 
 *** Btrfs
+
 Compression
+
 lzo - the fastest
+
 zstd - the best rates
+
 Minis - zstd:1 -m dup -d dup
+
 StarLite - lzo -m dup -d single
 
 **** Partitions
