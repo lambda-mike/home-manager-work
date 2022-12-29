@@ -97,6 +97,8 @@ ClientAliveInterval 100
     };
     services.vnstat.enable = true;
     services.thermald.enable = true;
+    # udisksctl
+    services.udisks2.enable = true;
     # Printing
     services.printing.enable = true;
     services.printing.drivers = [ pkgs.brlaser pkgs.brgenml1lpr ];
