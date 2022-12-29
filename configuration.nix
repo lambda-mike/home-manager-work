@@ -157,7 +157,9 @@ ClientAliveInterval 100
       group = "users";
       home = "/home/mike";
       isNormalUser = true;
-      openssh.authorizedKeys.keys = [];
+      openssh.authorizedKeys.keys = [
+        ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIH0uiT3vy0DVxDHI82v1EW/NxteksHexFcKdXHLcc+L nixos@Arrakis''
+      ];
       # FIXME Phase2 Uncomment once fish is installed using home-manager
       #shell = /home/mike/.nix-profile/bin/fish;
       uid = 1000;
