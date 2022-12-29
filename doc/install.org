@@ -103,6 +103,8 @@ lzo - the fastest
 
 zstd - the best rates
 
+=--data dup= does NOT support swapfiles yet
+
 Minis - zstd:1 -m dup -d dup
 
 StarLite - lzo -m dup -d single
@@ -133,7 +135,7 @@ cryptsetup luksHeaderRestore $PARTITION --header-backup-file /path/to/backup-fil
 #+begin_example shell
 mkfs.fat -F 32 -n boot /dev/sda2 # boot partition (EFI)
 
-mkfs.btrfs --metadata dup --data dup --label nixos /dev/mapper/nixos-luks
+mkfs.btrfs --metadata dup --data single --label nixos /dev/mapper/nixos-luks
 mkdir -p /mnt
 mount /dev/mapper/nixos-luks /mnt
 btrfs subvolume create /mnt/@
@@ -152,12 +154,14 @@ umount /mnt
 btrfs filesystem mkswapfile swapfile
 swapon swapfile
 
+Create swap **AFTER** mounting root @ subvolume
+
 mkdir -p /mnt/swap
 mount -o subvol=@swap /dev/mapper/nixos-luks /mnt/swap
 truncate -s 0 /mnt/swap/swapfile
 chattr +C /mnt/swap/swapfile
 btrfs property set /mnt/swap/swapfile compression none
-dd if=/dev/zero of=/mnt/swap/swapfile bs=1M count=16384 #8192
+fallocate -l 2G swapfile
 chmod 0600 /mnt/swap/swapfile
 mkswap /mnt/swap/swapfile
 #+end_example
@@ -167,15 +171,13 @@ Add to *configuration.nix*:
 
 **** Mounting
 #+begin_example shell
-mkdir /mnt/boot
-mount /dev/sda2 /mnt/boot
-
 mount -o compress=zstd:1,subvol=@ /dev/mapper/nixos-luks /mnt
-mkdir /mnt/{home,nix,data,swap,snaphsots}
-mount -o compress=zstd:1,noatime,subvol=@nix /dev/sdX2 /mnt/nix
-mount -o compress=zstd:1,noatime,subvol=@home /dev/sdX2 /mnt/home
-mount -o compress=zstd:1,noatime,subvol=@data /dev/sdX2 /mnt/home/data
-mount -o compress=zstd:1,noatime,subvol=@snaphsots /dev/sdX2 /mnt/snapshots
+mkdir /mnt/{boot,home,nix,data,swap,snaphsots}
+mount /dev/sda2 /mnt/boot
+mount -o compress=zstd:1,subvol=@nix /dev/sdX2 /mnt/nix
+mount -o compress=zstd:1,subvol=@home /dev/sdX2 /mnt/home
+mount -o compress=zstd:1,subvol=@data /dev/sdX2 /mnt/data
+mount -o compress=zstd:1,subvol=@snaphsots /dev/sdX2 /mnt/snapshots
 #+end_example
 
 ** Configuration
@@ -191,15 +193,14 @@ boot.initrd.luks.devices = {
     device = "/dev/nvme0n1p2"; # or by uuid better?
   };
 };
-services.nixosManual.showManual = true; # VT 8`
 
 # btrfs subvolumes
 fileSystems = {
-  "/".options = [ "compress=zstd:1" "noatime" ];
-  "/nix".options = [ "compress=zstd:1" "noatime" ];
-  "/home".options = [ "compress=zstd:1" "noatime" ];
-  "/home/data".options = [ "compress=zstd:1" "noatime" ];
-  "/snapshots".options = [ "compress=zstd:1" "noatime" ];
+  "/".options = [ "compress=zstd:1" ];
+  "/nix".options = [ "compress=zstd:1" ];
+  "/home".options = [ "compress=zstd:1" ];
+  "/home/data".options = [ "compress=zstd:1" ];
+  "/snapshots".options = [ "compress=zstd:1" ];
   "/swap".options = [ "noatime" ];
 };
 #+end_example

@@ -29,11 +29,11 @@
     # FIXME Phase1 Set proper mount point options
     # Filesystem
     fileSystems = {
-      "/".options = [ "compress=zstd:1" "noatime" ];
-      "/nix".options = [ "compress=zstd:1" "noatime" ];
-      "/home".options = [ "compress=zstd:1" "noatime" ];
-      "/home/data".options = [ "compress=zstd:1" "noatime" ];
-      "/snapshots".options = [ "compress=zstd:1" "noatime" ];
+      "/".options = [ "compress=zstd:1" ];
+      "/nix".options = [ "compress=zstd:1" ];
+      "/home".options = [ "compress=zstd:1" ];
+      "/home/data".options = [ "compress=zstd:1" ];
+      "/snapshots".options = [ "compress=zstd:1" ];
       "/swap".options = [ "noatime" ];
     };
     swapDevices = [ { device = "/swap/swapfile"; } ];
@@ -51,7 +51,6 @@
 
     # Nix
     nix = {
-      autoOptimiseStore = true;
       nix.extraOptions = ''
         keep-outputs = true
         keep-derivations = true
@@ -61,6 +60,7 @@
         dates = "weekly";
         options = "--delete-older-than 10d";
       };
+      settings.auto-optimise-store = true;
     };
 
     # Localization
