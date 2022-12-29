@@ -51,7 +51,7 @@
 
     # Nix
     nix = {
-      nix.extraOptions = ''
+      extraOptions = ''
         keep-outputs = true
         keep-derivations = true
       '';
@@ -183,11 +183,6 @@ ClientAliveInterval 100
     # Gaming
     programs.steam.enable = true;
     programs.mosh.enable = true;
-
-    nix.extraOptions = ''
-      keep-outputs = true
-      keep-derivations = true
-    '';
 
     services.openvpn.servers = {
       hobby = {
