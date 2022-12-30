@@ -22,6 +22,7 @@
     "Monofur" "Mononoki" "RobotoMono" "SourceCodePro" "Terminus" "UbuntuMono"
   ]; })
   ncompress
+  nil
   nixfmt
   nnn
   nodePackages.typescript-language-server

@@ -18,7 +18,7 @@ in {
   home = {
     username = "mike";
     homeDirectory = "/home/mike";
-    packages = [ ];
+    packages = [ pkgs.nil ];
     sessionPath = [
       "${config.home.homeDirectory}/.local/bin"
     ];
