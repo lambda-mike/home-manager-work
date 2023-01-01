@@ -25,6 +25,7 @@
         preLVM = true;
       };
     };
+    boot.supportedFilesystems = [ "ntfs" ];
 
     # FIXME Phase1 Set proper mount point options
     # Filesystem
