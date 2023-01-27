@@ -36,8 +36,14 @@ in {
   helix = {
     enable = true;
     package = pkgsUnstable.helix;
+    themes = {
+      my_catppuccin_mocha = {
+        inherits = "catppuccin_mocha";
+        "diagnostic.error" = { underline = { style = "curl"; color = "red"; }; };
+      };
+    };
     settings = {
-      theme = "catppuccin_mocha";
+      theme = "my_catppuccin_mocha";
       editor = {
         bufferline = "multiple";
         color-modes = true;
