@@ -39,7 +39,6 @@ in {
     settings = {
       theme = "catppuccin_mocha";
       editor = {
-        auto-save = true;
         bufferline = "multiple";
         color-modes = true;
         cursorline = true;
