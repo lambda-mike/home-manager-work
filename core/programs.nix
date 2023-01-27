@@ -49,7 +49,12 @@ in {
         lsp.display-messages = true;
         rulers = [ 80 ];
         scrolloff = 0;
-        statusline.right = [ "position-percentage" "diagnostics" "selections" "position" "file-encoding" ];
+        statusline.right = [
+          "diagnostics" "separator"
+          "selections" "primary-selection-length" "separator"
+          "position" "total-line-numbers" "position-percentage" "file-encoding"
+        ];
+        statusline.left = [ "mode" "spinner" "file-name" ];
         whitespace.render = "all";
       };
       keys = {
