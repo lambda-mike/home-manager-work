@@ -57,8 +57,16 @@ in {
           j.j = "normal_mode";
         };
         normal = {
-          space.q = ":q";
+          space.Q = ":quit!";
+          space.q = ":quit";
           space.e = ":reload";
+          space.b.b = "buffer_picker";
+          space.b.c = ":buffer-close";
+          space.b.C = ":buffer-close!";
+          space.f.f = "file_picker";
+          space.f.F = "file_picker_in_current_directory";
+          space.f.s = ":write";
+          space.w.c = "wclose";
           "H" = "goto_window_top";
           "M" = "goto_window_center";
           "L" = "goto_window_bottom";
