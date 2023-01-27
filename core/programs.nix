@@ -42,6 +42,7 @@ in {
         bufferline = "multiple";
         color-modes = true;
         cursorline = true;
+        cursor-shape.insert = "bar";
         file-picker.hidden = false;
         indent-guides.render = true;
         line-number = "relative";
