@@ -84,6 +84,7 @@ in {
           space.space = "file_picker_in_current_directory";
           space.f.s = ":write";
           space.w.c = "wclose";
+          space.c.c = "toggle_comments";
           Z.Z = ":write-quit";
           "H" = "goto_window_top";
           "M" = "goto_window_center";
