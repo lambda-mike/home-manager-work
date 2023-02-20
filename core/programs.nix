@@ -76,6 +76,7 @@ in {
           space.q.X = ":write-quit-all!";
           space.e = ":reload";
           space.b.b = "buffer_picker";
+          space."," = "buffer_picker";
           space.b.c = ":buffer-close";
           space.b.C = ":buffer-close!";
           space.b.N = ":new";
