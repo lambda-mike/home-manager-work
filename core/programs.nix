@@ -77,8 +77,8 @@ in {
           space.e = ":reload";
           space.b.b = "buffer_picker";
           space."," = "buffer_picker";
-          space.b.c = ":buffer-close";
-          space.b.C = ":buffer-close!";
+          space.b.k = ":buffer-close";
+          space.b.K = ":buffer-close!";
           space.b.N = ":new";
           space.f.f = "file_picker";
           space.f.F = "file_picker_in_current_directory";
@@ -90,8 +90,11 @@ in {
           "H" = "goto_window_top";
           "M" = "goto_window_center";
           "L" = "goto_window_bottom";
-          "ret" = "move_line_down";
-          "minus" = "move_line_up";
+          "G" = "goto_last_line";
+          "ret" = ["move_line_down" "goto_first_nonwhitespace"];
+          "minus" = ["move_line_up" "goto_first_nonwhitespace"];
+          "{" = "goto_prev_paragraph";
+          "}" = "goto_next_paragraph";
         };
       };
     };
