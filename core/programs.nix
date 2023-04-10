@@ -36,14 +36,8 @@ in {
   helix = {
     enable = true;
     package = pkgsUnstable.helix;
-    themes = {
-      my_catppuccin_mocha = {
-        inherits = "catppuccin_mocha";
-        "diagnostic.error" = { underline = { style = "curl"; color = "red"; }; };
-      };
-    };
     settings = {
-      theme = "my_catppuccin_mocha";
+      theme = "catppuccin_mocha";
       editor = {
         bufferline = "multiple";
         color-modes = true;
@@ -55,12 +49,13 @@ in {
         lsp.display-messages = true;
         rulers = [ 80 ];
         scrolloff = 0;
+        soft-wrap.enable = true;
         statusline.right = [
           "diagnostics" "separator"
           "selections" "primary-selection-length" "separator"
           "position" "total-line-numbers" "position-percentage" "file-encoding"
         ];
-        statusline.left = [ "mode" "spinner" "file-name" ];
+        statusline.left = [ "mode" "spinner" "version-control" "file-name" ];
         whitespace.render = "all";
       };
       keys = {
@@ -86,6 +81,9 @@ in {
           space.f.s = ":write";
           space.w.c = "wclose";
           space.c = "toggle_comments";
+          space.m.i = ":toggle-option lsp.display-inlay-hints";
+          space.m.f = ":run-shell-command pnpm exec prettier --parser typescript";
+          space.m.r = ":reflow 80";
           "C-/" = "toggle_comments";
           "A-/" = "toggle_comments";
           Z.Z = ":write-quit";
