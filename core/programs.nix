@@ -82,7 +82,7 @@ in {
           space.w.c = "wclose";
           space.c = "toggle_comments";
           space.m.i = ":toggle-option lsp.display-inlay-hints";
-          space.m.f = ":run-shell-command pnpm exec prettier --parser typescript";
+          space.m.f = ":pipe pnpm exec prettier --parser typescript";
           space.m.r = ":reflow 80";
           "C-/" = "toggle_comments";
           "A-/" = "toggle_comments";
