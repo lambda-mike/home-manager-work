@@ -1,5 +1,10 @@
 { pkgs, ... }:
-(with pkgs; [
+
+let
+  sources = import ../nix/sources.nix;
+  nixpkgsUnstable = sources."nixpkgs-unstable";
+  pkgsUnstable = import nixpkgsUnstable {};
+in (with pkgs; [
   appimage-run
   brave
   cmus
@@ -25,7 +30,7 @@
   nil
   nixfmt
   nnn
-  nodePackages.typescript-language-server
+  pkgsUnstable.nodePackages.typescript-language-server
   pciutils
   pinentry
   procs
