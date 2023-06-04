@@ -1,6 +1,6 @@
 {
     "home-manager": {
-        "branch": "release-22.05",
+        "branch": "release-23.05",
         "description": "Manage a user environment using Nix",
         "homepage": "https://rycee.gitlab.io/home-manager/",
         "owner": "nix-community",
