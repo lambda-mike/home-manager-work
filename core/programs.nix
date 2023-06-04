@@ -99,12 +99,14 @@ in {
         };
       };
     };
-    languages = [
-      {
-        name = "nix";
-        language-server.command = "nil";
-      }
-    ];
+    languages = {
+      language = [
+        {
+          name = "nix";
+          language-server.command = "nil";
+        }
+      ];
+    };
   };
   htop.enable = true;
   jq.enable = true;
