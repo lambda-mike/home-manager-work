@@ -6,7 +6,7 @@
       mainDark = "#00558c";
       lock = mainDark;
     };
-    font = "CaskaydiaCove Nerd Font";
+    font = "CaskaydiaCove NFP";
     rofi = "Arc-Dark";
   };
   green = {
@@ -16,7 +16,7 @@
       mainDark = "#007e69";
       lock = mainLight;
     };
-    font = "CaskaydiaCove Nerd Font";
+    font = "CaskaydiaCove NFP";
     rofi = "lb";
   };
 }
