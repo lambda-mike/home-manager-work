@@ -9,7 +9,7 @@ let
       (builtins.readFile ./polybar_head.config);
   polybarConfig =
     polybarHead + (builtins.readFile ./polybar.config);
-  polybarConfigPath = "${config.xdg.configHome}/polybar/config";
+  polybarConfigPath = "${config.xdg.configHome}/polybar/config.ini";
 in {
   services.polybar = {
     extraConfig = polybarConfig;
