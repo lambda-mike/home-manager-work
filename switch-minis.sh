@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-nix-shell --run "home-manager switch -A minis"
+nix-shell --run "home-manager switch -b backup -A minis"
