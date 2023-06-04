@@ -91,9 +91,11 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2201", GROUP="use
       extraConfig = ''
 ClientAliveInterval 100
 '';
-      forwardX11 = true;
-      passwordAuthentication = false;
-      permitRootLogin = "no";
+      settings = {
+        X11Forwarding = true;
+        PermitRootLogin = "no";
+        PasswordAuthentication = false;
+      };
       startWhenNeeded = true;
     };
     services.vnstat.enable = true;
