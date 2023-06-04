@@ -24,7 +24,7 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
-        "branch": "nixos-22.11",
+        "branch": "",
         "description": "Nix Packages collection",
         "homepage": "",
         "owner": "NixOS",
