@@ -13,4 +13,15 @@ jobs:
     - run: |
         export NIXPKGS_ALLOW_UNFREE=1
         echo '[]' > keys.nix
+
+        # Add home-manager channel
+        nix-channel --add https://github.com/nix-community/home-manager/archive/$HOME_MANAGER_BRANCH home-manager-dbg
+        nix-channel --update
+
+        # Install home-manager manually because it mutates global system state
+        nix-shell -A install ~/.nix-defexpr/channels/home-manager-dbg/default.nix
+
+        # Mutated global system state is required in order to execute home-manager
         nix-shell --run 'home-manager build -v -A work'
+
+        echo "done"

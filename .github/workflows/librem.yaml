@@ -28,4 +28,4 @@ jobs:
         # Mutated global system state is required in order to execute home-manager
         nix-shell --run 'home-manager build -v -A librem'
 
-        echo "librem done"
+        echo "done"
