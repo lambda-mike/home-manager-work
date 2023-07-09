@@ -6,16 +6,18 @@ let
 
   pkgs = import nixpkgs {};
 
-in pkgs.mkShell rec {
+  niv = (import sources."niv") { inherit pkgs; };
+
+in pkgs.mkShell {
 
   name = "niv-shell";
 
-  buildInputs = with pkgs; [
-    pkgs.niv
+  buildInputs = [
+    niv.niv
   ];
 
   shellHook = ''
-    export NIX_PATH="nixpkgs=${nixpkgs}"
+    export NIX_PATH="niv=${sources.niv}:nixpkgs=${nixpkgs}"
   '';
 
 }
