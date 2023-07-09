@@ -105,6 +105,18 @@ in {
           name = "nix";
           language-server.command = "nil";
         }
+        {
+          name = "unison";
+          scope = "source.unison";
+          "injection-regex" = "unison";
+          "file-types" = ["u"];
+          shebangs = [];
+          roots = [];
+          "auto-format" = false;
+          "comment-token" = "--";
+          indent = { "tab-width" = 4; unit = "    "; };
+          "language-server" = { command = "nc"; args = ["localhost" "5757"]; };
+        }
       ];
     };
   };
