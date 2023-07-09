@@ -102,6 +102,10 @@ in {
     languages = {
       language = [
         {
+          name = "nim";
+          language-server.command = "nimlsp";
+        }
+        {
           name = "nix";
           language-server.command = "nil";
         }
