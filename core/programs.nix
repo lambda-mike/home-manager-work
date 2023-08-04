@@ -76,8 +76,12 @@ in {
           space.b.k = ":buffer-close";
           space.b.K = ":buffer-close!";
           space.b.N = ":new";
+          space.b.o = ":buffer-close-others";
+          space.b.O = ":buffer-close-others!";
+          space.b.s = ":write";
+          space.b.S = ":write-all";
           space.f.f = "file_picker";
-          space.f.F = "file_picker_in_current_directory";
+          space.f.F = "file_picker_in_current_buffer_directory";
           space.space = "file_picker_in_current_directory";
           space.f.s = ":write";
           space.w.c = "wclose";
