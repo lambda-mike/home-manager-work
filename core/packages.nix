@@ -19,6 +19,7 @@ in (with pkgs; [
   git-crypt
   gnome.simple-scan
   i3lock
+  julia
   libreoffice
   lsof
   neofetch
