@@ -6,7 +6,7 @@ let
 
   pkgs = import nixpkgs {};
 
-in pkgs.mkShell rec {
+in pkgs.mkShell {
 
   name = "home-manager-shell";
 
