@@ -107,6 +107,8 @@ ClientAliveInterval 100
     services.printing.enable = true;
     services.printing.drivers = [ pkgs.brlaser pkgs.brgenml1lpr ];
 
+    services.tailscale.enable = true;
+
     # Scanner
     hardware.sane.enable = true;
     hardware.sane.brscan4.enable = true;
