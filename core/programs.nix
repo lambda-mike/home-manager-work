@@ -51,7 +51,7 @@ in {
         scrolloff = 0;
         soft-wrap.enable = true;
         statusline.right = [
-          "diagnostics" "separator"
+          "diagnostics" "separator" "register"
           "selections" "primary-selection-length" "separator"
           "position" "total-line-numbers" "position-percentage" "file-encoding"
         ];
@@ -104,14 +104,27 @@ in {
       };
     };
     languages = {
+      language-server = {
+        nimlsp = {
+          command = "nimlsp";
+        };
+        nil = {
+          command = "nil";
+        };
+        unison = {
+          command = "nc";
+          args = ["localhost" "5757"];
+        };
+        # TODO TS split to efm and ts lang server
+      };
       language = [
         {
           name = "nim";
-          language-server.command = "nimlsp";
+          language-servers = ["nimlsp"];
         }
         {
           name = "nix";
-          language-server.command = "nil";
+          language-servers = ["nil"];
         }
         {
           name = "unison";
@@ -123,7 +136,7 @@ in {
           "auto-format" = false;
           "comment-token" = "--";
           indent = { "tab-width" = 4; unit = "    "; };
-          "language-server" = { command = "nc"; args = ["localhost" "5757"]; };
+          language-servers = ["unison"];
         }
       ];
     };
