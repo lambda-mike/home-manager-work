@@ -26,7 +26,7 @@ in {
     nix-direnv.enable = true;
   };
   emacs.enable = true;
-  exa = {
+  eza = {
     enable = true;
     enableAliases = true;
   };
