@@ -6,6 +6,7 @@ let
   pkgsUnstable = import nixpkgsUnstable {};
 in (with pkgs; [
   appimage-run
+  pkgsUnstable.bazecor
   brave
   cmus
   dasel
