@@ -80,9 +80,10 @@
     nixpkgs.config.allowUnfree = true;
 
     # Dygma Raise
-    services.udev.extraRules =''
-SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2201", GROUP="users", MODE="0666"
-'';
+    # This should be included in the latest pkg in nixpkgs
+#     services.udev.extraRules =''
+# SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2201", GROUP="users", MODE="0666"
+# '';
 
     # Services
     services.greenclip.enable = true;
@@ -158,8 +159,9 @@ ClientAliveInterval 100
     # users
     users.users.mike = {
       createHome = true;
+      # uucp is needed by Bazecor do flash Dygma keyboards
       extraGroups =
-        [ "audio" "disk" "docker" "networkmanager" "vboxsf" "vboxusers" "video" "wheel" ];
+        [ "audio" "disk" "docker" "networkmanager" "uucp" "vboxsf" "vboxusers" "video" "wheel" ];
       group = "users";
       home = "/home/mike";
       isNormalUser = true;
@@ -200,6 +202,6 @@ ClientAliveInterval 100
           config /root/config.ovpn
         '';
       };
-    };
+    }
 
 }
