@@ -202,6 +202,6 @@ ClientAliveInterval 100
           config /root/config.ovpn
         '';
       };
-    }
+    };
 
 }
