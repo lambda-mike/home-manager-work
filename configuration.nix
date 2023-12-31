@@ -46,6 +46,7 @@
     # Networking
     networking.useDHCP = false;
     networking.interfaces.yours.useDHCP = true;
+    networking.interfaces.yours.wakeOnLan.enable = true;
     networking.networkmanager.enable = true;
     # FIXME Phase1 Set proper name
     networking.hostName = "nixos";
