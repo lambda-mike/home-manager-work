@@ -169,6 +169,7 @@ ClientAliveInterval 100
       openssh.authorizedKeys.keys = [
         ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIH0uiT3vy0DVxDHI82v1EW/NxteksHexFcKdXHLcc+L nixos@Arrakis''
         ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICiZ/5BJcFcSfSfrfwT1cy52zHQP23F81AoxnB850Yol nixos@Star''
+        ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAKNfaNgJUXd51qUbNmi6dXYON4rSGIDt4aLhDhIPlh7 osmc@osmc''
       ];
       # FIXME Phase2 Uncomment once fish is installed using home-manager
       #shell = /home/mike/.nix-profile/bin/fish;
