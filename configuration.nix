@@ -81,10 +81,13 @@
     nixpkgs.config.allowUnfree = true;
 
     # Dygma Raise
-    # This should be included in the latest pkg in nixpkgs
-#     services.udev.extraRules =''
-# SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2201", GROUP="users", MODE="0666"
-# '';
+    # network driver for minis
+    # Dygma Defy
+     services.udev.extraRules =''
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2201", GROUP="users", MODE="0666"
+SUBSYSTEM=="drivers", DEVPATH=="/bus/pci/drivers/mt7921e", ATTR{new_id}="14c3 0608"
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="35ef", ATTRS{idProduct}=="0012", GROUP="users", MODE="0666"
+    '';
 
     # Services
     services.greenclip.enable = true;
