@@ -188,6 +188,10 @@ nixos-generate-config --root --show-hardware-config /mnt
 vim /mnt/etc/nixos/configuration.nix
 #+end_example
 
+Check if hardware profile exists for your machine:
+
+[Nixos Hardware](https://github.com/NixOS/nixos-hardware)
+
 #+begin_example nix
 boot.initrd.luks.devices = {
   root = {
