@@ -151,7 +151,7 @@ umount /mnt
 **** Swap
 #+begin_example shell
 #Since version 6.1 it’s possible to create the swapfile in a single command (except the activation):
-btrfs filesystem mkswapfile swapfile
+btrfs filesystem mkswapfile --size 32G swapfile
 swapon swapfile
 
 Create swap **AFTER** mounting root @ subvolume
