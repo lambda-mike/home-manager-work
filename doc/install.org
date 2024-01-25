@@ -50,7 +50,7 @@ Use =cgdisk= or =gdisk= for UEFI, =cfdisk= or =fdisk= for BIOS.
 
 #+begin_example shell
 cryptsetup luksFormat $LVM_PARTITION
-cryptsetup luksOpen $LVM_PARTITION nixos-luks
+cryptsetup open $LVM_PARTITION nixos-luks
 #+end_example
 
 **** LVM partitioning
@@ -124,7 +124,7 @@ StarLite - lzo -m dup -d single
 
 #+begin_example shell
 cryptsetup luksFormat $PARTITION
-cryptsetup luksOpen $PARTITION nixos-luks
+cryptsetup open $PARTITION nixos-luks
 cryptsetup luksHeaderBackup $PARTITION --header-backup-file /path/to/backup-file
 # Restore LUKS header
 cryptsetup luksHeaderRestore $PARTITION --header-backup-file /path/to/backup-file
@@ -151,8 +151,8 @@ umount /mnt
 **** Swap
 #+begin_example shell
 #Since version 6.1 it’s possible to create the swapfile in a single command (except the activation):
-btrfs filesystem mkswapfile --size 32G swapfile
-swapon swapfile
+btrfs filesystem mkswapfile --size 32G /mnt/swap/swapfile
+swapon /mnt/swap/swapfile
 
 Create swap **AFTER** mounting root @ subvolume
 
@@ -184,7 +184,7 @@ mount -o compress=zstd:1,subvol=@snaphsots /dev/mapper/nixos-luks /mnt/snapshots
 ** Configuration
 
 #+begin_example shell
-nixos-generate-config --root --show-hardware-config /mnt
+nixos-generate-config --show-hardware-config --root /mnt
 vim /mnt/etc/nixos/configuration.nix
 #+end_example
 
@@ -198,6 +198,9 @@ boot.initrd.luks.devices = {
     device = "/dev/nvme0n1p2"; # or by uuid better?
   };
 };
+
+# add this to /boot in hardware configuration to avoid security warnings
+# options = [ "umask=0077" "defaults" ];
 
 # btrfs subvolumes
 fileSystems = {
@@ -222,7 +225,7 @@ passwd mike
 ** Troubleshooting
 
 #+begin_example shell
-cryptsetup luksOpen $PARTITION nixos-luks
+cryptsetup open $PARTITION nixos-luks
 lvscan vgchange -ay
 mount /dev/nixos-vg/root /mnt
 #+end_example
