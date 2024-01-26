@@ -1,4 +1,5 @@
 # https://github.com/doomemacs/doomemacs/blob/master/docs/getting_started.org#install-doom-alongside-other-configs-with-chemacs2
+# FIXME Chemacs/Doom
 { config, ... }:
 let emacsProfiles = import ./emacsProfiles.nix;
 in {
