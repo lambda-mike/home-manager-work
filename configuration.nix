@@ -6,6 +6,8 @@
 {
   imports =
     [ # Include the results of the hardware scan.
+      "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; ref = "master"; rev = "f84eaffc35d1a655e84749228cde19922fcf55f1"; }}/lenovo/thinkpad/p1/3th-gen"
+
       ./hardware-configuration.nix
     ];
 
