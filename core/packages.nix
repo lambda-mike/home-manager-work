@@ -7,7 +7,7 @@ let
 in (with pkgs; [
   appimage-run
   pkgsUnstable.bazecor
-  brave
+  pkgsUnstable.brave
   cmus
   dasel
   docker
