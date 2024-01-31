@@ -29,6 +29,19 @@
     };
     boot.supportedFilesystems = [ "ntfs" ];
 
+    # ethernet driver for eno1 (ethernet network interface)
+    boot.initrd.kernelModules = [ "igc" ];
+    boot.initrd.network = {
+      enable = true;
+      ssh = {
+        enable = true;
+        port = 2222;
+        shell = "/bin/cryptsetup-askpass";
+        hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
+        authorizedKeys = [ ];
+      };
+    };
+
     # FIXME Phase1 Set proper mount point options
     # Filesystem
     fileSystems = {
