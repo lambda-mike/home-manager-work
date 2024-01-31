@@ -233,3 +233,12 @@ mount /dev/nixos-vg/root /mnt
 https://github.com/ryantm/home-manager-template
 
 When switching from bash to fish, add in configuration.nix  :
+
+** Remote SSH
+
+It will require host key, which can be generated with cmds:
+
+#+begin_example shell
+ssh-keygen -t ed25519 -N "" -f /etc/secrets/initrd/ssh_host_ed25519_key
+sudo chmod go-rwx /etc/secrets/intird/ssh_host_ed25519_key
+#+end_example
