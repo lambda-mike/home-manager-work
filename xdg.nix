@@ -50,5 +50,9 @@ in {
   use_primary_selection_as_input = false
     '';
     };
+    configFile.leftwm = {
+      source = ./leftwm;
+      recursive = true;
+    };
   };
 }

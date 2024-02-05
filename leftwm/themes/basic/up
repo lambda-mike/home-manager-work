@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+export SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+
+#down the last running theme
+if [ -f "/tmp/leftwm-theme-down" ]; then
+    /tmp/leftwm-theme-down
+    rm /tmp/leftwm-theme-down
+fi
+ln -s $SCRIPTPATH/down /tmp/leftwm-theme-down
+
+autorandr --change
+
+leftwm-command "LoadTheme $SCRIPTPATH/theme.ron"
+
+# Autostart
+# TODO add extra notification about low battery
+#cbatticon --update-interval 60 --critical-level 10 --command-critical-level 'i3-nagbar -m "Critically low battery level!!!"' &
+$SCRIPTPATH/autostart.sh
