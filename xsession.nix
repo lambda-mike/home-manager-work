@@ -3,9 +3,10 @@
 {
   xsession = {
     enable = true;
-    initExtra = ''
-    autorandr -c
-    ${config.xdg.configHome}/fehbg &
-  '';
+    windowManager.command = ''
+      ${pkgs.leftwm}/bin/leftwm &
+      waitPID=$!
+      test -n "$waitPID" && wait "$waitPID"
+    '';
   };
 }

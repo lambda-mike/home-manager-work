@@ -10,7 +10,7 @@ fi
 ln -s $SCRIPTPATH/down /tmp/leftwm-theme-down
 
 autorandr --change
-
+${XDG_CONFIG_HOME}/fehbg &
 leftwm-command "LoadTheme $SCRIPTPATH/theme.ron"
 
 # Autostart
