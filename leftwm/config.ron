@@ -54,7 +54,7 @@
     layout_mode: Tag,
     insert_behavior: Bottom,
     scratchpad: [
-        (name: "pad", value: "alacritty", x: 0.0, y: 0.0, height: 1.0, width: 1.0),
+        (name: "pad", value: "alacritty", x: 20, y: 20, height: 60, width: 60),
     ],
     window_rules: [
       ( window_class: "brave-browser", spawn_on_tag: 1 ),
