@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# screen from 0 to n
+screen="$1"
+
+# empty string - do nothing
+[[ -z "${screen}" ]] && exit 1
+
+# support max 9 monitors - only 0 to 9 are valid inputs; default to 0
+[[ ! "${screen}" =~ ^[0-9]$ ]] && exit 1
+
+state="$(leftwm-state -qn)"
+
+count=$(echo $state | jq '.workspaces | length')
+[[ $screen -gt $(($count - 1)) ]] && exit 1
+
+function isNthScreenActive() {
+  local n="$1"
+  local nth="$(echo $state | jq '.workspaces | sort_by(.x, .y)['$n'].id')"
+  local active=$(echo $state | jq '.workspaces | sort_by(.x, .y) | .[] | select(.tags[] | contains({ "visible": true, "mine": true, "focused": true })).id')
+  [[ "${active}" == "${nth}" ]]
+}
+
+for i in $(seq $count)
+do
+  [[ $i -gt 1 ]] && leftwm command "FocusWorkspaceNext">/dev/null
+  isNthScreenActive $screen
+  result=$?
+  [[ $result -eq 0 ]] && break
+done
+
+exit 0
