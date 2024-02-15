@@ -62,7 +62,7 @@
       ( window_title: "tmux", spawn_on_tag: 2 ),
       ( window_class: "emacs", spawn_on_tag: 3 ),
     ],
-    disable_current_tag_swap: false,
+    disable_current_tag_swap: true,
     disable_tile_drag: false,
     disable_window_snap: true,
     focus_behaviour: Sloppy,
