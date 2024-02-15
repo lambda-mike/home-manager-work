@@ -1,6 +1,8 @@
 theme:
 { pkgs, config, ... }:
 let bgColour = builtins.substring 1 6 theme.colours.lock;
+    mainDark = theme.colours.mainDark;
+    mainLight = theme.colours.mainLight;
     emacsProfiles = import ./emacsProfiles.nix;
 in {
   xdg = {
@@ -53,6 +55,17 @@ in {
     configFile.leftwm = {
       source = ./leftwm;
       recursive = true;
+    };
+    configFile."leftwm/themes/basic/theme.ron" = {
+      text = ''
+(
+  border_width: 2,
+  margin: 0,
+  default_border_color: "#2f343f",
+  floating_border_color: "${mainDark}",
+  focused_border_color: "${mainLight}",
+)
+      '';
     };
   };
 }
