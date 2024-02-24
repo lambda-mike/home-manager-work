@@ -18,6 +18,7 @@ in {
     ./programs/kakoune.nix
     ./programs/keychain.nix
     ./programs/neovim.nix
+    ./programs/ssh.nix
     ./programs/tmux.nix
     ./services/gpg-agent.nix
     (import ./services/polybar.nix theme)
