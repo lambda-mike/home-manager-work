@@ -1,31 +1,31 @@
 {% for tag in workspace.tags %}
 
 {% if tag.mine and tag.focused %}
-%{A1:$SCRIPTPATH/change_to_tag {{workspace.index}} {{tag.index}}:}
-%{F#f3f4f5}%{B#00a489}%{o#00a489}%{+o}%{u#2F343F}%{+u} {{tag.name}} %{B-}%{F-}%{o-}%{u-}
+%{A1:$XDG_CONFIG_HOME/leftwm/change_to_tag {{workspace.index}} {{tag.index}}:}
+%{F#f3f4f5}%{B##MAIN_COLOUR##}%{o##MAIN_COLOUR##}%{+o}%{u#2F343F}%{+u} {{tag.name}} %{B-}%{F-}%{o-}%{u-}
 %{A}
 {% elsif tag.urgent %}
-%{A1:$SCRIPTPATH/change_to_tag {{workspace.index}} {{tag.index}}:}
-%{F#00a489}%{B#f3f4f5}%{o#f3f4f5}%{+o}%{u#2F343F}%{+u} {{tag.name}} %{B-}%{F-}%{o-}%{u-}
+%{A1:$XDG_CONFIG_HOME/leftwm/change_to_tag {{workspace.index}} {{tag.index}}:}
+%{F##MAIN_COLOUR##}%{B#f3f4f5}%{o#f3f4f5}%{+o}%{u#2F343F}%{+u} {{tag.name}} %{B-}%{F-}%{o-}%{u-}
 %{A}
 {% elsif tag.mine %}
-%{A1:$SCRIPTPATH/change_to_tag {{workspace.index}} {{tag.index}}:}
+%{A1:$XDG_CONFIG_HOME/leftwm/change_to_tag {{workspace.index}} {{tag.index}}:}
 %{F#f3f4f5}%{B#acacac}%{o#acacac}%{+o}%{u#2F343F}%{+u} {{tag.name}} %{B-}%{F-}%{o-}%{u-}
 %{A}
 {% elsif tag.focused %}
-%{A1:$SCRIPTPATH/change_to_tag {{workspace.index}} {{tag.index}}:}
-%{F#f3f4f5}%{B#2F343F}%{o#00a489}%{+o}%{u#2F343F}%{+u} {{tag.name}} %{B-}%{F-}%{o-}%{u-}
+%{A1:$XDG_CONFIG_HOME/leftwm/change_to_tag {{workspace.index}} {{tag.index}}:}
+%{F#f3f4f5}%{B#2F343F}%{o##MAIN_COLOUR##}%{+o}%{u#2F343F}%{+u} {{tag.name}} %{B-}%{F-}%{o-}%{u-}
 %{A}
 {% elsif tag.visible %}
-%{A1:$SCRIPTPATH/change_to_tag {{workspace.index}} {{tag.index}}:}
+%{A1:$XDG_CONFIG_HOME/leftwm/change_to_tag {{workspace.index}} {{tag.index}}:}
 %{F#f3f4f5}%{B#2F343F}%{o#acacac}%{+o}%{u#2F343F}%{+u} {{tag.name}} %{B-}%{F-}%{o-}%{u-}
 %{A}
 {% elsif tag.busy %}
-%{A1:$SCRIPTPATH/change_to_tag {{workspace.index}} {{tag.index}}:}
+%{A1:$XDG_CONFIG_HOME/leftwm/change_to_tag {{workspace.index}} {{tag.index}}:}
 %{F#f3f4f5}%{B#2F343F}%{o#2F343F}%{+o}%{u#2F343F}%{+u} {{tag.name}} %{B-}%{F-}%{o-}%{u-}
 %{A}
 {% else %}
-%{A1:$SCRIPTPATH/change_to_tag {{workspace.index}} {{tag.index}}:}
+%{A1:$XDG_CONFIG_HOME/leftwm/change_to_tag {{workspace.index}} {{tag.index}}:}
 %{F#acacac}%{B#2F343F}%{o#2F343F}%{+o}%{u#2F343F}%{+u} {{tag.name}} %{B-}%{F-}%{o-}%{u-}
 %{A}
 {% endif %}

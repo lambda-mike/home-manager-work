@@ -1,6 +1,6 @@
-{ config, pkgs, wm ? "xmonad", ... }:
+{ windowManager }:
+{ config, pkgs, ... }:
 let
-  choice = if sessions ? wm then wm else "xmonad";
   sessions = {
     xmonad = {
       xsession = {
@@ -22,4 +22,4 @@ let
       };
     };
   };
-in sessions.${choice}
+in sessions.${windowManager}

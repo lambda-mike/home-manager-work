@@ -1,6 +1,8 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, config, ... }:
 
-let theme = (import ./themes.nix).blue;
+let
+  theme = (import ./themes.nix).green;
+  windowManager = "xmonad";
 in {
 
   # The home-manager manual is at:
@@ -12,6 +14,7 @@ in {
   #   https://rycee.gitlab.io/home-manager/options.html
 
   imports = [
+    ./cursor.nix
     ./programs/alacritty.nix
     ./programs/fish.nix
     ./programs/git.nix
@@ -21,12 +24,11 @@ in {
     ./programs/ssh.nix
     ./programs/tmux.nix
     ./services/gpg-agent.nix
-    (import ./services/polybar.nix theme)
     ./services/redshift.nix
     ./services/screen-locker.nix
+    (import ./services/polybar.nix { inherit theme windowManager; })
     (import ./xdg.nix theme)
-    ./xsession.nix
-    ./cursor.nix
+    (import ./xsession.nix { inherit windowManager; })
   ];
 
   nixpkgs.overlays = [ ];
