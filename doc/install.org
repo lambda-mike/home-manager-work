@@ -242,3 +242,9 @@ It will require host key, which can be generated with cmds:
 ssh-keygen -t ed25519 -N "" -f /etc/secrets/initrd/ssh_host_ed25519_key
 sudo chmod go-rwx /etc/secrets/intird/ssh_host_ed25519_key
 #+end_example
+
+Wake machine up via LAN: =nix run nixpkgs#wol -- 'put_mac_here'=
+
+Connect via ssh: =ssh -p 2222 root@192.168.0.101=
+
+Connect via ssh to the NixOS as usual.
