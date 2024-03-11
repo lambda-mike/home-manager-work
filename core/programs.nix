@@ -105,6 +105,30 @@ in {
     };
     languages = {
       language-server = {
+        eslint = {
+          command = "eslint";
+          args = ["--stdio"];
+          config = {
+            experimental = { useFlatConfig = false; };
+            format = false;
+            onIgnoredFiles = "off";
+            problems = { shortenToSingleLine = false; };
+            quiet = false;
+            rulesCustomizations = [];
+            # "onType" or "onSave"
+            run = "onType";
+            # Commenting out this line causes the language-server to crash
+            nodePath = "";
+            # The documentation says this is "legacy", but without it it doesn't work
+            validate = "probe";
+            # or [{ mode = "auto" }]
+            workingDirectories = [{ mode = "location"; }];
+            codeAction = {
+              disableRuleComment = { enable = true; location = "separateLine"; };
+              showDocumentation = { enable = true; };
+            };
+          };
+        };
         nimlsp = {
           command = "nimlsp";
         };
@@ -118,6 +142,12 @@ in {
         # TODO TS split to efm and ts lang server
       };
       language = [
+        {
+          name = "typescript";
+          language-servers = [ "typescript-language-server" "eslint" ];
+          formatter = { command = "prettier"; args = ["--parser" "typescript"]; };
+          auto-format = true;
+        }
         {
           name = "nim";
           language-servers = ["nimlsp"];

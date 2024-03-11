@@ -32,6 +32,7 @@ in (with pkgs; [
   nil
   nixfmt
   nnn
+  pkgsUnstable.nodePackages.eslint
   pkgsUnstable.nodePackages.typescript-language-server
   pciutils
   pinentry
