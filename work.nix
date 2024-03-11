@@ -1,7 +1,7 @@
 { pkgs, config, ... }:
 
 let
-  theme = (import ./themes.nix).green;
+  theme = (import ./themes.nix).blue;
   windowManager = "xmonad";
 in {
 
