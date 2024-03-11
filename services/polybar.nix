@@ -25,14 +25,14 @@ let
 
 isVertical() {
   local monitor="$1"
-  local isPrimary="$(xrandr --query | grep "$monitor" | grep "primary")"
+  local isPrimary="$(xrandr --query | grep -w "$monitor" | grep "primary")"
   if [[ -n "$isPrimary" ]]; then
     local resolutionIndex=4
   else
     local resolutionIndex=3
   fi
-  local width=$(xrandr --query | grep "$monitor" | cut -d" " -f"$resolutionIndex" | cut -d"+" -f1 | cut -d"x" -f1)
-  local height=$(xrandr --query | grep "$monitor" | cut -d" " -f"$resolutionIndex" | cut -d"+" -f1 | cut -d"x" -f2)
+  local width=$(xrandr --query | grep -w "$monitor" | cut -d" " -f"$resolutionIndex" | cut -d"+" -f1 | cut -d"x" -f1)
+  local height=$(xrandr --query | grep -w "$monitor" | cut -d" " -f"$resolutionIndex" | cut -d"+" -f1 | cut -d"x" -f2)
   local result
   [[ "$width" -lt "$height" ]] && return
 }
