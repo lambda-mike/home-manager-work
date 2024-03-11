@@ -145,7 +145,7 @@ in {
         {
           name = "typescript";
           language-servers = [ "typescript-language-server" "eslint" ];
-          formatter = { command = "prettier"; args = ["--parser" "typescript"]; };
+          formatter = { command = "pnpm"; args = [ "exec" "prettier" "--parser" "typescript" ]; };
           auto-format = true;
         }
         {
