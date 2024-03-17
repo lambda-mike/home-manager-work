@@ -9,6 +9,7 @@ in (with pkgs; [
   pkgsUnstable.bazecor
   pkgsUnstable.brave
   cmus
+  cryfs
   dasel
   docker
   du-dust
