@@ -21,6 +21,7 @@ in (with pkgs; [
   gnome.simple-scan
   i3lock
   julia
+  leftwm
   libreoffice
   lsof
   neofetch
