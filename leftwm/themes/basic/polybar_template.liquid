@@ -1,31 +1,31 @@
 {% for tag in workspace.tags %}
 
 {% if tag.mine and tag.focused %}
-%{A1:$XDG_CONFIG_HOME/leftwm/change_to_tag {{workspace.index}} {{tag.index}}:}
+%{A1:leftwm-command "SendWorkspaceToTag {{workspace.index}} {{tag.index}}" :}%{A3:leftwm-command "FocusWindowUp" :}
 %{F#f3f4f5}%{B##MAIN_COLOUR##}%{o##MAIN_COLOUR##}%{+o}%{u#2F343F}%{+u} {{tag.name}} %{B-}%{F-}%{o-}%{u-}
-%{A}
+%{A}%{A}
 {% elsif tag.urgent %}
-%{A1:$XDG_CONFIG_HOME/leftwm/change_to_tag {{workspace.index}} {{tag.index}}:}
+%{A1:leftwm-command "SendWorkspaceToTag {{workspace.index}} {{tag.index}}" :}
 %{F##MAIN_COLOUR##}%{B#f3f4f5}%{o#f3f4f5}%{+o}%{u#2F343F}%{+u} {{tag.name}} %{B-}%{F-}%{o-}%{u-}
 %{A}
 {% elsif tag.mine %}
-%{A1:$XDG_CONFIG_HOME/leftwm/change_to_tag {{workspace.index}} {{tag.index}}:}
+%{A1:leftwm-command "SendWorkspaceToTag {{workspace.index}} {{tag.index}}" :}
 %{F#f3f4f5}%{B#acacac}%{o#acacac}%{+o}%{u#2F343F}%{+u} {{tag.name}} %{B-}%{F-}%{o-}%{u-}
 %{A}
 {% elsif tag.focused %}
-%{A1:$XDG_CONFIG_HOME/leftwm/change_to_tag {{workspace.index}} {{tag.index}}:}
+%{A1:leftwm-command "SendWorkspaceToTag {{workspace.index}} {{tag.index}}" :}
 %{F#f3f4f5}%{B#2F343F}%{o##MAIN_COLOUR##}%{+o}%{u#2F343F}%{+u} {{tag.name}} %{B-}%{F-}%{o-}%{u-}
 %{A}
 {% elsif tag.visible %}
-%{A1:$XDG_CONFIG_HOME/leftwm/change_to_tag {{workspace.index}} {{tag.index}}:}
+%{A1:leftwm-command "SendWorkspaceToTag {{workspace.index}} {{tag.index}}" :}
 %{F#f3f4f5}%{B#2F343F}%{o#acacac}%{+o}%{u#2F343F}%{+u} {{tag.name}} %{B-}%{F-}%{o-}%{u-}
 %{A}
 {% elsif tag.busy %}
-%{A1:$XDG_CONFIG_HOME/leftwm/change_to_tag {{workspace.index}} {{tag.index}}:}
+%{A1:leftwm-command "SendWorkspaceToTag {{workspace.index}} {{tag.index}}" :}
 %{F#f3f4f5}%{B#2F343F}%{o#2F343F}%{+o}%{u#2F343F}%{+u} {{tag.name}} %{B-}%{F-}%{o-}%{u-}
 %{A}
 {% else %}
-%{A1:$XDG_CONFIG_HOME/leftwm/change_to_tag {{workspace.index}} {{tag.index}}:}
+%{A1:leftwm-command "SendWorkspaceToTag {{workspace.index}} {{tag.index}}" :}
 %{F#acacac}%{B#2F343F}%{o#2F343F}%{+o}%{u#2F343F}%{+u} {{tag.name}} %{B-}%{F-}%{o-}%{u-}
 %{A}
 {% endif %}
