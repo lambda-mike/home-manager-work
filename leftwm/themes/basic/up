@@ -10,13 +10,14 @@ fi
 ln -s $SCRIPTPATH/down /tmp/leftwm-theme-down
 
 autorandr --change
-${XDG_CONFIG_HOME}/fehbg &
 leftwm-command "LoadTheme $SCRIPTPATH/theme.ron"
+${XDG_CONFIG_HOME}/fehbg &
 
 # Autostart
 # TODO add extra notification about low battery
 #cbatticon --update-interval 60 --critical-level 10 --command-critical-level 'i3-nagbar -m "Critically low battery level!!!"' &
 $SCRIPTPATH/autostart.sh
 
-polybar-msg cmd restart >/dev/null && echo "Polybars restarted"
+systemctl --user restart polybar.service && echo "Polybars restarted"
 
+leftwm-command "SoftReload"
