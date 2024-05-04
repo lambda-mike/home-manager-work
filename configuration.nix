@@ -68,7 +68,8 @@
 
     # VPN
     networking.firewall = {
-      allowedUDPPorts = [ 51820 ]; # Clients and peers can use the same port, see listenport
+      # without 22 git ssh won't work
+      allowedUDPPorts = [ 22 51820 ]; # Clients and peers can use the same port, see listenport
     };
     # WireGuard wg-quick
     networking.wg-quick.interfaces = {
