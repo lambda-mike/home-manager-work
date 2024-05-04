@@ -66,6 +66,27 @@
     # FIXME Phase1 Set proper name
     networking.hostName = "nixos";
 
+    # VPN
+    networking.firewall = {
+      allowedUDPPorts = [ 51820 ]; # Clients and peers can use the same port, see listenport
+    };
+    # WireGuard wg-quick
+    networking.wg-quick.interfaces = {
+      wg0 = {
+        address = [ "10.0.0.0/32" ];
+        dns = [ "10.3.0.1" ];
+        privateKeyFile = "/etc/secrets/wg0.priv";
+        peers = [
+          {
+            publicKey = "pub_key";
+            allowedIPs = [ "0.0.0.0/0" ];
+            endpoint = "IP4:51820";
+            persistentKeepalive = 25;
+          }
+        ];
+      };
+    };
+
     # Nix
     nix = {
       extraOptions = ''
