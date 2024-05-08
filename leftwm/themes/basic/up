@@ -20,4 +20,5 @@ $SCRIPTPATH/autostart.sh
 
 systemctl --user restart polybar.service && echo "Polybars restarted"
 
-leftwm-command "SoftReload"
+# causes infinite loop
+# leftwm-command "SoftReload"
