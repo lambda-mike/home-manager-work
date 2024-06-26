@@ -39,7 +39,7 @@ in (with pkgs; [
   pciutils
   pinentry
   procs
-  python38
+  python3
   qrencode
   qview
   ripgrep
