@@ -14,7 +14,7 @@
               y = 1;
             };
           };
-          draw_bold_text_with_bright_colors = true;
+          colors.draw_bold_text_with_bright_colors = true;
           # Kitty
           colors = {
             primary = {
