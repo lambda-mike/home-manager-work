@@ -32,7 +32,7 @@ in (with pkgs; [
   ]; })
   ncompress
   nil
-  nixfmt
+  nixfmt-classic
   nnn
   pkgsUnstable.nodePackages.eslint
   pkgsUnstable.nodePackages.typescript-language-server
