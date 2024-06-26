@@ -28,7 +28,8 @@ in {
   emacs.enable = true;
   eza = {
     enable = true;
-    enableAliases = true;
+    git = true;
+    icons = true;
   };
   feh.enable = true;
   firefox.enable = true;
