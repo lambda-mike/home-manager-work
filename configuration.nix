@@ -157,23 +157,21 @@ ClientAliveInterval 100
     hardware.bluetooth.enable = true;
 
     # X
+    services.displayManager = {
+      autoLogin = {
+        enable = true;
+        user = "mike";
+      };
+      defaultSession = "none+xmonad";
+    };
+    # Touchpad support
+    services.libinput.enable = true;
     services.xserver = {
       enable = true;
-      layout = "pl";
-      xkbVariant = "colemak";
+      xkb.layout = "pl";
+      xkb.variant = "colemak";
 
-      # Touchpad support
-      libinput.enable = true;
-
-      displayManager = {
-        autoLogin = {
-          enable = true;
-          user = "mike";
-        };
-        defaultSession = "none+xmonad";
-        lightdm.enable = true;
-      };
-
+      displayManager.lightdm.enable = true;
       windowManager.xmonad.enable = true;
     };
 
