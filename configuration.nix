@@ -1,7 +1,7 @@
 # Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ lib, pkgs, ... }:
+{ lib, pkgs, inputs, ... }:
 
 {
   imports =
@@ -150,6 +150,9 @@ ClientAliveInterval 100
     services.printing.drivers = [ pkgs.brlaser pkgs.brgenml1lpr ];
 
     services.tailscale.enable = true;
+    # take tailscale pkg from flake inputs
+    services.tailscale.package = inputs.tailscale.packages."${pkgs.system}".tailscale;
+
 
     # Scanner
     hardware.sane.enable = true;
