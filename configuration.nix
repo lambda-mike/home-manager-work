@@ -197,13 +197,16 @@ ClientAliveInterval 100
         host.enable = true;
       };
     };
+    # KVM by Virt Manager
+    virtualisation.libvirtd.enable = true;
+    programs.virt-manager.enable = true;
 
     # users
     users.users.mike = {
       createHome = true;
       # uucp is needed by Bazecor do flash Dygma keyboards
       extraGroups =
-        [ "audio" "disk" "docker" "networkmanager" "uucp" "vboxsf" "vboxusers" "video" "wheel" ];
+        [ "adbusers" "audio" "disk" "docker" "libvirtd" "networkmanager" "uucp" "vboxsf" "vboxusers" "video" "wheel" ];
       group = "users";
       home = "/home/mike";
       isNormalUser = true;
