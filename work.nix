@@ -38,6 +38,7 @@ in {
     homeDirectory = "/home/mike";
     file = import ./homeFile.nix { inherit config; };
     packages = import ./core/packages.nix { inherit pkgs; } ++ (with pkgs; [
+      vlc
     ]);
     sessionPath = [
       "${config.home.homeDirectory}/.local/bin"

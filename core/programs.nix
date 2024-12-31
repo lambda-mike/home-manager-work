@@ -174,6 +174,7 @@ in {
   };
   htop.enable = true;
   jq.enable = true;
+  obs-studio.enable = true;
   rofi = {
     enable = true;
     font = "${theme.font} 14";
