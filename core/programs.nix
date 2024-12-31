@@ -29,7 +29,7 @@ in {
   eza = {
     enable = true;
     git = true;
-    icons = true;
+    icons = "auto";
   };
   feh.enable = true;
   firefox.enable = true;
