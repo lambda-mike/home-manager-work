@@ -109,8 +109,7 @@
     time.timeZone = "Europe/London";
 
     # Sound
-    sound.enable = true;
-    hardware.pulseaudio.enable = true;
+    hardware.alsa.enablePersistence = true;
 
     # Gaming
     hardware.pulseaudio.support32Bit = true;
@@ -171,9 +170,10 @@ ClientAliveInterval 100
     services.libinput.enable = true;
     services.xserver = {
       enable = true;
-      xkb.layout = "pl";
-      xkb.variant = "colemak";
-
+      xkb = {
+        layout = "pl";
+        variant = "colemak";
+      };
       displayManager.lightdm.enable = true;
       windowManager.xmonad.enable = true;
     };
