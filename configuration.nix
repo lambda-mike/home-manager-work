@@ -109,7 +109,10 @@
     time.timeZone = "Europe/London";
 
     # Sound
-    hardware.alsa.enablePersistence = true;
+    services.pipewire.enable = true;
+    # hardware.alsa.enablePersistence = true;
+    services.pipewire.alsa.enable = true;
+    services.pipewire.alsa.support32Bit = true;
 
     # Gaming
     hardware.pulseaudio.support32Bit = true;
