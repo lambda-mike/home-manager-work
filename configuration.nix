@@ -226,6 +226,7 @@ ClientAliveInterval 100
 
     # Pkgs
     environment.systemPackages = with pkgs; [
+      alsa-utils
       android-studio
       appimage-run
       killall
