@@ -3,7 +3,7 @@
 # TODO yellow theme
 let
   theme = (import ./themes.nix).green;
-  windowManager = "xmonad";
+  windowManager = "leftwm";
 in {
 
   # The home-manager manual is at:
@@ -54,6 +54,4 @@ in {
   programs = import ./core/programs.nix theme { inherit pkgs; } // {
     # Overwrite programs here
   };
-
-  xsession.windowManager = import ./xmonad.nix theme { inherit pkgs; };
 }
