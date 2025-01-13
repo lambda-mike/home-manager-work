@@ -5,8 +5,7 @@ let
   hostname = "kodi";
 in {
   imports = [
-    #"${fetchTarball "https://github.com/NixOS/nixos-hardware/tarball/master"}/raspberry-pi/3"
-    "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; ref = "master"; }}/raspberry-pi/3"
+    "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; ref = "master"; rev = "8870dcaff63dfc6647fb10648b827e9d40b0a337"; }}/raspberry-pi/3"
     ./hardware-configuration.nix
   ];
 
@@ -57,8 +56,6 @@ in {
     enable = true;
     desktopManager.kodi.enable = true;
     desktopManager.kodi.package = pkgs.kodi.withPackages (pkgs: with pkgs; [
-      # jellycon
-      # osmc-skin
       pdfreader
       youtube
   	]);
