@@ -162,7 +162,6 @@ ClientAliveInterval 100
     # take tailscale pkg from flake inputs
     services.tailscale.package = inputs.tailscale.packages."${pkgs.system}".tailscale;
 
-
     # Scanner
     hardware.sane.enable = true;
     hardware.sane.brscan4.enable = true;
