@@ -41,6 +41,7 @@ in {
     git
     helix
     lynx
+    screen
     wget
   ];
 
