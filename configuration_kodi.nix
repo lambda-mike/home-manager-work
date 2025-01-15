@@ -53,18 +53,22 @@ in {
     };
   };
   services.xserver = {
-    enable = true;
-    desktopManager.kodi.enable = true;
-    desktopManager.kodi.package = pkgs.kodi.withPackages (pkgs: with pkgs; [
-      pdfreader
-      youtube
-  	]);
-    displayManager.lightdm.greeter.enable = false;
+    enable = false;
+    # desktopManager.kodi.enable = true;
+   #  desktopManager.kodi.package = pkgs.kodi.withPackages (pkgs: with pkgs; [
+   #    pdfreader
+   #    youtube
+  	# ]);
+   #  displayManager.lightdm.greeter.enable = false;
     xkb = {
       layout = "pl";
       variant = "colemak";
     };
   };
+  services.cage.user = user;
+  services.cage.program = "${pkgs.kodi-wayland}/bin/kodi-standalone";
+  services.cage.enable = true;
+
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -85,8 +89,8 @@ in {
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICiZ/5BJcFcSfSfrfwT1cy52zHQP23F81AoxnB850Yol nixos@Star"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIH0uiT3vy0DVxDHI82v1EW/NxteksHexFcKdXHLcc+L nixos@Arrakis"
       ];
+      shell = pkgs.fish;
     };
-    shell = pkgs.fish;
   };
 
   hardware.enableRedistributableFirmware = true;
