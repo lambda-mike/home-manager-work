@@ -72,11 +72,19 @@
     # FIXME Phase1 Set proper name
     networking.hostName = "nixos";
 
-    # VPN
     networking.firewall = {
+      allowedTCPPorts = [
+        2025 
+        161 162 9100 # HPLIP printing
+      ];
       # without 22 git ssh won't work
-      allowedUDPPorts = [ 22 51820 ]; # Clients and peers can use the same port, see listenport
+      allowedUDPPorts = [
+        22 51820 # Clients and peers can use the same port, see listenport
+        # nix-shell -p hplipWithPlugin --run 'sudo -E hp-setup'
+        161 162 9100 # HPLIP printing
+      ];
     };
+    # VPN
     # WireGuard wg-quick
     networking.wg-quick.interfaces = {
       wg0 = {
@@ -156,7 +164,7 @@ ClientAliveInterval 100
     services.udisks2.enable = true;
     # Printing
     services.printing.enable = true;
-    services.printing.drivers = [ pkgs.brlaser pkgs.brgenml1lpr ];
+    services.printing.drivers = [ pkgs.brlaser pkgs.brgenml1lpr pkgs.hplip ];
 
     services.tailscale.enable = true;
     # take tailscale pkg from flake inputs
