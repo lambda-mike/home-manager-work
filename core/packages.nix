@@ -10,6 +10,7 @@ in (with pkgs; [
   cmus
   cryfs
   dasel
+  delta
   docker
   du-dust
   duf
