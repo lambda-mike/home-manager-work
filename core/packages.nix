@@ -20,6 +20,7 @@ in (with pkgs; [
   gimp
   git-crypt
   simple-scan
+  grex
   i3lock
   julia
   leftwm
