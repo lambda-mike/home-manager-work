@@ -6,6 +6,7 @@ let
   pkgsUnstable = import nixpkgsUnstable {};
 in (with pkgs; [
   appimage-run
+  bandwhich
   pkgsUnstable.brave
   cmus
   cryfs
