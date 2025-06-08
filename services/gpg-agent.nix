@@ -5,7 +5,7 @@
     # gpgconf --reload gpg-agent should make pinentry available
     gpg-agent = {
       enable = true;
-      pinentryPackage = pkgs.pinentry-tty;
+      pinentry.package = pkgs.pinentry-tty;
     };
   };
 }

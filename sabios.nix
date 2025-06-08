@@ -21,7 +21,7 @@
       brave
       gimp
       git
-      gnome.simple-scan
+      simple-scan
       htop
       libreoffice
       megasync

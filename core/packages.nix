@@ -6,7 +6,6 @@ let
   pkgsUnstable = import nixpkgsUnstable {};
 in (with pkgs; [
   appimage-run
-  pkgsUnstable.bazecor
   pkgsUnstable.brave
   cmus
   cryfs
@@ -19,17 +18,27 @@ in (with pkgs; [
   font-awesome
   gimp
   git-crypt
-  gnome.simple-scan
+  simple-scan
   i3lock
   julia
   leftwm
   libreoffice
   lsof
   neofetch
-  (nerdfonts.override { fonts = [
-    "Agave" "CascadiaCode" "Cousine" "FiraMono" "Hack" "Hermit" "Iosevka" "JetBrainsMono"
-    "Monofur" "Mononoki" "RobotoMono" "SourceCodePro" "Terminus" "UbuntuMono"
-  ]; })
+  nerd-fonts.agave
+  nerd-fonts.caskaydia-cove
+  nerd-fonts.cousine
+  nerd-fonts.fira-mono
+  nerd-fonts.hack
+  nerd-fonts.hurmit
+  nerd-fonts.iosevka
+  nerd-fonts.jetbrains-mono
+  nerd-fonts.monofur
+  nerd-fonts.mononoki
+  nerd-fonts.roboto-mono
+  nerd-fonts.sauce-code-pro
+  nerd-fonts.terminess-ttf
+  nerd-fonts.ubuntu-mono
   ncompress
   nil
   nixfmt-classic

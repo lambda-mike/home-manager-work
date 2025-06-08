@@ -258,6 +258,8 @@ ClientAliveInterval 100
     programs.steam.enable = true;
     programs.mosh.enable = true;
 
+    programs.bazecor.enable = true;
+
     services.openvpn.servers = {
       hobby = {
         autoStart = false;
