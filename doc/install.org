@@ -2,6 +2,10 @@
 
 * NixOS installation
 
+** USB preparation
+
+=sudo dd bs=4M conv=fsync oflag=direct status=progress if=<path-to.img> of=/dev/sdX=
+
 =nixos-help= # or check other terminals
 
 Check type of setup (BIOS or UEFI)
@@ -215,6 +219,14 @@ fileSystems = {
 
 =nixos-install=
 
+For flake variant:
+
+=nixos-install --flake '/path/to/flake.nix#nixos'=
+
+If user is declared in configuration:
+
+=nixos-enter --root /mnt -c 'passwd alice'=
+
 =reboot=
 
 #+begin_example shell
@@ -248,3 +260,8 @@ Wake machine up via LAN: =nix run nixpkgs#wol -- 'put_mac_here'=
 Connect via ssh: =ssh -p 2222 root@192.168.0.101=
 
 Connect via ssh to the NixOS as usual.
+
+** Home Manager NixOS module flake template
+
+# https://home-manager.dev/manual/24.11/index.xhtml#sec-flakes-nixos-module
+=nix flake new /etc/nixos -t github:nix-community/home-manager#nixos=
