@@ -253,12 +253,13 @@ ClientAliveInterval 100
 
     # Android
     programs.adb.enable = true;
-    programs.command-not-found.enable = true;
-    # Gaming
-    programs.steam.enable = true;
-    programs.mosh.enable = true;
 
     programs.bazecor.enable = true;
+    programs.command-not-found.enable = true;
+    programs.i3lock.enable = true;
+    programs.mosh.enable = true;
+    # Gaming
+    programs.steam.enable = true;
 
     services.openvpn.servers = {
       hobby = {
