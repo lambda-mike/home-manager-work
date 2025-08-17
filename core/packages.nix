@@ -49,6 +49,8 @@ in (with pkgs; [
   pkgsUnstable.nodePackages.eslint
   pkgsUnstable.nodePackages.typescript-language-server
   pciutils
+  perl
+  perlnavigator
   pinentry
   procs
   python3
