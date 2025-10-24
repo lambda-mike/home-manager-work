@@ -13,6 +13,15 @@ in {
     ./hardware-configuration.nix
   ];
 
+  # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
+  boot.loader.grub.enable = false;
+  # Enables the generation of /boot/extlinux/extlinux.conf
+  boot.loader.generic-extlinux-compatible.enable = true;
+
+  hardware.enableRedistributableFirmware = true;
+
+  system.copySystemConfiguration = true;
+
   fileSystems = {
     "/disk/pumba" = {
       device = "/dev/disk/by-label/pumba";
@@ -42,6 +51,15 @@ in {
   };
   networking.networkmanager.enable = true;
 
+  console.useXkbConfig = true;
+
+  time.timeZone = "Europe/Warsaw";
+
+  nixpkgs.config.allowUnfree = true;
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+  };
+
   environment.systemPackages = with pkgs; [
     bottom
     cloudflared
@@ -54,8 +72,16 @@ in {
   ];
 
   programs.fish.enable = true;
-  services.openssh.enable = true;
+
+  services.openssh = {
+    enable = true;
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
+    };
+  };
   services.cloudflared.enable = true;
+  services.tailscale.enable = true;
   services.displayManager = {
     autoLogin = {
       enable = true;
@@ -80,11 +106,6 @@ in {
     enable = true;
     pulse.enable = true;
   };
-  services.tailscale.enable = true;
-
-  console.useXkbConfig = true;
-  time.timeZone = "Europe/Warsaw";
-  nixpkgs.config.allowUnfree = true;
 
   users = {
     mutableUsers = true;
@@ -93,11 +114,14 @@ in {
       isNormalUser = true;
       extraGroups = [ "audio" "disk" "networkmanager" "video" "wheel" ];
       shell = pkgs.fish;
+      # check ssh_keys.nix
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICiZ/5BJcFcSfSfrfwT1cy52zHQP23F81AoxnB850Yol nixos@Star"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIH0uiT3vy0DVxDHI82v1EW/NxteksHexFcKdXHLcc+L nixos@Arrakis"
+      ];
     };
   };
 
-  hardware.enableRedistributableFirmware = true;
-  system.copySystemConfiguration = true;
   # FIXME use correct version of the system installed
   system.stateVersion = "24.11";
 }
