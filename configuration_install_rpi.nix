@@ -7,6 +7,8 @@
 let
   user = "mike";
   hostname = "rpi";
+  tunnelUuid = "00000000-0000-0000-0000-000000000000";
+  tunnelHostname = "www.example.com";
 in {
   imports = [
     "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; ref = "master"; rev = "d0955d227d7c4c42ff8e0efe77d910061c5e303d"; }}/raspberry-pi/3"
@@ -80,7 +82,21 @@ in {
       PasswordAuthentication = false;
     };
   };
-  services.cloudflared.enable = true;
+  services.cloudflared = {
+    enable = true;
+    tunnels = {
+      ${tunnelUuid} = {
+        credentialsFile = "/var/lib/cloudflared/${tunnelUuid}.json";
+        certificateFile = "/var/lib/cloudflared/cert.pem";
+        default = "http_status:404";
+        ingress = {
+          ${tunnelHostname} = {
+            service = "tcp://localhost:22";
+          };
+        };
+      };
+    };
+  };
   services.tailscale.enable = true;
   services.displayManager = {
     autoLogin = {
