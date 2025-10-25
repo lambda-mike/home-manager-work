@@ -9,6 +9,7 @@
 1. `sudo chown root:root /var/lib/cloudflared/cert.pem`
 1. `sudo chmod 600 /var/lib/cloudflared/cert.pem`
 1. `cloudflared tunnel create rpi-nixos`
+1. `cloudflared tunnel route dns rpi-nixos ssh.example.com`
 1. note UUID
 1. `sudo mv ~/.cloudflared/*.json /var/lib/cloudflared/`
 1. `sudo chown root:root /var/lib/cloudflared/*.json`
