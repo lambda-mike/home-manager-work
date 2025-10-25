@@ -69,11 +69,14 @@ in {
     git
     helix
     lynx
-    screen
     wget
   ];
 
   programs.fish.enable = true;
+  programs.screen = {
+    enable = true;
+    screenrc = "defscrollback 10000";
+  };
 
   services.openssh = {
     enable = true;
