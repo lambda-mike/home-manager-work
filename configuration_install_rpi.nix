@@ -94,7 +94,7 @@ in {
         default = "http_status:404";
         ingress = {
           ${tunnelHostname} = {
-            service = "tcp://localhost:22";
+            service = "ssh://localhost:22";
           };
         };
       };
