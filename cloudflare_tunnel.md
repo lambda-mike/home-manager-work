@@ -19,9 +19,11 @@
 
 ## Usage
 
-1. On your laptop set up socks5 forwarding:
-`ssh -N -D 1080 user@ssh.example.com`
-1. set up proxy or run cmd:
-`export ALL_PROXY=socks5://127.0.0.1:1080 curl https://service.example.com/report`
+1. On your laptop install `cloudflared`
+1. Then set up socks5 forwarding:
+`ssh -vvvo ProxyCommand="cloudflared access ssh --hostname %h" -N -D 1080 user@ssh.example.com`
+1. Alternatively move ProxyCommand to sshd_config (or openssh.extraConfig)
+1. set up proxy on system level or run cmd:
+`export ALL_PROXY=socks5h://127.0.0.1:1080 curl https://service.example.com/report`
 1. set up bypass for local services
 `export NO_PROXY=localhost,127.0.0.1,::1`
