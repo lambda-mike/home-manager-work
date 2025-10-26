@@ -45,9 +45,26 @@ in {
   hardware.bluetooth.enable = true;
 
   networking = {
+    interfaces.eth0 = {
+      ipv4.addresses = [
+        { address = "172.16.1.1"; prefixLength = 24; }
+      ];
+    };
+    enableIPv4Forwarding = true;
     firewall = {
-      allowedTCPPorts = [ 8080 ];
+      enable = true;
+      allowPing = true;
+      allowedTCPPorts = [ 22 8080 ];
       allowedUDPPorts = [ 8080 ];
+      extraCommands = ''
+        # flush old nat rules
+        iptables -t nat -F POSTROUTING || true
+        # masquerade all traffic going out wlan0
+        iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
+        # permit forwarding
+        iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
+        iptables -A FORWARD -i wlan0 -o eth0 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+      '' + config.networking.firewall.extraCommands;
     };
     hostName = hostname;
   };
@@ -101,6 +118,23 @@ in {
     };
   };
   services.tailscale.enable = true;
+  services.dnsmasq = {
+    enable = true;
+    interface = "eth0";
+    dhcpRanges = [
+      {
+        address = "172.16.1.100";
+        netmask = "255.255.255.0";
+        start = "172.16.1.100";
+        end = "172.16.1.200";
+        leaseTime = "12h";
+      }
+    ];
+    dhcpOptions = [
+      "option:router,172.16.1.1"
+      "option:dns-server,1.1.1.1,1.0.0.1"
+    ];
+  };
   services.displayManager = {
     autoLogin = {
       enable = true;
