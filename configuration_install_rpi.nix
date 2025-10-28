@@ -180,6 +180,7 @@ in {
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICiZ/5BJcFcSfSfrfwT1cy52zHQP23F81AoxnB850Yol nixos@Star"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIH0uiT3vy0DVxDHI82v1EW/NxteksHexFcKdXHLcc+L nixos@Arrakis"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2m2R4kY/dhyT5Dv46yz6CkGO9p7+Q+QTn0LBUYehTu macnix"
       ];
     };
   };
