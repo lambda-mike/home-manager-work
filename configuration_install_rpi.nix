@@ -20,6 +20,10 @@ in {
   # Enables the generation of /boot/extlinux/extlinux.conf
   boot.loader.generic-extlinux-compatible.enable = true;
 
+  boot.kernel.sysctl = {
+    "net.ipv4.conf.all.forwarding" = 1;
+  };
+
   hardware.enableRedistributableFirmware = true;
 
   system.copySystemConfiguration = true;
@@ -45,30 +49,36 @@ in {
   hardware.bluetooth.enable = true;
 
   networking = {
-    interfaces.eth0 = {
-      ipv4.addresses = [
-        { address = "172.16.1.1"; prefixLength = 24; }
-      ];
-    };
-    enableIPv4Forwarding = true;
+    interfaces.eth0.ipv4.addresses = [
+      { address = "172.16.1.1"; prefixLength = 24; }
+    ];
     firewall = {
       enable = true;
       allowPing = true;
-      allowedTCPPorts = [ 22 8080 ];
-      allowedUDPPorts = [ 8080 ];
+      allowedTCPPorts = [ 22 ];
+      allowedUDPPorts = [];
+      interfaces.eth0 = {
+        allowedTCPPorts = [ 53 67 80 443 ];
+        allowedUDPPorts = [ 53 67 68 ];
+      };
       extraCommands = ''
-        # flush old nat rules
-        iptables -t nat -F POSTROUTING || true
-        # masquerade all traffic going out wlan0
-        iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
-        # permit forwarding
+        # LAN -> WAN
         iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
+        # returning traffic WAN -> LAN
         iptables -A FORWARD -i wlan0 -o eth0 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-      '' + config.networking.firewall.extraCommands;
+      '';
+    };
+    nat = {
+      enable = true;
+      externalInterface = "wlan0";
+      internalInterfaces = ["eth0"];
+      internalIPs = [ "172.16.1.0/24" ];
     };
     hostName = hostname;
   };
   networking.networkmanager.enable = true;
+  networking.networkmanager.unmanaged = [ "eth0" ];
+  systemd.services.NetworkManager-wait-online.enable = true;
 
   console.useXkbConfig = true;
 
@@ -120,20 +130,19 @@ in {
   services.tailscale.enable = true;
   services.dnsmasq = {
     enable = true;
-    interface = "eth0";
-    dhcpRanges = [
-      {
-        address = "172.16.1.100";
-        netmask = "255.255.255.0";
-        start = "172.16.1.100";
-        end = "172.16.1.200";
-        leaseTime = "12h";
-      }
-    ];
-    dhcpOptions = [
-      "option:router,172.16.1.1"
-      "option:dns-server,1.1.1.1,1.0.0.1"
-    ];
+    alwaysKeepRunning = true;
+    settings = {
+      interface = "eth0";
+      "dhcp-range" = "172.16.1.100,172.16.1.200,12h";
+      "dhcp-option" = [
+        "option:router,172.16.1.1"
+        "option:dns-server,172.16.1.1"
+      ];
+      # server = [
+      #   "1.1.1.1"
+      #   "1.0.0.1"
+      # ];
+    };
   };
   services.displayManager = {
     autoLogin = {
